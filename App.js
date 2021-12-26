@@ -1,22 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import Screen from "./app/components/Screen";
+import Bacheca from "./app/screens/Bacheha";
+import LoginScreen from "./app/screens/LoginScreen";
+import PaginaCreazioneBC from "./app/screens/PaginaCreazione";
+import ProfilePage from "./app/screens/ProfilePage";
+import RegisterScreen from "./app/screens/RegisterScreen";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>
-        Open up App.js to start working on your app. There is a change.
-      </Text>
-      <StatusBar style="auto" />
-    </View>
+    <Screen>
+      <RegisterScreen />
+    </Screen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+//Per ProfilePage è necessario dare dei valori da passare al component
+
+const styles = StyleSheet.create({});
