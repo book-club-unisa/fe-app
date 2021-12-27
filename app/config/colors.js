@@ -15,5 +15,5 @@ export default {
   azzurrochiaro: "#a4cafa",
   red: "#FF0000",
   blu: "#192a8f",
-  giallo: "#f4c500",
+  giallo: "#a92",
 };
