@@ -5,8 +5,9 @@ import {
   StyleSheet,
   Text,
   Image,
-  TextInput,
+  useColorScheme,
 } from "react-native";
+
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
@@ -16,6 +17,10 @@ import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import BCAppFormField from "../components/BCAppFormField";
+import * as Progress from "react-native-progress";
+import UserState from "../components/singleItems/UserState";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import NumericInput from "react-native-numeric-input";
 
 const Users = [
   {
@@ -41,32 +46,9 @@ const Users = [
     name: "user536@unisa.it",
     image: require("../assets/users/4.png"),
   },
-  {
-    id: 5,
-    name: "giovanna243@hotmail.it",
-    image: require("../assets/users/1.png"),
-  },
-
-  {
-    id: 6,
-    name: "alfonso.m@gmail.com",
-    image: require("../assets/users/2.png"),
-  },
-
-  {
-    id: 7,
-    name: "lucia.rossi12@gmail.it",
-    image: require("../assets/users/3.png"),
-  },
-
-  {
-    id: 8,
-    name: "user536@unisa.it",
-    image: require("../assets/users/4.png"),
-  },
 ];
 
-function InvitaUtenti(props) {
+function InfoBookClub(props) {
   return (
     <Screen>
       <View style={styles.container}>
@@ -89,14 +71,14 @@ function InvitaUtenti(props) {
           </View>
         </View>
 
-        <Text style={styles.txt}> Aggiungi i tuoi amici </Text>
+        <Text style={styles.txt}> Partecipanti </Text>
 
         <FlatList
           style={{ marginBottom: 55 }}
           data={Users}
           keyExtractor={(user) => user.id.toString()}
           renderItem={({ item }) => (
-            <UserListItem
+            <UserState
               title={item.name}
               image={item.image}
               onPress={() =>
@@ -109,30 +91,94 @@ function InvitaUtenti(props) {
           ItemSeparatorComponent={ListItemSeparator}
         />
       </View>
-      <View style={styles.button}>
-        <AppButton title="Fine" />
+      <View style={styles.barre}>
+        <View style={styles.bar}>
+          <View style={styles.allinea}>
+            <View style={{ marginRight: 20 }}>
+              <Text style={styles.txt}> Obiettivo Di Lettura </Text>
+              <Progress.Bar
+                progress={0.6}
+                width={200}
+                height={15}
+                borderRadius={7}
+                borderWidth={0}
+                unfilledColor={colors.azzurrochiaro}
+              />
+            </View>
+
+            <View style={{ marginTop: 15 }}>
+              <NumericInput
+                onChange={(value) => console.log(value)}
+                minValue={0}
+                rounded={true}
+                totalWidth={80}
+                rightButtonBackgroundColor={colors.blu}
+                leftButtonBackgroundColor={colors.azzurrochiaro}
+                borderColor={colors.white}
+              />
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.bar}>
+          <View style={styles.allinea}>
+            <View style={{ marginRight: 20 }}>
+              <Text style={styles.txt}> Progresso Di Lettura </Text>
+              <Progress.Bar
+                progress={0.8}
+                width={200}
+                height={15}
+                borderRadius={7}
+                borderWidth={0}
+                unfilledColor={colors.azzurrochiaro}
+              />
+            </View>
+
+            <View style={{ marginTop: 15 }}>
+              <NumericInput
+                onChange={(value) => console.log(value)}
+                minValue={0}
+                rounded={true}
+                totalWidth={80}
+                rightButtonBackgroundColor={colors.blu}
+                leftButtonBackgroundColor={colors.azzurrochiaro}
+                borderColor={colors.white}
+              />
+            </View>
+          </View>
+        </View>
       </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  allinea: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  bar: {
+    marginBottom: 15,
+    alignSelf: "center",
+  },
+
+  barre: {
+    position: "absolute",
+    width: "100%",
+    bottom: 30,
+  },
+
   boldtitle: {
     fontWeight: "bold",
-    color: colors.azzurro,
+    color: colors.blu,
     textTransform: "uppercase",
   },
-  
+
   bookContainer: {
     flexDirection: "row",
     width: "100%",
     marginBottom: 20,
-  },
-
-  button: {
-    position: "absolute",
-    width: "100%",
-    bottom: 15,
   },
 
   container: {
@@ -163,13 +209,12 @@ const styles = StyleSheet.create({
   },
 
   txt: {
-    marginVertical: 20,
+    marginVertical: 5,
     alignSelf: "center",
     fontWeight: "bold",
     textTransform: "uppercase",
     color: colors.black,
   },
-  
 });
 
-export default InvitaUtenti;
+export default InfoBookClub;

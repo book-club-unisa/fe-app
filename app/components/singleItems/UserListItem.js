@@ -4,7 +4,7 @@ import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function BCListItem({ image, title, subTitle, ImageComponent, onPress }) {
+function UserListItem({ image, title, subTitle, ImageComponent, onPress }) {
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
     color: colors.mediumgrey,
   },
 });
-export default BCListItem;
+export default UserListItem;
