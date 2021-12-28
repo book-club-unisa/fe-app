@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
 
   buttonLogin: {
-    width: "50%",
+    width: "100%",
     height: 60,
     borderRadius: 30,
     backgroundColor: colors.azzurro,

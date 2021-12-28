@@ -7,11 +7,12 @@ import LoginScreen from "./app/screens/LoginScreen";
 import PaginaCreazioneBC from "./app/screens/PaginaCreazione";
 import ProfilePage from "./app/screens/ProfilePage";
 import RegisterScreen from "./app/screens/RegisterScreen";
+import InvitaUtenti from "./app/screens/InvitaUtenti";
 
 export default function App() {
   return (
     <Screen>
-      <Catalogo />
+      <InvitaUtenti />
     </Screen>
   );
 }
