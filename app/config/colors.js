@@ -16,4 +16,5 @@ export default {
   red: "#FF0000",
   blu: "#007aff",
   giallo: "#a92",
+  orange: "#F9A825",
 };

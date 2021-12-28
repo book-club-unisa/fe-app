@@ -10,11 +10,12 @@ import RegisterScreen from "./app/screens/RegisterScreen";
 import InvitaUtenti from "./app/screens/InvitaUtenti";
 import InfoBookClubFounder from "./app/screens/InfoBookClubFounder";
 import InfoBookClubUser from "./app/screens/InfoBookClubUser";
+import BookClubInvites from "./app/screens/BookClubInvites";
 
 export default function App() {
   return (
     <Screen>
-      <InfoBookClubFounder />
+      <Catalogo />
     </Screen>
   );
 }

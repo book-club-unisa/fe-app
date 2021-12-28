@@ -2,9 +2,20 @@ import React from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
+import { FontAwesome } from "@expo/vector-icons";
+import * as Progress from "react-native-progress";
+import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
-function BCListItem({ image, title, subTitle, ImageComponent, onPress }) {
+function InviteState({
+  image,
+  title,
+  subTitle,
+  ImageComponent,
+  onPress,
+  state,
+}) {
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>
@@ -19,11 +30,28 @@ function BCListItem({ image, title, subTitle, ImageComponent, onPress }) {
             </Text>
           )}
         </View>
-        <MaterialCommunityIcons
-          name="chevron-right"
-          size={25}
-          color={colors.mediumgrey}
-        />
+
+        <View>
+          <View>
+            {state === 0 ? (
+              <>
+                <MaterialCommunityIcons
+                  name="clock"
+                  size={25}
+                  color={colors.orange}
+                />
+              </>
+            ) : (
+              <>
+                <Ionicons
+                  name="checkmark-circle-sharp"
+                  size={25}
+                  color={colors.green}
+                />
+              </>
+            )}
+          </View>
+        </View>
       </View>
     </TouchableHighlight>
   );
@@ -38,9 +66,9 @@ const styles = StyleSheet.create({
   },
 
   profilePic: {
-    width: 65,
-    height: 90,
-    borderRadius: 5,
+    width: 30,
+    height: 30,
+    //borderRadius: 35,
   },
 
   details: {
@@ -57,4 +85,5 @@ const styles = StyleSheet.create({
     color: colors.mediumgrey,
   },
 });
-export default BCListItem;
+
+export default InviteState;
