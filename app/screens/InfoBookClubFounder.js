@@ -1,54 +1,46 @@
 import React from "react";
-import {
-  FlatList,
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  useColorScheme,
-} from "react-native";
+import { FlatList, View, StyleSheet, Text, Image } from "react-native";
 
 import Screen from "../components/Screen";
-import AppTextInput from "../components/AppTextInput";
-import AppButton from "../components/AppButton";
-import UserListItem from "../components/singleItems/UserListItem";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
-import BCAppFormField from "../components/BCAppFormField";
 import * as Progress from "react-native-progress";
 import UserState from "../components/singleItems/UserState";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import NumericInput from "react-native-numeric-input";
+import ProgressBar from "../components/singleItems/ProgressBar";
 
 const Users = [
   {
     id: 1,
     name: "giovanna243@hotmail.it",
     image: require("../assets/users/1.png"),
+    pdl: 0.6,
   },
 
   {
     id: 2,
     name: "alfonso.m@gmail.com",
     image: require("../assets/users/2.png"),
+    pdl: 0.2,
   },
 
   {
     id: 3,
     name: "lucia.rossi12@gmail.it",
     image: require("../assets/users/3.png"),
+    pdl: 0.8,
   },
 
   {
     id: 4,
     name: "user536@unisa.it",
     image: require("../assets/users/4.png"),
+    pdl: 0.5,
   },
 ];
 
-function InfoBookClub(props) {
+function InfoBookClubFounder(props) {
   return (
     <Screen>
       <View style={styles.container}>
@@ -81,6 +73,7 @@ function InfoBookClub(props) {
             <UserState
               title={item.name}
               image={item.image}
+              personalprogress={item.pdl}
               onPress={() =>
                 Alert.alert("title", "Messaggio", [
                   { text: "Ok", onPress: () => console.log(item.title) },
@@ -96,14 +89,7 @@ function InfoBookClub(props) {
           <View style={styles.allinea}>
             <View style={{ marginRight: 20 }}>
               <Text style={styles.txt}> Obiettivo Di Lettura </Text>
-              <Progress.Bar
-                progress={0.6}
-                width={200}
-                height={15}
-                borderRadius={7}
-                borderWidth={0}
-                unfilledColor={colors.azzurrochiaro}
-              />
+              <ProgressBar value={0.9} larghezza={200} />
             </View>
 
             <View style={{ marginTop: 15 }}>
@@ -124,14 +110,7 @@ function InfoBookClub(props) {
           <View style={styles.allinea}>
             <View style={{ marginRight: 20 }}>
               <Text style={styles.txt}> Progresso Di Lettura </Text>
-              <Progress.Bar
-                progress={0.8}
-                width={200}
-                height={15}
-                borderRadius={7}
-                borderWidth={0}
-                unfilledColor={colors.azzurrochiaro}
-              />
+              <ProgressBar value={0.2} larghezza={200} />
             </View>
 
             <View style={{ marginTop: 15 }}>
@@ -217,4 +196,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InfoBookClub;
+export default InfoBookClubFounder;
