@@ -3,7 +3,9 @@ import { SafeAreaView, Alert, StyleSheet, View, FlatList } from "react-native";
 import { SearchBar } from "react-native-elements";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import BCListItem from "../components/singleItems/BCListItem";
-import { RefreshControl } from "react-native-web";
+
+import colors from "../config/colors";
+
 const Books = [
   {
     id: 1,
@@ -90,14 +92,17 @@ const Catalogo = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <SearchBar
-          inputStyle={{ backgroundColor: "lightgrey" }}
+          inputStyle={{ backgroundColor: colors.lightgrey }}
           containerStyle={{
             backgroundColor: "white",
             borderWidth: 1,
-            borderRadius: 5,
+            //borderRadius: 5,
+            borderTopColor: colors.white,
+            borderBottomColor: colors.white,
+            borderColor: colors.white,
           }}
           inputContainerStyle={{
-            backgroundColor: "lightgrey",
+            backgroundColor: colors.lightgrey,
           }}
           round
           searchIcon={{ size: 24 }}
@@ -132,8 +137,9 @@ const Catalogo = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: colors.yellow,
   },
+
   itemStyle: {
     padding: 10,
   },
