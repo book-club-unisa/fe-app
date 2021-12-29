@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, View, StyleSheet, Text, Image } from "react-native";
+import { FlatList, View, StyleSheet, Text, Image, Alert } from "react-native";
 
 import Screen from "../components/Screen";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
@@ -9,6 +9,7 @@ import * as Progress from "react-native-progress";
 import InviteState from "../components/singleItems/InviteState";
 import NumericInput from "react-native-numeric-input";
 import ProgressBar from "../components/singleItems/ProgressBar";
+import AppButton from "../components/AppButton";
 
 const Users = [
   {
@@ -40,18 +41,15 @@ const Users = [
   },
 ];
 
-function BookClubInvites(props) {
+function BookClubInvites({ route }) {
   return (
     <Screen>
       <View style={styles.container}>
         <View style={styles.bookContainer}>
-          <Image
-            source={require("../assets/lotr1.jpg")}
-            style={styles.copertina}
-          />
+          <Image source={route.params.image} style={styles.copertina} />
           <View style={styles.description}>
             <Text style={styles.boldtitle} numberOfLines={1}>
-              Appassionati Tolkeniani
+              {route.params.value}
             </Text>
             <Text numberOfLines={1}>Il tuo Book Blub</Text>
           </View>
@@ -70,12 +68,21 @@ function BookClubInvites(props) {
               state={item.inviteState}
               onPress={() =>
                 Alert.alert("title", "Messaggio", [
-                  { text: "Ok", onPress: () => console.log(item.title) },
+                  { text: "Ok", onPress: () => console.log("1") },
                 ])
               }
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}
+        />
+
+        <AppButton
+          title="INVITA"
+          onPress={() =>
+            Alert.alert("title", "Messaggio", [
+              { text: "Ok", onPress: () => console.log("1") },
+            ])
+          }
         />
       </View>
     </Screen>

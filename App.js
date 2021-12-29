@@ -12,11 +12,22 @@ import InfoBookClubFounder from "./app/screens/InfoBookClubFounder";
 import InfoBookClubUser from "./app/screens/InfoBookClubUser";
 import BookClubInvites from "./app/screens/BookClubInvites";
 
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Button } from "react-native";
+import colors from "./app/config/colors";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import NavigationTheme from "./app/navigation/NavigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
+
 export default function App() {
   return (
-    <Screen>
-      <Catalogo />
-    </Screen>
+    <NavigationContainer theme={NavigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
 

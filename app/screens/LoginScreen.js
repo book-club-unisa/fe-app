@@ -5,12 +5,21 @@ import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import AppButton from "../components/AppButton";
+import colors from "../config/colors";
+
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(4).label("Password"),
+  email: Yup.string()
+    .required("Email è un campo richiesto")
+    .email("Il formato deve essere quello di una email")
+    .label("Email"),
+  password: Yup.string()
+    .required("Password è un campo richiesto")
+    .min(4, "Password deve essere almeno di ${min} caratteri")
+    .label("Password"),
 });
 
-function LoginScreen(props) {
+function LoginScreen({ navigation }) {
   return (
     <Screen styleChildren={styles.container}>
       <Image style={styles.logo} source={require("../assets/BCLogo.png")} />
@@ -37,10 +46,17 @@ function LoginScreen(props) {
               name="password"
               secureTextEntry={true}
             />
-            <SubmitButton title="Login" />
+            <SubmitButton
+              title="Accedi"
+              onPress={() => navigation.navigate("Bacheca")}
+            />
           </>
         )}
       </Formik>
+      <AppButton
+        title="Registrati qui"
+        onPress={() => navigation.navigate("Register")}
+      />
     </Screen>
   );
 }

@@ -5,6 +5,9 @@ import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import BCListItem from "../components/singleItems/BCListItem";
 
 import colors from "../config/colors";
+import Screen from "../components/Screen";
+
+import routes from "../navigation/routes";
 
 const Books = [
   {
@@ -19,6 +22,7 @@ const Books = [
       "contro Sauron, Isildur, figlio del re degli uomini Elendil, tagliò" +
       "a Sauron il dito al quale era infilato l'Anello, ottenendo così la",
     image: require("../assets/lotr1.jpg"),
+    autore: "J.R.Tolkien",
   },
 
   {
@@ -32,6 +36,7 @@ const Books = [
       " personaggi fatati, inventati, la sete di avventura e il raggiungimento della meta dopo aver " +
       "dato prova dei propri valori.",
     image: require("../assets/hobbit.jpg"),
+    autore: "J.R.Tolkien",
   },
 
   {
@@ -46,6 +51,7 @@ const Books = [
       " attaccano e Alastor Moody e Edvige vengono uccisi. Lord Voldemort tenta di assassinare " +
       " Harry, ma una reazione inattesa tra le loro due bacchette glielo impedisce.",
     image: require("../assets/hpdm.jpg"),
+    autore: "J.K.Rowling",
   },
 
   {
@@ -58,9 +64,10 @@ const Books = [
       " quasi un ghigno. Batman sospetta di una strana arma, e le vittime potevano essere una " +
       "sorta di cavie, e sarà solo l'inizio.",
     image: require("../assets/bwl.jpg"),
+    autore: "Scott Snyder",
   },
 ];
-const Catalogo = () => {
+const Catalogo = ({ navigation }) => {
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState(Books);
   const [masterDataSource, setMasterDataSource] = useState(Books);
@@ -89,7 +96,7 @@ const Catalogo = () => {
     }
   };
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <Screen>
       <View style={styles.container}>
         <SearchBar
           inputStyle={{ backgroundColor: colors.lightgrey }}
@@ -100,10 +107,12 @@ const Catalogo = () => {
             borderTopColor: colors.white,
             borderBottomColor: colors.white,
             borderColor: colors.white,
+            //placeholderTextColor: colors.primary,
           }}
           inputContainerStyle={{
             backgroundColor: colors.lightgrey,
           }}
+          placeholderTextColor={colors.mediumgrey}
           round
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilterFunction(text)}
@@ -119,11 +128,7 @@ const Catalogo = () => {
               title={item.title}
               subTitle={item.description}
               image={item.image}
-              onPress={() =>
-                Alert.alert("title", "Messaggio", [
-                  { text: "Ok", onPress: () => console.log(item.title) },
-                ])
-              }
+              onPress={() => navigation.navigate(routes.INFOLIBRO, item)}
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}
@@ -131,13 +136,13 @@ const Catalogo = () => {
           onRefresh={onRefresh}
         />
       </View>
-    </SafeAreaView>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.yellow,
+    //backgroundColor: colors.yellow,
   },
 
   itemStyle: {

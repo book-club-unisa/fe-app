@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
 
-function PaginaCreazioneBC(props) {
+function PaginaCreazioneBC({ route, navigation }) {
+  const [value, setValue] = useState("");
+
+  const item = route.params;
+
   return (
     <Screen>
       <View style={styles.container}>
@@ -12,24 +16,24 @@ function PaginaCreazioneBC(props) {
           iconName="book-open-page-variant"
           placeholder="Nome book club"
           style={styles.textInput}
+          onChangeText={(value) => setValue({ value })}
         />
         <Text style={styles.title}> Libro scelto </Text>
+        <Text style={styles.bookTitle}>{route.params.title}</Text>
+        <Text style={styles.autore}>{route.params.autore}</Text>
         <View style={styles.BookContainer}>
-          <Image
-            source={require("../assets/lotr1.jpg")}
-            style={styles.copertina}
-          />
+          <Image source={route.params.image} style={styles.copertina} />
           <Text style={styles.description} numberOfLines={12}>
-            Nella Seconda Era, Sauron, l'Oscuro Signore di Mordor, donò 19
-            anelli alle razze della Terra di Mezzo: tre ai re degli elfi, sette
-            ai re dei nani e nove ai re degli uomini; tutti loro, però, furono
-            ingannati dall'Oscuro Signore, il quale forgiò l'Unico Anello, in
-            grado di controllare tutti gli altri. Nella battaglia contro Sauron,
-            Isildur, figlio del re degli uomini Elendil, tagliò a Sauron il dito
-            al quale era infilato l'Anello, ottenendo così la
+            {route.params.description}
           </Text>
         </View>
-        <AppButton title="crea book club" />
+        <AppButton
+          title="crea book club"
+          onPress={() => (
+            navigation.navigate("Inviti", item),
+            navigation.navigate("Inviti", value)
+          )}
+        />
       </View>
     </Screen>
   );
@@ -47,7 +51,21 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    marginVertical: 20,
+    margin: 20,
+    alignSelf: "center",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
+
+  autore: {
+    marginBottom: 30,
+    alignSelf: "center",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
+
+  bookTitle: {
+    marginVertical: 10,
     alignSelf: "center",
     fontWeight: "bold",
     textTransform: "uppercase",

@@ -5,11 +5,26 @@ import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import colors from "../config/colors";
+
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required().min(1).max(16).label("name"),
-  surname: Yup.string().required().min(1).max(20).label("surname"),
-  email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(4).label("Password"),
+  name: Yup.string()
+    .required("Nome è un campo richiesto")
+    .min(1)
+    .max(16)
+    .label("name"),
+  surname: Yup.string()
+    .required("Cognome è un campo richiesto")
+    .min(1)
+    .label("surname"),
+  email: Yup.string()
+    .required("Email è un campo richiesto")
+    .email("Il formato deve essere quello di una email")
+    .label("Email"),
+  password: Yup.string()
+    .required("Password è un campo richiesto")
+    .min(4, "Password deve essere almeno di ${min} caratteri")
+    .label("Password"),
 });
 
 function RegisterScreen(props) {
@@ -26,14 +41,14 @@ function RegisterScreen(props) {
             <AppFormField
               autoCapitalize="none"
               autoCorrect={false}
-              placeholder="Name"
+              placeholder="Nome"
               iconName="account"
               name="name"
             />
             <AppFormField
               autoCapitalize="none"
               autoCorrect={false}
-              placeholder="Surname"
+              placeholder="Cognome"
               iconName="account"
               name="surname"
             />
@@ -53,7 +68,7 @@ function RegisterScreen(props) {
               name="password"
               secureTextEntry={true}
             />
-            <SubmitButton title="Register" />
+            <SubmitButton title="Registrati" />
           </>
         )}
       </Formik>

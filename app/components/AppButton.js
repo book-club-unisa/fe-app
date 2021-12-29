@@ -17,8 +17,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    alignItems: "center",
-    justifyContent: "center",
+    marginVertical: 20,
+    // alignItems: "center",
+    // justifyContent: "center",
   },
 
   buttonLogin: {
