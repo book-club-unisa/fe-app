@@ -1,13 +1,9 @@
-import { Formik } from "formik";
-import React, { useState } from "react";
-import { FlatList, StyleSheet, View, Alert } from "react-native";
-import BCListItem from "../components/singleItems/BCListItem";
+import React, { useState, useEffect } from "react";
+import { SafeAreaView, Alert, StyleSheet, View, FlatList } from "react-native";
+import { SearchBar } from "react-native-elements";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
-import Screen from "../components/Screen";
-import * as Yup from "yup";
-import { AppFormField } from "../components/forms";
-import BCAppFormField from "../components/BCAppFormField";
-
+import BCListItem from "../components/singleItems/BCListItem";
+import { RefreshControl } from "react-native-web";
 const Books = [
   {
     id: 1,
@@ -62,56 +58,91 @@ const Books = [
     image: require("../assets/bwl.jpg"),
   },
 ];
+const Catalogo = () => {
+  const [search, setSearch] = useState("");
+  const [filteredDataSource, setFilteredDataSource] = useState(Books);
+  const [masterDataSource, setMasterDataSource] = useState(Books);
+  const [Refreshig, setRefreshing] = useState(false);
 
-const validationSchema = Yup.object().shape({
-  search: Yup.string().min(1).label("Cerca libro"),
-});
-
-export default function Catalogo(props) {
+  const onRefresh = () => {
+    setRefreshing(true);
+    setFilteredDataSource([...Books]);
+    setSearch("");
+    setRefreshing(false);
+  };
+  const searchFilterFunction = (text) => {
+    if (text) {
+      const newData = masterDataSource.filter(function (item) {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
+  };
   return (
-    <Screen style={styles.container}>
-      <Formik
-        initialValues={{ search: "" }}
-        onSubmit={(value) => {
-          console.log(value);
-        }}
-        validationSchema={validationSchema}
-      >
-        {() => (
-          <>
-            <BCAppFormField
-              autoCorrect={false}
-              keyboardType="default"
-              placeholder="Cerca qui"
-              iconName="book-search-outline"
-              name="search"
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <SearchBar
+          inputStyle={{ backgroundColor: "lightgrey" }}
+          containerStyle={{
+            backgroundColor: "white",
+            borderWidth: 1,
+            borderRadius: 5,
+          }}
+          inputContainerStyle={{
+            backgroundColor: "lightgrey",
+          }}
+          round
+          searchIcon={{ size: 24 }}
+          onChangeText={(text) => searchFilterFunction(text)}
+          onClear={(text) => searchFilterFunction("")}
+          placeholder="Type Here..."
+          value={search}
+        />
+        <FlatList
+          data={filteredDataSource}
+          keyExtractor={(book) => book.id.toString()}
+          renderItem={({ item }) => (
+            <BCListItem
+              title={item.title}
+              subTitle={item.description}
+              image={item.image}
+              onPress={() =>
+                Alert.alert("title", "Messaggio", [
+                  { text: "Ok", onPress: () => console.log(item.title) },
+                ])
+              }
             />
-          </>
-        )}
-      </Formik>
-      <FlatList
-        data={Books}
-        keyExtractor={(book) => book.id.toString()}
-        renderItem={({ item }) => (
-          <BCListItem
-            title={item.title}
-            subTitle={item.description}
-            image={item.image}
-            onPress={() =>
-              Alert.alert("title", "Messaggio", [
-                { text: "Ok", onPress: () => console.log(item.title) },
-              ])
-            }
-          />
-        )}
-        ItemSeparatorComponent={ListItemSeparator}
-      />
-    </Screen>
+          )}
+          ItemSeparatorComponent={ListItemSeparator}
+          refreshing={Refreshig}
+          onRefresh={onRefresh}
+        />
+      </View>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 10,
+    backgroundColor: "white",
+  },
+  itemStyle: {
+    padding: 10,
+  },
+  searchInput: {
+    width: "100%",
+    height: "100%",
+    paddingLeft: 8,
+    fontSize: 16,
   },
 });
+
+export default Catalogo;
