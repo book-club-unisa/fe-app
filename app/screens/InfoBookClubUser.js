@@ -40,26 +40,23 @@ const Users = [
   },
 ];
 
-function InfoBookClubUser(props) {
+function InfoBookClubUser({ route }) {
   return (
     <Screen>
       <View style={styles.container}>
         <View style={styles.bookContainer}>
-          <Image
-            source={require("../assets/lotr1.jpg")}
-            style={styles.copertina}
-          />
+          <Image source={route.params.image} style={styles.copertina} />
           <View style={styles.description}>
             <Text style={styles.boldtitle} numberOfLines={1}>
               Nome book club
             </Text>
-            <Text numberOfLines={1}>Appassionati Tolkeniani</Text>
+            <Text numberOfLines={1}>{route.params.nomebc}</Text>
             <Text numberOfLines={1}></Text>
 
             <Text style={styles.boldtitle} numberOfLines={1}>
               Fondatore
             </Text>
-            <Text numberOfLines={1}>Michele Bisaccia</Text>
+            <Text numberOfLines={1}>{route.params.nomeFondatore}</Text>
           </View>
         </View>
 

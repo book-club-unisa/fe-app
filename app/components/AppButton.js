@@ -3,10 +3,14 @@ import { Pressable, View, StyleSheet, Text } from "react-native";
 
 import colors from "../config/colors";
 
-function AppButton({ title, onPress }) {
+function AppButton({ title, onPress, styleButton }) {
   return (
     <View style={styles.container}>
-      <Pressable title={title} onPress={onPress} style={styles.buttonLogin}>
+      <Pressable
+        title={title}
+        onPress={onPress}
+        style={[styles.buttonLogin, styleButton]}
+      >
         <Text style={styles.text}>{title}</Text>
       </Pressable>
     </View>
@@ -18,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     marginVertical: 20,
-    // alignItems: "center",
+    //alignItems: "center",
     // justifyContent: "center",
   },
 

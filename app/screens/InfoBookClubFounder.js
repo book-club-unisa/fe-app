@@ -1,5 +1,13 @@
 import React from "react";
-import { FlatList, View, StyleSheet, Text, Image } from "react-native";
+import {
+  FlatList,
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  Alert,
+  Pressable,
+} from "react-native";
 
 import Screen from "../components/Screen";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
@@ -9,6 +17,7 @@ import * as Progress from "react-native-progress";
 import UserState from "../components/singleItems/UserState";
 import NumericInput from "react-native-numeric-input";
 import ProgressBar from "../components/singleItems/ProgressBar";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const Users = [
   {
@@ -40,30 +49,39 @@ const Users = [
   },
 ];
 
-function InfoBookClubFounder(props) {
+function InfoBookClubFounder({ route, navigation }) {
+  const item = route.params;
+
   return (
     <Screen>
       <View style={styles.container}>
         <View style={styles.bookContainer}>
-          <Image
-            source={require("../assets/lotr1.jpg")}
-            style={styles.copertina}
-          />
+          <Image source={route.params.image} style={styles.copertina} />
           <View style={styles.description}>
             <Text style={styles.boldtitle} numberOfLines={1}>
               Nome book club
             </Text>
-            <Text numberOfLines={1}>Appassionati Tolkeniani</Text>
+            <Text numberOfLines={1}>{route.params.nomebc}</Text>
             <Text numberOfLines={1}></Text>
 
             <Text style={styles.boldtitle} numberOfLines={1}>
               Fondatore
             </Text>
-            <Text numberOfLines={1}>Michele Bisaccia</Text>
+            <Text numberOfLines={1}>{route.params.nomeFondatore}</Text>
           </View>
         </View>
 
-        <Text style={styles.txt}> Partecipanti </Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.txt}> Partecipanti </Text>
+          <Pressable onPress={() => navigation.navigate("BCInvites", item)}>
+            <FontAwesome5
+              name="user-plus"
+              size={20}
+              color="black"
+              style={{ paddingLeft: "55%" }}
+            />
+          </Pressable>
+        </View>
 
         <FlatList
           style={{ marginBottom: 55 }}

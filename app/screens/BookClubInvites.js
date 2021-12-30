@@ -46,7 +46,7 @@ function BookClubInvites({ route }) {
           <Image source={route.params.image} style={styles.copertina} />
           <View style={styles.description}>
             <Text style={styles.boldtitle} numberOfLines={1}>
-              {route.params.value}
+              {route.params.nomebc}
             </Text>
             <Text numberOfLines={1}>Il tuo Book Blub</Text>
           </View>

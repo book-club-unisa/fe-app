@@ -3,8 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Catalogo from "../screens/Catalogo";
 import PaginaCreazioneBC from "../screens/PaginaCreazione";
-import BookClubInvites from "../screens/BookClubInvites";
-import Bacheca from "../screens/Bacheha";
+import InvitaUtenti from "../screens/InvitaUtenti";
 
 const Stack = createStackNavigator();
 
@@ -17,7 +16,7 @@ const FeedNavigator = () => (
   >
     <Stack.Screen name="Catalogo" component={Catalogo} />
     <Stack.Screen name="infoLibro" component={PaginaCreazioneBC} />
-    <Stack.Screen name="Inviti" component={BookClubInvites} />
+    <Stack.Screen name="Inviti" component={InvitaUtenti} />
   </Stack.Navigator>
 );
 

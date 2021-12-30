@@ -42,7 +42,7 @@ const Books = [
 
   {
     nomebc: "POTTERHEAD",
-    nomeFondatore: "Luca Morelli",
+    nomeFondatore: "Paolo Moretti",
     titoloLibro: "Harry Potter e i doni della morte",
     autore: "J.K.Rowling",
     descrizione:
@@ -74,8 +74,9 @@ const Books = [
     pdlPersonale: "30",
   },
 ];
+const random = 1;
 
-function Bacheca(props) {
+function Bacheca({ navigation }) {
   return (
     <FlatList
       data={Books}
@@ -89,6 +90,7 @@ function Bacheca(props) {
           pdlPersonale={item.pdlPersonale}
           titoloLibro={item.titoloLibro}
           autore={item.autore}
+          onPress={() => navigation.navigate("infoBCFounder", item)}
         />
       )}
     />

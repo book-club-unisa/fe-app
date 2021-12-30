@@ -5,11 +5,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
 import colors from "../config/colors";
-import Bacheca from "../screens/Bacheha";
+import Bacheca from "../screens/Bacheca";
 import Catalogo from "../screens/Catalogo";
 import ProfilePage from "../screens/ProfilePage";
 import FeedNavigator from "./FeedNavigator";
 import NewBacheca from "./NewBacheca";
+import ClubNavigator from "./ClubNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -59,7 +60,7 @@ const AppNavigator = () => (
     />
     <Tab.Screen
       name="Bacheca"
-      component={Bacheca}
+      component={ClubNavigator}
       options={({ navigation }) => ({
         tabBarIcon: ({ color, size, focused }) => (
           <View style={styles.container}>
