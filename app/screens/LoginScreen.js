@@ -7,6 +7,7 @@ import * as Yup from "yup";
 
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -48,14 +49,14 @@ function LoginScreen({ navigation }) {
             />
             <SubmitButton
               title="Accedi"
-              onPress={() => navigation.navigate("Bacheca")}
+              onPress={() => navigation.navigate(routes.BACHECA)}
             />
           </>
         )}
       </Formik>
       <AppButton
         title="Registrati qui"
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => navigation.navigate(routes.REGISTRATI)}
       />
     </Screen>
   );

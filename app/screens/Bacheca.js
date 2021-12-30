@@ -3,6 +3,7 @@ import { FlatList, StyleSheet } from "react-native";
 import BookClubCard from "../components/singleItems/BookClubCard";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
 const Books = [
   {
@@ -90,7 +91,7 @@ function Bacheca({ navigation }) {
           pdlPersonale={item.pdlPersonale}
           titoloLibro={item.titoloLibro}
           autore={item.autore}
-          onPress={() => navigation.navigate("infoBCFounder", item)}
+          onPress={() => navigation.navigate(routes.INFOBOOKCLUBF, item)}
         />
       )}
     />

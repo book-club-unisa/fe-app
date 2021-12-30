@@ -18,6 +18,7 @@ import UserState from "../components/singleItems/UserState";
 import NumericInput from "react-native-numeric-input";
 import ProgressBar from "../components/singleItems/ProgressBar";
 import { FontAwesome5 } from "@expo/vector-icons";
+import routes from "../navigation/routes";
 
 const Users = [
   {
@@ -73,7 +74,9 @@ function InfoBookClubFounder({ route, navigation }) {
 
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.txt}> Partecipanti </Text>
-          <Pressable onPress={() => navigation.navigate("BCInvites", item)}>
+          <Pressable
+            onPress={() => navigation.navigate(routes.REVISIONEINVITI, item)}
+          >
             <FontAwesome5
               name="user-plus"
               size={20}

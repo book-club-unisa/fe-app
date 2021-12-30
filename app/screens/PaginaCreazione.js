@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image } from "react-native";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
+import routes from "../navigation/routes";
 
 function PaginaCreazioneBC({ route, navigation }) {
   const [value, setValue] = useState("");
@@ -30,8 +31,8 @@ function PaginaCreazioneBC({ route, navigation }) {
         <AppButton
           title="crea book club"
           onPress={() => (
-            navigation.navigate("Inviti", item),
-            navigation.navigate("Inviti", value)
+            navigation.navigate(routes.UTENTIDAINVITARE, item),
+            navigation.navigate(routes.UTENTIDAINVITARE, value)
           )}
         />
       </View>
