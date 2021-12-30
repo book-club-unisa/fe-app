@@ -22,13 +22,10 @@ import colors from "./app/config/colors";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import NavigationTheme from "./app/navigation/NavigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
+import InvitiRicevuti from "./app/screens/InvitiRicevuti";
 
 export default function App() {
-  return (
-    <NavigationContainer theme={NavigationTheme}>
-      <AppNavigator />
-    </NavigationContainer>
-  );
+  return <InvitiRicevuti />;
 }
 
 //Per ProfilePage è necessario dare dei valori da passare al component

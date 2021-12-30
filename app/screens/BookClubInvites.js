@@ -5,10 +5,7 @@ import Screen from "../components/Screen";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 
 import colors from "../config/colors";
-import * as Progress from "react-native-progress";
 import InviteState from "../components/singleItems/InviteState";
-import NumericInput from "react-native-numeric-input";
-import ProgressBar from "../components/singleItems/ProgressBar";
 import AppButton from "../components/AppButton";
 
 const Users = [
@@ -95,17 +92,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  bar: {
-    marginBottom: 15,
-    alignSelf: "center",
-  },
-
-  barre: {
-    position: "absolute",
-    width: "100%",
-    bottom: 30,
-  },
-
   boldtitle: {
     fontWeight: "bold",
     color: colors.blu,
@@ -121,7 +107,7 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
     overflow: "hidden",
-    margin: 40,
+    margin: 30,
     flex: 1,
     justifyContent: "center",
   },

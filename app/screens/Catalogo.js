@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { SafeAreaView, Alert, StyleSheet, View, FlatList } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, FlatList } from "react-native";
 import { SearchBar } from "react-native-elements";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import BCListItem from "../components/singleItems/BCListItem";
@@ -117,7 +117,7 @@ const Catalogo = ({ navigation }) => {
           searchIcon={{ size: 24 }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction("")}
-          placeholder="Type Here..."
+          placeholder="Cerca un libro..."
           value={search}
         />
         <FlatList

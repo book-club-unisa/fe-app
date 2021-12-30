@@ -1,11 +1,19 @@
-import React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Image, Text, Pressable, Alert } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
-function InviteState({ image, title, ImageComponent, onPress, state }) {
+function ReceivedInvite({
+  image,
+  title,
+  ImageComponent,
+  onPress,
+  inviteState,
+}) {
+  const [state, setState] = useState(0);
+
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>
@@ -19,13 +27,24 @@ function InviteState({ image, title, ImageComponent, onPress, state }) {
         <View>
           <View>
             {(state === 0 && (
-              <View>
+              <View style={styles.icone}>
                 <>
-                  <MaterialCommunityIcons
-                    name="clock"
-                    size={25}
-                    color={colors.orange}
-                  />
+                  <Pressable onPress={(state) => setState(1)}>
+                    <Ionicons
+                      name="checkmark-outline"
+                      size={25}
+                      color={colors.blu}
+                    />
+                  </Pressable>
+
+                  <Pressable onPress={(state) => setState(2)}>
+                    <MaterialCommunityIcons
+                      style={styles.singleIcon}
+                      name="delete-outline"
+                      size={25}
+                      color={colors.blu}
+                    />
+                  </Pressable>
                 </>
               </View>
             )) ||
@@ -53,15 +72,10 @@ function InviteState({ image, title, ImageComponent, onPress, state }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    padding: 15,
+    paddingBottom: 15,
+    paddingTop: 15,
     backgroundColor: colors.white,
     alignItems: "center",
-  },
-
-  profilePic: {
-    width: 30,
-    height: 30,
-    //borderRadius: 35,
   },
 
   details: {
@@ -69,14 +83,25 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  icone: {
+    flex: 1,
+    flexDirection: "row",
+  },
+
+  profilePic: {
+    width: 30,
+    height: 40,
+    borderRadius: 3,
+  },
+
+  singleIcon: {
+    marginLeft: 5,
+  },
+
   title: {
     fontWeight: "bold",
     paddingBottom: 5,
   },
-
-  subTitle: {
-    color: colors.mediumgrey,
-  },
 });
 
-export default InviteState;
+export default ReceivedInvite;
