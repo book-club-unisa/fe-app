@@ -21,6 +21,7 @@ function ProfilePage({
           size={150}
           style={styles.profilePic}
         />
+        <Text style={styles.title}> Il tuo profilo </Text>
         <ProfileItem
           profileName={profileName}
           profileSurname={profileSurname}
@@ -31,8 +32,8 @@ function ProfilePage({
       <View style={styles.buttonsUtility}>
         <Pressable
           title="Impostazioni"
-          color="colors.secondary"
-          onPress={console.log(1)}
+          color="colors.blu"
+          onPress={() => console.log(0)}
           style={styles.buttonLogin}
         >
           <Ionicons name="settings" size={24} style={styles.icon} />
@@ -40,9 +41,9 @@ function ProfilePage({
         </Pressable>
 
         <Pressable
-          title="Impostazioni"
-          color="colors.secondary"
-          onPress={console.log(1)}
+          title="Sicurezza"
+          color="colors.blu"
+          onPress={() => console.log(1)}
           style={styles.buttonLogin}
         >
           <Ionicons
@@ -58,16 +59,6 @@ function ProfilePage({
 }
 
 const styles = StyleSheet.create({
-  container: {},
-  subContainer: {
-    alignItems: "center",
-  },
-
-  profilePic: {
-    color: colors.blu,
-    marginVertical: 30,
-  },
-
   buttonLogin: {
     width: "90%",
     height: 60,
@@ -78,10 +69,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     margin: 2,
   },
+
+  buttonsUtility: {
+    alignItems: "center",
+    marginTop: 2,
+    marginBottom: 2,
+  },
+
+  container: {},
+
   icon: {
     marginHorizontal: 10,
     color: colors.blu,
   },
+
+  profilePic: {
+    color: colors.blu,
+    marginTop: 30,
+  },
+
+  subContainer: {
+    alignItems: "center",
+  },
+
   settings: {
     flex: 1,
     fontWeight: "bold",
@@ -89,9 +99,11 @@ const styles = StyleSheet.create({
     color: colors.blu,
   },
 
-  buttonsUtility: {
-    alignItems: "center",
-    marginTop: "20%",
+  title: {
+    fontSize: 15,
+    marginVertical: 10,
+    fontWeight: "bold",
+    textTransform: "uppercase",
   },
 });
 

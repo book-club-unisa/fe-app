@@ -25,7 +25,11 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import InvitiRicevuti from "./app/screens/InvitiRicevuti";
 
 export default function App() {
-  return <InvitiRicevuti />;
+  return (
+    <NavigationContainer theme={NavigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
+  );
 }
 
 //Per ProfilePage è necessario dare dei valori da passare al component

@@ -7,16 +7,25 @@ import colors from "../../config/colors";
 function ProfileItem({ profileName, profileEmail, profileSurname }) {
   return (
     <View style={styles.container}>
+      <View>
+        <Text style={styles.titolo}> Nome </Text>
+      </View>
       <View style={styles.textContainer}>
         <MaterialCommunityIcons name="account" size={25} style={styles.icon} />
         <Text style={styles.text}>{profileName}</Text>
       </View>
 
+      <View>
+        <Text style={styles.titolo}> Cognome </Text>
+      </View>
       <View style={styles.textContainer}>
         <MaterialCommunityIcons name="account" size={25} style={styles.icon} />
         <Text style={styles.text}>{profileSurname}</Text>
       </View>
 
+      <View>
+        <Text style={styles.titolo}> Email </Text>
+      </View>
       <View style={styles.textContainer}>
         <MaterialCommunityIcons name="email" size={25} style={styles.icon} />
         <Text style={styles.text}>{profileEmail}</Text>
@@ -28,6 +37,10 @@ function ProfileItem({ profileName, profileEmail, profileSurname }) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+  },
+  icon: {
+    margin: 10,
+    color: colors.mediumgrey,
   },
   textContainer: {
     width: "90%",
@@ -44,8 +57,7 @@ const styles = StyleSheet.create({
     color: colors.mediumgrey,
     fontWeight: "bold",
   },
-  icon: {
-    margin: 10,
+  titolo: {
     color: colors.mediumgrey,
   },
 });
