@@ -119,7 +119,7 @@ function InvitaUtenti({ route }) {
 const styles = StyleSheet.create({
   boldtitle: {
     fontWeight: "bold",
-    color: colors.azzurro,
+    color: colors.blu,
     textTransform: "uppercase",
   },
 
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   button: {
     position: "absolute",
     width: "100%",
-    bottom: 15,
+    bottom: 0,
   },
 
   container: {

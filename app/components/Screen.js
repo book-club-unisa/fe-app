@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  StatusBar,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, Platform, StatusBar, SafeAreaView } from "react-native";
 
 export default function Screen({ children, styleChildren }) {
   return (

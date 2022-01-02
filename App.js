@@ -23,6 +23,8 @@ import AuthNavigator from "./app/navigation/AuthNavigator";
 import NavigationTheme from "./app/navigation/NavigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import InvitiRicevuti from "./app/screens/InvitiRicevuti";
+import Sicurezza from "./app/screens/Sicurezza";
+import ChiSiamo from "./app/screens/ChiSiamo";
 
 export default function App() {
   return (

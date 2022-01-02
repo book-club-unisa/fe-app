@@ -31,13 +31,13 @@ function ProfilePage({
       </View>
       <View style={styles.buttonsUtility}>
         <Pressable
-          title="Impostazioni"
+          title="ChiSiamo"
           color="colors.blu"
           onPress={() => console.log(0)}
           style={styles.buttonLogin}
         >
-          <Ionicons name="settings" size={24} style={styles.icon} />
-          <Text style={styles.settings}>Impostazioni</Text>
+          <Ionicons name="people-sharp" size={24} style={styles.icon} />
+          <Text style={styles.settings}> Chi siamo </Text>
         </Pressable>
 
         <Pressable

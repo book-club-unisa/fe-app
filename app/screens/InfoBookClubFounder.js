@@ -166,7 +166,8 @@ const styles = StyleSheet.create({
   barre: {
     position: "absolute",
     width: "100%",
-    bottom: 30,
+    bottom: 0,
+    backgroundColor: colors.white,
   },
 
   boldtitle: {

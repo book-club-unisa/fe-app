@@ -22,15 +22,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     marginVertical: 20,
-    //alignItems: "center",
-    // justifyContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   buttonLogin: {
     width: "50%",
-    height: 60,
+    height: 50,
     borderRadius: 30,
-    backgroundColor: colors.azzurro,
+    backgroundColor: colors.blu,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   text: {
     color: colors.white,
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 18,
     textTransform: "uppercase",
   },
 });

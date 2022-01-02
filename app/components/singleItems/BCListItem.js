@@ -4,7 +4,7 @@ import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function BCListItem({ image, title, subTitle, ImageComponent, onPress }) {
+function BCListItem({ image, title, subTitle, onPress }) {
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>
