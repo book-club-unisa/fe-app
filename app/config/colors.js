@@ -15,4 +15,5 @@ export default {
   blu: "#007aff",
   giallo: "#a92",
   orange: "#F9A825",
+  inventato: "#F721A3",
 };
