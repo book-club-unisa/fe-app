@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import Screen from "./app/components/Screen";
 import Bacheca from "./app/screens/Bacheca";
 import Catalogo from "./app/screens/Catalogo";
@@ -25,15 +25,20 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import InvitiRicevuti from "./app/screens/InvitiRicevuti";
 import Sicurezza from "./app/screens/Sicurezza";
 import ChiSiamo from "./app/screens/ChiSiamo";
+import AppActivityIndicator from "./app/components/AppActivityIndicator";
+import ChargingScreen1 from "./app/screens/ChargingScreen1";
+import ChargingScreen2 from "./app/screens/ChargingScreen2";
 
 export default function App() {
-  return (
-    <NavigationContainer theme={NavigationTheme}>
-      <AppNavigator />
-    </NavigationContainer>
-  );
+  return <ChargingScreen2 />;
 }
 
 //Per ProfilePage è necessario dare dei valori da passare al component
+
+/**
+ * <NavigationContainer theme={NavigationTheme}>
+      <AuthNavigator />
+    </NavigationContainer>
+ */
 
 const styles = StyleSheet.create({});

@@ -10,20 +10,24 @@ import colors from "../config/colors";
 const validationSchema = Yup.object().shape({
   name: Yup.string()
     .required("Nome è un campo richiesto")
-    .min(1)
-    .max(16)
+    .min(2, "La lunghezza deve essere maggiore di ${min}")
+    .max(20, "La lunghezza deve essere minore di ${max}")
     .label("name"),
   surname: Yup.string()
     .required("Cognome è un campo richiesto")
-    .min(1)
+    .min(2, "La lunghezza deve essere maggiore di ${min}")
+    .max(20, "La lunghezza deve essere minore di ${max}")
     .label("surname"),
   email: Yup.string()
     .required("Email è un campo richiesto")
     .email("Il formato deve essere quello di una email")
+    .min(6, "La lunghezza deve essere maggiore di ${min}")
+    .max(100, "La lunghezza deve essere minore di ${max}")
     .label("Email"),
   password: Yup.string()
     .required("Password è un campo richiesto")
-    .min(4, "Password deve essere almeno di ${min} caratteri")
+    .min(6, "Password deve essere almeno di ${min} caratteri")
+    .max(16, "La lunghezza deve essere minore di ${max}")
     .label("Password"),
 });
 
