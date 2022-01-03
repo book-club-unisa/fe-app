@@ -83,7 +83,7 @@ function InvitaUtenti({ route }) {
             <Text numberOfLines={1}></Text>
 
             <Text style={styles.boldtitle} numberOfLines={1}>
-              {fondatore}
+              Fondatore Book Club
             </Text>
             <Text numberOfLines={1}>Michele Bisaccia</Text>
           </View>

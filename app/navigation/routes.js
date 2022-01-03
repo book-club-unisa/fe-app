@@ -7,4 +7,6 @@ export default Object.freeze({
   INFOBOOKCLUBF: "infoBCFounder",
   INFOBOOKCLUBU: "infoBCUtente",
   REVISIONEINVITI: "BCInvites",
+  CHISIAMO: "ChiSiamo",
+  SICUREZZA: "Sicurezza",
 });

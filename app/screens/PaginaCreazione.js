@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, Text, Image, Alert, Pressable } from "react-native";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
@@ -7,7 +7,25 @@ import routes from "../navigation/routes";
 
 function PaginaCreazioneBC({ route, navigation }) {
   const [value, setValue] = useState("");
+  const [validate, setValidate] = useState(false);
 
+  const Controllo = (value) => {
+    if (value.length < 2 || value.length > 20) {
+      setValidate(false);
+    } else {
+      setValue({ value });
+      setValidate(true);
+    }
+  };
+
+  const CButton = () => {
+    if (validate === true) {
+      navigation.navigate(routes.UTENTIDAINVITARE, item),
+        navigation.navigate(routes.UTENTIDAINVITARE, value);
+    } else {
+      Alert.alert("Alert", "Il nome del bookclub non è valido");
+    }
+  };
   const item = route.params;
 
   return (
@@ -17,7 +35,7 @@ function PaginaCreazioneBC({ route, navigation }) {
           iconName="book-open-page-variant"
           placeholder="Nome book club"
           style={styles.textInput}
-          onChangeText={(value) => setValue({ value })}
+          onChangeText={Controllo}
         />
         <Text style={styles.title}> Libro scelto </Text>
         <Text style={styles.bookTitle}>{route.params.title}</Text>
@@ -28,13 +46,7 @@ function PaginaCreazioneBC({ route, navigation }) {
             {route.params.description}
           </Text>
         </View>
-        <AppButton
-          title="crea book club"
-          onPress={() => (
-            navigation.navigate(routes.UTENTIDAINVITARE, item),
-            navigation.navigate(routes.UTENTIDAINVITARE, value)
-          )}
-        />
+        <AppButton onPress={CButton} title="crea book club" />
       </View>
     </Screen>
   );

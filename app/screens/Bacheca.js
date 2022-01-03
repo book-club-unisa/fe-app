@@ -79,22 +79,24 @@ const random = 1;
 
 function Bacheca({ navigation }) {
   return (
-    <FlatList
-      data={Books}
-      keyExtractor={(book) => book.nomebc}
-      renderItem={({ item }) => (
-        <BookClubCard
-          bcName={item.nomebc}
-          founderName={item.nomeFondatore}
-          image={item.image}
-          odlValue={item.odlValue}
-          pdlPersonale={item.pdlPersonale}
-          titoloLibro={item.titoloLibro}
-          autore={item.autore}
-          onPress={() => navigation.navigate(routes.INFOBOOKCLUBF, item)}
-        />
-      )}
-    />
+    <Screen>
+      <FlatList
+        data={Books}
+        keyExtractor={(book) => book.nomebc}
+        renderItem={({ item }) => (
+          <BookClubCard
+            bcName={item.nomebc}
+            founderName={item.nomeFondatore}
+            image={item.image}
+            odlValue={item.odlValue}
+            pdlPersonale={item.pdlPersonale}
+            titoloLibro={item.titoloLibro}
+            autore={item.autore}
+            onPress={() => navigation.navigate(routes.INFOBOOKCLUBF, item)}
+          />
+        )}
+      />
+    </Screen>
   );
 }
 

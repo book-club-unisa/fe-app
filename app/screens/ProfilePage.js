@@ -6,12 +6,14 @@ import colors from "../config/colors";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import routes from "../navigation/routes";
 
 function ProfilePage({
   profileName,
   profilePassword,
   profileEmail,
   profileSurname,
+  navigation,
 }) {
   return (
     <Screen styleChildren={styles.container}>
@@ -32,8 +34,8 @@ function ProfilePage({
       <View style={styles.buttonsUtility}>
         <Pressable
           title="ChiSiamo"
-          color="colors.blu"
-          onPress={() => console.log(0)}
+          color={colors.blu}
+          onPress={() => navigation.navigate(routes.CHISIAMO)}
           style={styles.buttonLogin}
         >
           <Ionicons name="people-sharp" size={24} style={styles.icon} />
@@ -42,8 +44,8 @@ function ProfilePage({
 
         <Pressable
           title="Sicurezza"
-          color="colors.blu"
-          onPress={() => console.log(1)}
+          color={colors.blu}
+          onPress={() => navigation.navigate(routes.SICUREZZA)}
           style={styles.buttonLogin}
         >
           <Ionicons

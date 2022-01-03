@@ -12,6 +12,7 @@ import ProfilePage from "../screens/ProfilePage";
 import FeedNavigator from "./FeedNavigator";
 import NewBacheca from "./NewBacheca";
 import ClubNavigator from "./ClubNavigator";
+import UsNavigator from "./UsNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -59,6 +60,7 @@ const AppNavigator = () => (
         ),
       })}
     />
+
     <Tab.Screen
       name="Bacheca"
       component={ClubNavigator}
@@ -84,7 +86,7 @@ const AppNavigator = () => (
     />
     <Tab.Screen
       name="Profilo"
-      component={ProfilePage}
+      component={UsNavigator}
       options={({ navigation }) => ({
         tabBarIcon: ({ color, size, focused }) => (
           <View style={styles.container}>
