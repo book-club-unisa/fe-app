@@ -30,7 +30,11 @@ import ChargingScreen1 from "./app/screens/ChargingScreen1";
 import ChargingScreen2 from "./app/screens/ChargingScreen2";
 
 export default function App() {
-  return <ChargingScreen2 />;
+  return (
+    <NavigationContainer theme={NavigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
+  );
 }
 
 //Per ProfilePage è necessario dare dei valori da passare al component
