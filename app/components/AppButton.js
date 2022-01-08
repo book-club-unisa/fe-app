@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     marginVertical: 20,
     alignItems: "center",
-    justifyContent: "center",
+    //justifyContent: "center",
   },
 
   buttonLogin: {
