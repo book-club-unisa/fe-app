@@ -20,8 +20,8 @@ function PaginaCreazioneBC({ route, navigation }) {
 
   const CButton = () => {
     if (validate === true) {
-      navigation.navigate(routes.UTENTIDAINVITARE, item),
-        navigation.navigate(routes.UTENTIDAINVITARE, value);
+      navigation.navigate(routes.INFOLIBRO, item),
+        navigation.navigate(routes.INFOLIBRO, value);
     } else {
       Alert.alert("Alert", "Il nome del bookclub non è valido");
     }

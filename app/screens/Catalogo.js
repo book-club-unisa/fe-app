@@ -128,7 +128,7 @@ const Catalogo = ({ navigation }) => {
               title={item.title}
               subTitle={item.description}
               image={item.image}
-              onPress={() => navigation.navigate(routes.INFOLIBRO, item)}
+              onPress={() => navigation.navigate(routes.CREAZIONEBC, item)}
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}

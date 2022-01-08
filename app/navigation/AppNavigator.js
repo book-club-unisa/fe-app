@@ -97,7 +97,7 @@ const AppNavigator = () => (
             />
             <Text
               style={{
-                color: focused ? colors.white : colors.black,
+                color: colors.white,
                 fontSize: 12,
               }}
             >

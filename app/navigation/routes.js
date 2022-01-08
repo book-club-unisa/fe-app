@@ -1,6 +1,7 @@
 export default Object.freeze({
   BACHECA: "Bacheca",
-  INFOLIBRO: "infoLibro",
+  INFOLIBRO: "InfoLibro",
+  CREAZIONEBC: "CreazioneBC",
   ACCEDI: "Login",
   REGISTRATI: "Register",
   UTENTIDAINVITARE: "Inviti",
@@ -9,4 +10,5 @@ export default Object.freeze({
   REVISIONEINVITI: "BCInvites",
   CHISIAMO: "ChiSiamo",
   SICUREZZA: "Sicurezza",
+  INVITAUTENTI: "InvitaUtenti",
 });

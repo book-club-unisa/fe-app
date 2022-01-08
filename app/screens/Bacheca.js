@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { Alert, FlatList, StyleSheet } from "react-native";
 import BookClubCard from "../components/singleItems/BookClubCard";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
@@ -92,7 +92,9 @@ function Bacheca({ navigation }) {
             pdlPersonale={item.pdlPersonale}
             titoloLibro={item.titoloLibro}
             autore={item.autore}
-            onPress={() => navigation.navigate(routes.INFOBOOKCLUBF, item)}
+            onPress={() => {
+              navigation.navigate(routes.INFOBOOKCLUBU, item);
+            }}
           />
         )}
       />

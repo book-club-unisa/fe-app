@@ -9,6 +9,7 @@ import * as Progress from "react-native-progress";
 import UserState from "../components/singleItems/UserState";
 import NumericInput from "react-native-numeric-input";
 import ProgressBar from "../components/singleItems/ProgressBar";
+import AppButton from "../components/AppButton";
 
 const Users = [
   {
@@ -112,6 +113,11 @@ function InfoBookClubUser({ route }) {
             </View>
           </View>
         </View>
+        <AppButton
+          title="Abbandona Book Club"
+          styleButton={{ width: "90%" }}
+          onPress={() => console.log(1)}
+        />
       </View>
     </Screen>
   );

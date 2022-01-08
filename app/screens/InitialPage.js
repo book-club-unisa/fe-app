@@ -3,8 +3,9 @@ import { StyleSheet, View, Image, Text } from "react-native";
 import Screen from "../components/Screen";
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
-function InitialPage(props) {
+function InitialPage({ navigation }) {
   return (
     <Screen>
       <View style={styles.container}>
@@ -18,19 +19,18 @@ function InitialPage(props) {
         <View style={styles.subContainer}>
           <View style={styles.buttons}>
             <AppButton
-              styleButton={{ width: "90%" }}
-              title="Accedi"
-              onPress={() => navigation.navigate(routes.ACCEDI)}
+              title="Registrati qui"
+              onPress={() => {
+                console.log(1);
+              }}
             />
           </View>
 
-          <View style={styles.buttonsi}>
-            <AppButton
-              styleButton={{ width: "90%" }}
-              title="Registrati"
-              onPress={() => navigation.navigate(routes.REGISTRATI)}
-            />
-          </View>
+          <AppButton
+            title="Registrati qui"
+            onPress={() => navigation.navigate(routes.REGISTRATI)}
+          />
+          <View style={styles.buttons}></View>
         </View>
       </View>
     </Screen>

@@ -2,8 +2,6 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Bacheca from "../screens/Bacheca";
-import PaginaCreazioneBC from "../screens/PaginaCreazione";
-import InvitaUtenti from "../screens/InvitaUtenti";
 import InfoBookClubFounder from "../screens/InfoBookClubFounder";
 import InfoBookClubUser from "../screens/InfoBookClubUser";
 import BookClubInvites from "../screens/BookClubInvites";

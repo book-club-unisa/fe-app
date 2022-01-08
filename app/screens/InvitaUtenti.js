@@ -5,18 +5,18 @@ import {
   StyleSheet,
   Text,
   Image,
-  TextInput,
   Alert,
+  Pressable,
+  TextInput,
 } from "react-native";
+
 import Screen from "../components/Screen";
-import AppTextInput from "../components/AppTextInput";
-import AppButton from "../components/AppButton";
-import UserListItem from "../components/singleItems/UserListItem";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
-import BCAppFormField from "../components/BCAppFormField";
+import InviteState from "../components/singleItems/InviteState";
+import AppButton from "../components/AppButton";
+import AppTextInput from "../components/AppTextInput";
 
 const Users = [
   {
@@ -42,81 +42,56 @@ const Users = [
     name: "user536@unisa.it",
     image: require("../assets/users/4.png"),
   },
-  {
-    id: 5,
-    name: "giovanna243@hotmail.it",
-    image: require("../assets/users/1.png"),
-  },
-
-  {
-    id: 6,
-    name: "alfonso.m@gmail.com",
-    image: require("../assets/users/2.png"),
-  },
-
-  {
-    id: 7,
-    name: "lucia.rossi12@gmail.it",
-    image: require("../assets/users/3.png"),
-  },
-
-  {
-    id: 8,
-    name: "user536@unisa.it",
-    image: require("../assets/users/4.png"),
-  },
 ];
 
-const fondatore = "Michele Bisaccia";
-
-function InvitaUtenti({ route }) {
+function InvitaUtenti({ navigation }) {
   return (
     <Screen>
       <View style={styles.container}>
-        <View style={styles.bookContainer}>
-          <Image source={route.params.image} style={styles.copertina} />
-          <View style={styles.description}>
-            <Text style={styles.boldtitle} numberOfLines={1}>
-              Nome book club
-            </Text>
-            <Text numberOfLines={1}>{route.params.value}</Text>
-            <Text numberOfLines={1}></Text>
-
-            <Text style={styles.boldtitle} numberOfLines={1}>
-              Fondatore Book Club
-            </Text>
-            <Text numberOfLines={1}>Michele Bisaccia</Text>
-          </View>
+        <View style={styles.searchContainer}>
+          <AppTextInput
+            iconName="book-open-page-variant"
+            placeholder="Cerca utenti"
+            style={styles.textInput}
+          />
         </View>
-
-        <Text style={styles.txt}> Aggiungi i tuoi amici </Text>
-
         <FlatList
           style={{ marginBottom: 55 }}
           data={Users}
           keyExtractor={(user) => user.id.toString()}
           renderItem={({ item }) => (
-            <UserListItem
+            <InviteState
               title={item.name}
               image={item.image}
               onPress={() =>
                 Alert.alert("title", "Messaggio", [
-                  { text: "Ok", onPress: () => console.log(item.title) },
+                  { text: "Ok", onPress: () => console.log("1") },
                 ])
               }
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}
         />
-      </View>
-      <View style={styles.button}>
-        <AppButton title="Fine" />
+
+        <AppButton
+          title="INVITA"
+          onPress={() =>
+            Alert.alert("title", "Messaggio", [
+              { text: "Ok", onPress: () => console.log("1") },
+            ])
+          }
+        />
       </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  allinea: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
   boldtitle: {
     fontWeight: "bold",
     color: colors.blu,
@@ -129,23 +104,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  button: {
-    position: "absolute",
-    width: "100%",
-    bottom: 0,
-  },
-
   container: {
     marginVertical: 10,
     overflow: "hidden",
-    marginHorizontal: 40,
+    margin: 30,
     flex: 1,
     justifyContent: "center",
   },
 
   copertina: {
-    width: 104,
-    height: 160,
+    width: 52,
+    height: 80,
     borderRadius: 5,
   },
 
@@ -163,11 +132,24 @@ const styles = StyleSheet.create({
   },
 
   txt: {
-    marginVertical: 20,
+    marginVertical: 5,
     alignSelf: "center",
     fontWeight: "bold",
     textTransform: "uppercase",
     color: colors.black,
+  },
+
+  title: {
+    flexDirection: "row",
+    flex: 1,
+  },
+
+  textInput: {
+    flex: 1,
+  },
+
+  searchContainer: {
+    marginVertical: 20,
   },
 });
 
