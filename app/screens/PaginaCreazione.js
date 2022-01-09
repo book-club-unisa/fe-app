@@ -41,7 +41,10 @@ function PaginaCreazioneBC({ route, navigation }) {
         <Text style={styles.bookTitle}>{route.params.title}</Text>
         <Text style={styles.autore}>{route.params.autore}</Text>
         <View style={styles.BookContainer}>
-          <Image source={route.params.image} style={styles.copertina} />
+          <Image
+            source={{ uri: route.params.coverUrl }}
+            style={styles.copertina}
+          />
           <Text style={styles.description} numberOfLines={12}>
             {route.params.description}
           </Text>

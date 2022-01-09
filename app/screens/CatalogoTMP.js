@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { SearchBar } from "react-native-elements";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
@@ -8,9 +8,8 @@ import colors from "../config/colors";
 import Screen from "../components/Screen";
 
 import routes from "../navigation/routes";
-import BCapi from "../api/BCapi";
 
-/*const Books = [
+const Books = [
   {
     id: 1,
     title: "Il signore degli anelli - La compagnia dell'anello",
@@ -67,45 +66,74 @@ import BCapi from "../api/BCapi";
     image: require("../assets/bwl.jpg"),
     autore: "Scott Snyder",
   },
-];*/
-
+];
 const Catalogo = ({ navigation }) => {
-  const [books, setBooks] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filteredDataSource, setFilteredDataSource] = useState(Books);
+  const [masterDataSource, setMasterDataSource] = useState(Books);
+  const [Refreshig, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    getBooks();
-  }, []);
-
-  function getBooks() {
-    BCapi.get("/books")
-      .then(async function (response) {
-        //setLoading(true);
-        setBooks(response.data.items);
-        //setLoading(false);
-        // setError(false);
-      })
-      .catch(function (error) {
-        console.log(2);
-        console.log(error);
-        // setError(true);
+  const onRefresh = () => {
+    setRefreshing(true);
+    setFilteredDataSource([...Books]);
+    setSearch("");
+    setRefreshing(false);
+  };
+  const searchFilterFunction = (text) => {
+    if (text) {
+      const newData = masterDataSource.filter(function (item) {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
       });
-  }
-
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
+  };
   return (
     <Screen>
       <View style={styles.container}>
+        <SearchBar
+          inputStyle={{ backgroundColor: colors.lightgrey }}
+          containerStyle={{
+            backgroundColor: "white",
+            borderWidth: 1,
+            //borderRadius: 5,
+            borderTopColor: colors.white,
+            borderBottomColor: colors.white,
+            borderColor: colors.white,
+            //placeholderTextColor: colors.primary,
+          }}
+          inputContainerStyle={{
+            backgroundColor: colors.lightgrey,
+          }}
+          placeholderTextColor={colors.mediumgrey}
+          round
+          searchIcon={{ size: 24 }}
+          onChangeText={(text) => searchFilterFunction(text)}
+          onClear={(text) => searchFilterFunction("")}
+          placeholder="Cerca un libro..."
+          value={search}
+        />
         <FlatList
-          data={books}
-          keyExtractor={(book) => book.isbn.toString()}
+          data={filteredDataSource}
+          keyExtractor={(book) => book.id.toString()}
           renderItem={({ item }) => (
             <BCListItem
               title={item.title}
               subTitle={item.description}
-              image={item.coverUrl}
+              image={item.image}
               onPress={() => navigation.navigate(routes.CREAZIONEBC, item)}
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}
+          refreshing={Refreshig}
+          onRefresh={onRefresh}
         />
       </View>
     </Screen>

@@ -77,7 +77,10 @@ function InfoLibro({ route, navigation }) {
     <Screen>
       <View style={styles.container}>
         <View style={styles.bookContainer}>
-          <Image source={route.params.image} style={styles.copertina} />
+          <Image
+            source={{ uri: route.params.coverUrl }}
+            style={styles.copertina}
+          />
           <View style={styles.description}>
             <Text style={styles.boldtitle} numberOfLines={1}>
               Nome book club

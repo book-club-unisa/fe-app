@@ -8,7 +8,7 @@ function BCListItem({ image, title, subTitle, onPress }) {
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>
-        {image && <Image style={styles.profilePic} source={image} />}
+        {image && <Image style={styles.profilePic} source={{ uri: image }} />}
         <View style={styles.details}>
           <Text numberOfLines={1} style={styles.title}>
             {title}
