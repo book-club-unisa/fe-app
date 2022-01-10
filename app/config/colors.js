@@ -2,6 +2,7 @@ export default {
   black: "#000",
   white: "#fff",
   lightgrey: "#f8f4f4",
+  newgrey: "#EEEEEE",
   mediumgrey: "#6e6969",
   danger: "#ff5252",
   yellow: "#ffe66d",

@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Alert } from "react-native";
 import Screen from "../components/Screen";
 import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
+import BCapi from "../api/BCapi";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -18,18 +19,31 @@ const validationSchema = Yup.object().shape({
     .label("Email"),
   password: Yup.string()
     .required("Password è un campo richiesto")
-    .min(6, "Password deve essere almeno di ${min} caratteri")
-    .max(16, "La lunghezza deve essere minore di ${max}")
+    .min(8, "Password deve essere almeno di ${min} caratteri")
+    .max(32, "La lunghezza deve essere minore di ${max}")
     .label("Password"),
 });
 
 function LoginScreen({ navigation }) {
+  function LogIn(values) {
+    BCapi.post("users/sign-in", values)
+      .then(async function (response) {
+        navigation.navigate(routes.CLUBS);
+      })
+
+      .catch(function (error) {
+        Alert.alert("Errore, controlla i dati inseriti");
+
+        console.log(error);
+      });
+  }
+
   return (
     <Screen styleChildren={styles.container}>
       <Image style={styles.logo} source={require("../assets/BCLogo.png")} />
       <Formik
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => LogIn(values)}
         validationSchema={validationSchema}
       >
         {() => (

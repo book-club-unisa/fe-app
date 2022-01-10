@@ -49,7 +49,11 @@ function PaginaCreazioneBC({ route, navigation }) {
             {route.params.description}
           </Text>
         </View>
-        <AppButton onPress={CButton} title="crea book club" />
+        <AppButton
+          onPress={CButton}
+          title="crea book club"
+          styleButton={styles.button}
+        />
       </View>
     </Screen>
   );
@@ -64,6 +68,10 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
+  },
+
+  button: {
+    marginTop: 20,
   },
 
   title: {
@@ -96,6 +104,7 @@ const styles = StyleSheet.create({
     width: 130,
     height: 200,
     marginHorizontal: 10,
+    borderRadius: 8,
   },
 
   description: {

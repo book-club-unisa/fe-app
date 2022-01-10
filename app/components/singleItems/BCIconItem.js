@@ -5,7 +5,7 @@ import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function BCIconItem({
-  backgroundIconColor = colors.primary,
+  backgroundIconColor = colors.green,
   title,
   onPress,
   iconName = "close",
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     padding: 15,
-    backgroundColor: colors.white,
+    backgroundColor: colors.lightgrey,
   },
 
   details: {

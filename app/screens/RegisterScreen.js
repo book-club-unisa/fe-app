@@ -30,8 +30,8 @@ const validationSchema = Yup.object().shape({
     .label("Email"),
   password: Yup.string()
     .required("Password è un campo richiesto")
-    .min(6, "Password deve essere almeno di ${min} caratteri")
-    .max(16, "La lunghezza deve essere minore di ${max}")
+    .min(8, "Password deve essere almeno di ${min} caratteri")
+    .max(32, "La lunghezza deve essere minore di ${max}")
     .label("Password"),
 });
 
@@ -42,7 +42,7 @@ function RegisterScreen({ navigation }) {
         navigation.navigate(routes.CLUBS);
       })
       .catch(function (error) {
-        Alert.alert("Errore", "l'email è già stata utilizzata");
+        Alert.alert("Errore, controlla i dati inseriti");
       });
   }
 

@@ -6,6 +6,7 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 import colors from "../../config/colors";
 import Screen from "../Screen";
@@ -81,9 +82,10 @@ export default function BookClubCard({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.lightgrey,
     width: "90%",
     borderRadius: 5,
+    marginVertical: Platform.OS === "android" ? 0 : 5,
   },
   subContainer: {
     flexDirection: "row",
@@ -102,6 +104,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 130,
     marginRight: 10,
+    borderRadius: 5,
   },
 
   notesContainer: {

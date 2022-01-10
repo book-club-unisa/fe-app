@@ -79,7 +79,7 @@ const random = 1;
 
 function Bacheca({ navigation }) {
   return (
-    <Screen>
+    <Screen styleChildren={styles.container}>
       <FlatList
         data={Books}
         keyExtractor={(book) => book.nomebc}
@@ -104,7 +104,7 @@ function Bacheca({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.lightgrey,
+    backgroundColor: colors.white,
   },
 });
 export default Bacheca;
