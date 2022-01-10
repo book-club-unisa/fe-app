@@ -18,6 +18,7 @@ const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
   <Tab.Navigator
+    initialRouteName="Bacheca"
     tabBarOptions={{
       showLabel: false,
       style: {
@@ -82,6 +83,7 @@ const AppNavigator = () => (
             </Text>
           </View>
         ),
+        unmountOnBlur: true,
       })}
     />
     <Tab.Screen

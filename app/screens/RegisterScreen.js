@@ -8,6 +8,8 @@ import * as Yup from "yup";
 import colors from "../config/colors";
 import BCapi from "../api/BCapi";
 import routes from "../navigation/routes";
+import AppButton from "../components/AppButton";
+import LoginScreen from "./LoginScreen";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -33,17 +35,17 @@ const validationSchema = Yup.object().shape({
     .label("Password"),
 });
 
-function register(values) {
-  BCapi.post("users", values)
-    .then(async function (response) {
-      console.log(1);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-}
+function RegisterScreen({ navigation }) {
+  function register(values) {
+    BCapi.post("users", values)
+      .then(async function (response) {
+        navigation.navigate(routes.CLUBS);
+      })
+      .catch(function (error) {
+        Alert.alert("Errore", "l'email è già stata utilizzata");
+      });
+  }
 
-function RegisterScreen(props) {
   return (
     <Screen styleChildren={styles.container}>
       <Image style={styles.logo} source={require("../assets/BCLogo.png")} />
