@@ -53,6 +53,8 @@ function LoginScreen({ navigation }) {
             <SubmitButton
               title="Accedi"
               onPress={() => navigation.navigate(routes.BACHECA)}
+              onPress={() => navigation.navigate(routes.BACHECA)}
+              styleButton={styles.button}
             />
           </>
         )}
@@ -60,6 +62,7 @@ function LoginScreen({ navigation }) {
       <AppButton
         title="Registrati qui"
         onPress={() => navigation.navigate(routes.REGISTRATI)}
+        styleButton={styles.button}
       />
     </Screen>
   );
@@ -75,6 +78,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 50,
     marginBottom: 20,
+  },
+
+  button: {
+    marginVertical: 10,
   },
 });
 

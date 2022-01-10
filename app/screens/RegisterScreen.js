@@ -1,19 +1,21 @@
 import React from "react";
-import { Image, StyleSheet } from "react-native";
+import { Alert, Image, StyleSheet } from "react-native";
 import Screen from "../components/Screen";
 import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
 import colors from "../config/colors";
+import BCapi from "../api/BCapi";
+import routes from "../navigation/routes";
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string()
+  firstName: Yup.string()
     .required("Nome è un campo richiesto")
     .min(2, "La lunghezza deve essere maggiore di ${min}")
     .max(20, "La lunghezza deve essere minore di ${max}")
     .label("name"),
-  surname: Yup.string()
+  lastName: Yup.string()
     .required("Cognome è un campo richiesto")
     .min(2, "La lunghezza deve essere maggiore di ${min}")
     .max(20, "La lunghezza deve essere minore di ${max}")
@@ -31,13 +33,23 @@ const validationSchema = Yup.object().shape({
     .label("Password"),
 });
 
+function register(values) {
+  BCapi.post("users", values)
+    .then(async function (response) {
+      console.log(1);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
 function RegisterScreen(props) {
   return (
     <Screen styleChildren={styles.container}>
       <Image style={styles.logo} source={require("../assets/BCLogo.png")} />
       <Formik
-        initialValues={{ name: "", surname: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        initialValues={{ firstName: "", lastName: "", email: "", password: "" }}
+        onSubmit={(values) => register(values)}
         validationSchema={validationSchema}
       >
         {() => (
@@ -47,14 +59,14 @@ function RegisterScreen(props) {
               autoCorrect={false}
               placeholder="Nome"
               iconName="account"
-              name="name"
+              name="firstName"
             />
             <AppFormField
               autoCapitalize="none"
               autoCorrect={false}
               placeholder="Cognome"
               iconName="account"
-              name="surname"
+              name="lastName"
             />
             <AppFormField
               autoCapitalize="none"

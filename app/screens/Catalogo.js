@@ -13,19 +13,18 @@ import BCapi from "../api/BCapi";
 
 const Catalogo = ({ navigation }) => {
   const [books, setBooks] = useState([]);
-  const [index, setIndex] = useState();
+  const [index, setIndex] = useState(1);
   const [next, setNext] = useState(0);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     getBooks();
-  }, []);
+  }, []);*/
 
   useEffect(() => {
-    console.log("next");
     changeNextPage();
   }, []);
 
-  function getBooks() {
+  /*function getBooks() {
     BCapi.get("/books")
       .then(async function (response) {
         //setLoading(true);
@@ -39,20 +38,20 @@ const Catalogo = ({ navigation }) => {
       .catch(function (error) {
         // setError(true);
       });
-  }
+  }*/
 
   function changeNextPage() {
     BCapi.get(`/books?page=${index}&limit=10`)
       .then(async function (response) {
-        console.log(" changeNextPage()");
-        console.log(response.data.meta.currentPage);
+        //console.log(" changeNextPage()");
+        // console.log(response.data.meta.currentPage);
         setIndex(response.data.meta.currentPage + 1);
         setBooks(response.data.items);
         setNext(1);
       })
       .catch(function (error) {
-        console.log(2);
-        console.log(error);
+        // console.log(2);
+        // console.log(error);
       });
   }
 
