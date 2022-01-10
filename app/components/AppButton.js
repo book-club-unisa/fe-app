@@ -19,9 +19,9 @@ function AppButton({ title, onPress, styleButton }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //flex: 1,
     backgroundColor: colors.white,
-    marginVertical: 20,
+    //marginVertical: 20,
     alignItems: "center",
     //justifyContent: "center",
   },

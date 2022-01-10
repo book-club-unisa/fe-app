@@ -1,79 +1,28 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { SearchBar } from "react-native-elements";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import BCListItem from "../components/singleItems/BCListItem";
-
+import AppButton from "../components/AppButton";
 import colors from "../config/colors";
 import Screen from "../components/Screen";
 
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
 
-/*const Books = [
-  {
-    id: 1,
-    title: "Il signore degli anelli - La compagnia dell'anello",
-    description:
-      "Nella Seconda Era, Sauron, l'Oscuro Signore di Mordor, donò 19 " +
-      "anelli alle razze della Terra di Mezzo: tre ai re degli elfi," +
-      "sette ai re dei nani e nove ai re degli uomini; tutti loro, però," +
-      "furono ingannati dall'Oscuro Signore, il quale forgiò l'Unico" +
-      "Anello, in grado di controllare tutti gli altri. Nella battaglia" +
-      "contro Sauron, Isildur, figlio del re degli uomini Elendil, tagliò" +
-      "a Sauron il dito al quale era infilato l'Anello, ottenendo così la",
-    image: require("../assets/lotr1.jpg"),
-    autore: "J.R.Tolkien",
-  },
-
-  {
-    id: 2,
-    title: "Lo hobbit annoiato",
-    description:
-      "E’ un romanzo scritto da J.R.R. Tolkien nel 1937, e per molti è ritenuto il prequel del Signore" +
-      "degli Anelli per la presenza di aspetti comuni ad entrambi i libri e per il ripetersi di alcuni " +
-      "personaggi che troviamo nella celeberrima trilogia. E’ un racconto fantasy che si colloca per lo " +
-      "più nella categoria libri per ragazzi. Non mancano: elementi fantastici, maghi, incantesimi, " +
-      " personaggi fatati, inventati, la sete di avventura e il raggiungimento della meta dopo aver " +
-      "dato prova dei propri valori.",
-    image: require("../assets/hobbit.jpg"),
-    autore: "J.R.Tolkien",
-  },
-
-  {
-    id: 3,
-    title: "Harry Potter e i doni della morte",
-    description:
-      "Con l'avvicinarsi del suo diciassettesimo compleanno, Harry Potter rischia" +
-      "di perdere la protezione offerta dalla casa degli zii; i Dursley vengono quindi " +
-      "trasferiti per la loro sicurezza, mentre l'Ordine della Fenice si prepara a scortare " +
-      "Harry verso la Tana, trasformando sei suoi affiliati in copie fisiche del ragazzo in " +
-      "modo da confondere eventuali inseguitori. Durante il tragitto i Mangiamorte li " +
-      " attaccano e Alastor Moody e Edvige vengono uccisi. Lord Voldemort tenta di assassinare " +
-      " Harry, ma una reazione inattesa tra le loro due bacchette glielo impedisce.",
-    image: require("../assets/hpdm.jpg"),
-    autore: "J.K.Rowling",
-  },
-
-  {
-    id: 4,
-    title: "Il Batman che ride",
-    description:
-      "Gotham City. La polizia, guidata dal capitano James Gordon, " +
-      " sta investigando in un capannone pieno di cadaveri, tutti caratterizzati da una " +
-      " strana carnagione pallida ed un'anomala contrazione muscolare del viso, che forma " +
-      " quasi un ghigno. Batman sospetta di una strana arma, e le vittime potevano essere una " +
-      "sorta di cavie, e sarà solo l'inizio.",
-    image: require("../assets/bwl.jpg"),
-    autore: "Scott Snyder",
-  },
-];*/
-
 const Catalogo = ({ navigation }) => {
   const [books, setBooks] = useState([]);
+  const [index, setIndex] = useState();
+  const [next, setNext] = useState(0);
 
   useEffect(() => {
     getBooks();
+  }, []);
+
+  useEffect(() => {
+    console.log("next");
+    changeNextPage();
   }, []);
 
   function getBooks() {
@@ -81,13 +30,29 @@ const Catalogo = ({ navigation }) => {
       .then(async function (response) {
         //setLoading(true);
         setBooks(response.data.items);
+        console.log("pagina corrente");
+        setIndex(response.data.meta.currentPage + 1);
+        console.log(response.data.meta.currentPage);
         //setLoading(false);
         // setError(false);
       })
       .catch(function (error) {
+        // setError(true);
+      });
+  }
+
+  function changeNextPage() {
+    BCapi.get(`/books?page=${index}&limit=10`)
+      .then(async function (response) {
+        console.log(" changeNextPage()");
+        console.log(response.data.meta.currentPage);
+        setIndex(response.data.meta.currentPage + 1);
+        setBooks(response.data.items);
+        setNext(1);
+      })
+      .catch(function (error) {
         console.log(2);
         console.log(error);
-        // setError(true);
       });
   }
 
@@ -108,13 +73,18 @@ const Catalogo = ({ navigation }) => {
           ItemSeparatorComponent={ListItemSeparator}
         />
       </View>
+      <AppButton
+        title="Continua"
+        onPress={() => changeNextPage()}
+        styleButton={styles.button}
+      />
     </Screen>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: colors.yellow,
+    flex: 1,
   },
 
   itemStyle: {
@@ -126,6 +96,41 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     fontSize: 16,
   },
+
+  button: {
+    backgroundColor: colors.blu,
+    marginVertical: 5,
+  },
 });
+
+/**
+ * 
+ * 
+  useEffect(() => {
+    console.log("previous");
+    changePreviousPage();
+  }, []);
+  
+  function changePreviousPage() {
+    BCapi.get(`/books?page=${index}&limit=10`)
+      .then(async function (response) {
+        console.log(" changePreviousPage() index");
+        console.log(response.data.meta.currentPage);
+        setIndex(response.data.meta.currentPage - 1);
+        setBooks(response.data.items);
+        setNext(1);
+      })
+      .catch(function (error) {
+        console.log(2);
+        console.log(error);
+      });
+  }
+
+ *       <AppButton
+        title="Indietro"
+        onPress={() => changePreviousPage()}
+        styleButton={styles.button}
+      />
+ */
 
 export default Catalogo;
