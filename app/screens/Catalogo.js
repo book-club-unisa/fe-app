@@ -1,12 +1,19 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import React, {
+  useState,
+  useEffect,
+  ActivityIndicator,
+  Loading,
+  TouchableOpacity,
+} from "react";
+import { StyleSheet, View, FlatList, Text } from "react-native";
 import { SearchBar } from "react-native-elements";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import BCListItem from "../components/singleItems/BCListItem";
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
 import Screen from "../components/Screen";
+import AppTextInput from "../components/AppTextInput";
 
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
@@ -15,39 +22,23 @@ const Catalogo = ({ navigation }) => {
   const [books, setBooks] = useState([]);
   const [index, setIndex] = useState(1);
   const [next, setNext] = useState(0);
-
-  /*  useEffect(() => {
-    getBooks();
-  }, []);*/
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     changeNextPage();
   }, []);
 
-  /*function getBooks() {
-    BCapi.get("/books")
-      .then(async function (response) {
-        //setLoading(true);
-        setBooks(response.data.items);
-        console.log("pagina corrente");
-        setIndex(response.data.meta.currentPage + 1);
-        console.log(response.data.meta.currentPage);
-        //setLoading(false);
-        // setError(false);
-      })
-      .catch(function (error) {
-        // setError(true);
-      });
-  }*/
-
   function changeNextPage() {
+    setLoading(true);
     BCapi.get(`/books?page=${index}&limit=10`)
       .then(async function (response) {
         //console.log(" changeNextPage()");
         // console.log(response.data.meta.currentPage);
         setIndex(response.data.meta.currentPage + 1);
-        setBooks(response.data.items);
-        setNext(1);
+        setBooks((prevData) => [...prevData, ...response.data.items]).setNext(
+          1
+        );
+        setLoading(false);
       })
       .catch(function (error) {
         // console.log(2);
@@ -58,6 +49,12 @@ const Catalogo = ({ navigation }) => {
   return (
     <Screen>
       <View style={styles.container}>
+        <AppTextInput
+          iconName="book-open-page-variant"
+          placeholder="Nome book club"
+          style={styles.textInput}
+          onChangeText={console.log(1)}
+        />
         <FlatList
           data={books}
           keyExtractor={(book) => book.isbn.toString()}
@@ -70,13 +67,10 @@ const Catalogo = ({ navigation }) => {
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}
+          onEndReached={() => changeNextPage()}
+          onEndReachedThreshold={0.1}
         />
       </View>
-      <AppButton
-        title="Continua"
-        onPress={() => changeNextPage()}
-        styleButton={styles.button}
-      />
     </Screen>
   );
 };
@@ -101,35 +95,5 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
 });
-
-/**
- * 
- * 
-  useEffect(() => {
-    console.log("previous");
-    changePreviousPage();
-  }, []);
-  
-  function changePreviousPage() {
-    BCapi.get(`/books?page=${index}&limit=10`)
-      .then(async function (response) {
-        console.log(" changePreviousPage() index");
-        console.log(response.data.meta.currentPage);
-        setIndex(response.data.meta.currentPage - 1);
-        setBooks(response.data.items);
-        setNext(1);
-      })
-      .catch(function (error) {
-        console.log(2);
-        console.log(error);
-      });
-  }
-
- *       <AppButton
-        title="Indietro"
-        onPress={() => changePreviousPage()}
-        styleButton={styles.button}
-      />
- */
 
 export default Catalogo;

@@ -34,7 +34,7 @@ import InvitaUtenti from "./app/screens/InvitaUtenti";
 export default function App() {
   return (
     <NavigationContainer theme={NavigationTheme}>
-      <AuthNavigator />
+      <AppNavigator />
     </NavigationContainer>
   );
 }
