@@ -4,10 +4,13 @@ import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
 import routes from "../navigation/routes";
+import BCapi from "../api/BCapi";
 
 function PaginaCreazioneBC({ route, navigation }) {
   const [value, setValue] = useState("");
   const [validate, setValidate] = useState(false);
+
+  const [isbn, setIsbn] = useState(route.params.isbn);
 
   const Controllo = (value) => {
     if (value.length < 2 || value.length > 20) {
@@ -20,12 +23,30 @@ function PaginaCreazioneBC({ route, navigation }) {
 
   const CButton = () => {
     if (validate === true) {
+      console.log(1);
+      //createBC(isbn, value);
       navigation.navigate(routes.INFOLIBRO, item),
         navigation.navigate(routes.INFOLIBRO, value);
     } else {
       Alert.alert("Alert", "Il nome del bookclub non è valido");
     }
   };
+
+  /*
+  function createBC(isbn) {
+    const name = value.value;
+
+    console.log(isbn, name);
+    BCapi.post("/bookclubs/create", { isbn, name })
+      .then(async function (response) {
+        console.log(1);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  */
+
   const item = route.params;
 
   return (
@@ -51,6 +72,10 @@ function PaginaCreazioneBC({ route, navigation }) {
         </View>
         <AppButton
           onPress={CButton}
+          /*
+          onPress={(isbn, value) => {
+            CButton(isbn, value);
+          }}*/
           title="crea book club"
           styleButton={styles.button}
         />

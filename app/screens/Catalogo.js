@@ -51,8 +51,8 @@ const Catalogo = ({ navigation }) => {
     <Screen>
       <View style={styles.container}>
         <AppTextInput
-          iconName="book-open-page-variant"
-          placeholder="Nome book club"
+          iconName="book-search"
+          placeholder="Cerca un libro"
           style={styles.textInput}
           onChangeText={console.log(1)}
         />
@@ -64,7 +64,9 @@ const Catalogo = ({ navigation }) => {
               title={item.title}
               subTitle={item.description}
               image={item.coverUrl}
-              onPress={() => navigation.navigate(routes.CREAZIONEBC, item)}
+              onPress={() => {
+                navigation.navigate(routes.CREAZIONEBC, item);
+              }}
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}
