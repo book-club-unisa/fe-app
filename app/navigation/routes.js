@@ -13,4 +13,5 @@ export default Object.freeze({
   INVITAUTENTI: "InvitaUtenti",
   CATALOGO: "Catalogo",
   CLUBS: "Clubs",
+  RICERCA: "Ricerca",
 });

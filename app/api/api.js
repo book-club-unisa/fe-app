@@ -23,12 +23,14 @@ export default function useApi(token = undefined) {
   });
 
   return {
+    /*
     searchBooks: (query, pageSize, pageNum) =>
       axiosInstance
         .get(
           `books/search?query=${query}&pageSize=${pageSize}&pageNum=${pageNum}`
         )
         .then((response) => response.data),
+        */
 
     createBookClub: (name, bookId) =>
       axiosInstance
@@ -39,6 +41,11 @@ export default function useApi(token = undefined) {
             bookId,
           })
         )
+        .then((response) => response.data),
+
+    searchBooksByName: (name) =>
+      axiosInstance
+        .get(`/books/searchBook/${name}`)
         .then((response) => response.data),
   };
 }

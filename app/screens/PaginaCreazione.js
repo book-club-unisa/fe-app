@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, StyleSheet, Text, Image, Alert, Pressable } from "react-native";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
+import AuthContext from "../auth/context";
 
 function PaginaCreazioneBC({ route, navigation }) {
   const [value, setValue] = useState("");
   const [validate, setValidate] = useState(false);
+  const { token, setToken } = useContext(AuthContext);
 
   const [isbn, setIsbn] = useState(route.params.isbn);
 
@@ -23,7 +25,7 @@ function PaginaCreazioneBC({ route, navigation }) {
 
   const CButton = () => {
     if (validate === true) {
-      console.log(1);
+      //console.log(1);
       //createBC(isbn, value);
       navigation.navigate(routes.INFOLIBRO, item),
         navigation.navigate(routes.INFOLIBRO, value);
@@ -37,12 +39,14 @@ function PaginaCreazioneBC({ route, navigation }) {
     const name = value.value;
 
     console.log(isbn, name);
-    BCapi.post("/bookclubs/create", { isbn, name })
+    BCapi.post("/bookclubs/create/", { isbn: isbn, name: name })
       .then(async function (response) {
         console.log(1);
+        console.log(token);
       })
       .catch(function (error) {
         console.log(error);
+        console.log(token);
       });
   }
   */

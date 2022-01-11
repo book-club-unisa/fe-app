@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import ProfileItem from "../components/singleItems/ProfileItem";
 import Screen from "../components/Screen";
@@ -9,6 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
+import BCapi from "../api/BCapi";
 
 function ProfilePage({
   profileName,
@@ -19,10 +20,34 @@ function ProfilePage({
 }) {
   const { token, setToken } = useContext(AuthContext);
 
+  const user = useContext(AuthContext);
+  //console.log(user.token);
+  setToken(user.token);
+  //console.log(token);
+
+  /*
   const handleLogout = () => {
     setToken(null);
     authStorage.removeToken();
   };
+  */
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  function getUserData() {
+    console.log(token);
+    BCapi.get("/users/emailByToken")
+      .then(async function (response) {
+        console.log(1);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(2);
+        console.log(error);
+      });
+  }
 
   return (
     <Screen styleChildren={styles.container}>
@@ -30,7 +55,7 @@ function ProfilePage({
         <Pressable
           title="Logout"
           color={colors.red}
-          onPress={handleLogout}
+          onPress={() => console.log(5)}
           style={styles.buttonLogout}
         >
           <Text style={styles.logout}>Esci</Text>

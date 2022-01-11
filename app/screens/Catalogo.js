@@ -5,6 +5,7 @@ import React, {
   ActivityIndicator,
   Loading,
   TouchableOpacity,
+  Pressable,
 } from "react";
 import { StyleSheet, View, FlatList, Text } from "react-native";
 import { SearchBar } from "react-native-elements";
@@ -14,6 +15,7 @@ import AppButton from "../components/AppButton";
 import colors from "../config/colors";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
+import { Ionicons } from "@expo/vector-icons";
 
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
@@ -50,12 +52,11 @@ const Catalogo = ({ navigation }) => {
   return (
     <Screen>
       <View style={styles.container}>
-        <AppTextInput
-          iconName="book-search"
-          placeholder="Cerca un libro"
-          style={styles.textInput}
-          onChangeText={console.log(1)}
+        <AppButton
+          title="Cerca un libro"
+          onPress={() => navigation.navigate(routes.RICERCA)}
         />
+
         <FlatList
           data={books}
           keyExtractor={(book) => book.isbn.toString()}
@@ -96,6 +97,28 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.blu,
     marginVertical: 5,
+  },
+
+  search: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: colors.blu,
+  },
+
+  searchIcon: {
+    marginHorizontal: 10,
+    color: colors.blu,
+  },
+
+  buttonSearch: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    height: 60,
+    borderRadius: 30,
+    alignItems: "center",
+    // justifyContent: "center",
+    flexDirection: "row",
+    margin: 2,
   },
 });
 
