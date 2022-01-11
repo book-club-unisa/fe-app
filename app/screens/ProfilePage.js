@@ -10,6 +10,7 @@ import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
 import BCapi from "../api/BCapi";
+import useApi from "../api/api";
 
 function ProfilePage({
   profileName,
@@ -20,32 +21,43 @@ function ProfilePage({
 }) {
   const { token, setToken } = useContext(AuthContext);
 
-  const user = useContext(AuthContext);
+  //const user = useContext(AuthContext);
   //console.log(user.token);
-  setToken(user.token);
-  //console.log(token);
+  //setToken(user.token);
+  console.log(token);
+  const { getUserDataByToken } = useApi(token);
 
-  /*
   const handleLogout = () => {
     setToken(null);
     authStorage.removeToken();
   };
-  */
 
   useEffect(() => {
     getUserData();
   }, []);
 
-  function getUserData() {
+  /*function getUserDataOLD() {
     console.log(token);
     BCapi.get("/users/emailByToken")
-      .then(async function (response) {
+      .then(function (response) {
         console.log(1);
         console.log(response.data);
       })
       .catch(function (error) {
         console.log(2);
         console.log(error);
+      });
+  }*/
+
+  function getUserData() {
+    getUserDataByToken()
+      .then(function ({ email, firstName, lastName }) {
+        console.log("ok getUserData");
+        console.log(email, firstName, lastName);
+      })
+      .catch(function (err) {
+        console.log("error getUserData");
+        console.error(err);
       });
   }
 
@@ -55,7 +67,7 @@ function ProfilePage({
         <Pressable
           title="Logout"
           color={colors.red}
-          onPress={() => console.log(5)}
+          onPress={() => handleLogout()}
           style={styles.buttonLogout}
         >
           <Text style={styles.logout}>Esci</Text>

@@ -6,11 +6,13 @@ import AppButton from "../components/AppButton";
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
 import AuthContext from "../auth/context";
+import useApi from "../api/api";
 
 function PaginaCreazioneBC({ route, navigation }) {
   const [value, setValue] = useState("");
   const [validate, setValidate] = useState(false);
   const { token, setToken } = useContext(AuthContext);
+  const { createBookClub } = useApi(token);
 
   const [isbn, setIsbn] = useState(route.params.isbn);
 
@@ -26,7 +28,7 @@ function PaginaCreazioneBC({ route, navigation }) {
   const CButton = () => {
     if (validate === true) {
       //console.log(1);
-      //createBC(isbn, value);
+      createBC(isbn, value);
       navigation.navigate(routes.INFOLIBRO, item),
         navigation.navigate(routes.INFOLIBRO, value);
     } else {
@@ -50,6 +52,18 @@ function PaginaCreazioneBC({ route, navigation }) {
       });
   }
   */
+
+  function createBC(isbn) {
+    const name = value.value;
+    console.log(isbn, name);
+    createBookClub(isbn, name)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
   const item = route.params;
 
@@ -75,11 +89,9 @@ function PaginaCreazioneBC({ route, navigation }) {
           </Text>
         </View>
         <AppButton
-          onPress={CButton}
-          /*
           onPress={(isbn, value) => {
             CButton(isbn, value);
-          }}*/
+          }}
           title="crea book club"
           styleButton={styles.button}
         />

@@ -12,6 +12,7 @@ import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
+import useApi from "../api/api";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -47,16 +48,26 @@ function LoginScreen({ navigation }) {
   const handleSubmit = async ({ email, password }) => {
     const result = await authApi
       .login(email, password)
-      .then(async function (response) {
-        console.log(response.data);
-        authContext.setToken(response.data);
-        authStorage.storeToken(response.data);
-        navigation.navigate(routes.CLUBS);
+      .then((response) => {
+        const token = response.data;
+        const tokenizedApi = useApi(token);
+        return tokenizedApi.getUserDataByToken().then((res) => [token, res]);
       })
-
-      .catch(function (error) {
+      .then(([token, { email, firstName, lastName }]) => {
+        console.log(token);
+        authContext.setToken(token);
+        // TODO
+        // authContent.setEmail(email);
+        // authContent.setFirstName(fistName);
+        // authContent.setLastName(lastName);
+        authStorage.storeToken(token);
+        navigation.navigate(routes.CLUBS);
+        console.log("ok getUserData");
+        console.log(email, firstName, lastName);
+      })
+      .catch((err) => {
         Alert.alert("Errore, controlla i dati inseriti");
-        console.log(error);
+        console.log(err);
       });
   };
 

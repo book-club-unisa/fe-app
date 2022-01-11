@@ -1,11 +1,11 @@
 import BCapi from "./BCapi";
 import axios from "axios";
 
-//const apiUrl = "http://localhost:4000";
+const apiUrl = "http://127.0.0.1:4000";
 
-function makeFormData(object) {
+function makeFormData(obj) {
   const result = new FormData();
-  object.entries().forEach(([key, value]) => {
+  Object.entries(obj).forEach(([key, value]) => {
     if (value !== undefined) {
       result.append(key, value);
     }
@@ -15,12 +15,16 @@ function makeFormData(object) {
 
 export default function useApi(token = undefined) {
   const axiosInstance = axios.create({
-    baseURL: BCapi,
+    baseURL: apiUrl,
     timeout: 6000,
     headers: {
       Authorization: token || undefined,
     },
   });
+
+  const fd = new FormData();
+  fd.append("isbn", "ciao");
+  fd.append("name", "ciao");
 
   return {
     /*
@@ -45,7 +49,18 @@ export default function useApi(token = undefined) {
 
     searchBooksByName: (name) =>
       axiosInstance
-        .get(`/books/searchBook/${name}`)
+        .get(`books/searchBook/${name}`)
+        .then((response) => response.data),
+
+    getUserDataByToken: () =>
+      axiosInstance.get("users/emailByToken").then((response) => response.data),
+
+    createBookClub: (isbn, name) =>
+      axiosInstance
+        .post("bookclubs/create", {
+          isbn,
+          name,
+        })
         .then((response) => response.data),
   };
 }

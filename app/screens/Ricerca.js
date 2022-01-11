@@ -20,6 +20,7 @@ const Ricerca = ({ navigation }) => {
   }, [name]);
 
   function getBooksByName(name) {
+    //BCapi.get(`books/searchBook?query=${encodeURIComponent(name)}`)
     BCapi.get(`/books/searchBook/${name}`)
       .then(async function (response) {
         //setLoading(true);
