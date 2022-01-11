@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import ProfileItem from "../components/singleItems/ProfileItem";
 import Screen from "../components/Screen";
@@ -7,6 +7,7 @@ import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import routes from "../navigation/routes";
+import AuthContext from "../auth/context";
 
 function ProfilePage({
   profileName,
@@ -15,9 +16,20 @@ function ProfilePage({
   profileSurname,
   navigation,
 }) {
+  const { token, setToken } = useContext(AuthContext);
+
   return (
     <Screen styleChildren={styles.container}>
       <View style={styles.subContainer}>
+        <Pressable
+          title="Logout"
+          color={colors.red}
+          onPress={() => setToken(null)}
+          style={styles.buttonLogout}
+        >
+          <Text style={styles.logout}>Esci</Text>
+          <Ionicons name="log-out-sharp" size={24} style={styles.logOutIcon} />
+        </Pressable>
         <MaterialCommunityIcons
           name="account-circle"
           size={150}
@@ -72,6 +84,17 @@ const styles = StyleSheet.create({
     margin: 2,
   },
 
+  buttonLogout: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    height: 60,
+    borderRadius: 30,
+    alignItems: "center",
+    // justifyContent: "center",
+    flexDirection: "row",
+    margin: 2,
+  },
+
   buttonsUtility: {
     alignItems: "center",
     marginTop: 2,
@@ -81,6 +104,11 @@ const styles = StyleSheet.create({
   container: {},
 
   icon: {
+    marginHorizontal: 10,
+    color: colors.blu,
+  },
+
+  logOutIcon: {
     marginHorizontal: 10,
     color: colors.blu,
   },
@@ -96,6 +124,12 @@ const styles = StyleSheet.create({
 
   settings: {
     flex: 1,
+    fontWeight: "bold",
+    fontSize: 16,
+    color: colors.blu,
+  },
+
+  logout: {
     fontWeight: "bold",
     fontSize: 16,
     color: colors.blu,

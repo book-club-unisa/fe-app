@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image, StyleSheet, Alert } from "react-native";
 import Screen from "../components/Screen";
 import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
+import authApi from "../api/auth";
 import * as Yup from "yup";
 
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
+import AuthContext from "../auth/context";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -25,6 +27,8 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginScreen({ navigation }) {
+  const authContext = useContext(AuthContext);
+  /*
   function LogIn(values) {
     BCapi.post("users/sign-in", values)
       .then(async function (response) {
@@ -37,13 +41,29 @@ function LoginScreen({ navigation }) {
         console.log(error);
       });
   }
+  */
+
+  const handleSubmit = async ({ email, password }) => {
+    const result = await authApi
+      .login(email, password)
+      .then(async function (response) {
+        console.log(response.data);
+        authContext.setToken(response.data);
+        navigation.navigate(routes.CLUBS);
+      })
+
+      .catch(function (error) {
+        Alert.alert("Errore, controlla i dati inseriti");
+        console.log(error);
+      });
+  };
 
   return (
     <Screen styleChildren={styles.container}>
       <Image style={styles.logo} source={require("../assets/BCLogo.png")} />
       <Formik
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => LogIn(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         {() => (

@@ -30,7 +30,7 @@ const Catalogo = ({ navigation }) => {
 
   function changeNextPage() {
     setLoading(true);
-    //BCapi.get(`/books?query=XXX&pageSize=10&pageNum=0`)
+    //BCapi.get(`/books?query=${search}&pageSize=10&pageNum=${index}`)
     BCapi.get(`/books?page=${index}&limit=10`)
       .then(async function (response) {
         //console.log(" changeNextPage()");

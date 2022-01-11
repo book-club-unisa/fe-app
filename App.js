@@ -30,12 +30,18 @@ import ChargingScreen1 from "./app/screens/ChargingScreen1";
 import ChargingScreen2 from "./app/screens/ChargingScreen2";
 import InitialPage from "./app/screens/InitialPage";
 import InvitaUtenti from "./app/screens/InvitaUtenti";
+import { useState } from "react";
+import AuthContext from "./app/auth/context";
 
 export default function App() {
+  const [token, setToken] = useState();
+
   return (
-    <NavigationContainer theme={NavigationTheme}>
-      <AuthNavigator />
-    </NavigationContainer>
+    <AuthContext.Provider value={{ token, setToken }}>
+      <NavigationContainer theme={NavigationTheme}>
+        {token ? <AppNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
 
