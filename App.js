@@ -30,11 +30,22 @@ import ChargingScreen1 from "./app/screens/ChargingScreen1";
 import ChargingScreen2 from "./app/screens/ChargingScreen2";
 import InitialPage from "./app/screens/InitialPage";
 import InvitaUtenti from "./app/screens/InvitaUtenti";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthContext from "./app/auth/context";
+import authStorage from "./app/auth/storage";
 
 export default function App() {
   const [token, setToken] = useState();
+
+  const restoreToken = async () => {
+    const userToken = await authStorage.getToken();
+    if (!userToken) return;
+    setToken(userToken);
+  };
+
+  useEffect(() => {
+    restoreToken();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>

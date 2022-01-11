@@ -8,6 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
+import authStorage from "../auth/storage";
 
 function ProfilePage({
   profileName,
@@ -18,13 +19,18 @@ function ProfilePage({
 }) {
   const { token, setToken } = useContext(AuthContext);
 
+  const handleLogout = () => {
+    setToken(null);
+    authStorage.removeToken();
+  };
+
   return (
     <Screen styleChildren={styles.container}>
       <View style={styles.subContainer}>
         <Pressable
           title="Logout"
           color={colors.red}
-          onPress={() => setToken(null)}
+          onPress={handleLogout}
           style={styles.buttonLogout}
         >
           <Text style={styles.logout}>Esci</Text>

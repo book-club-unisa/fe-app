@@ -11,6 +11,7 @@ import colors from "../config/colors";
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
 import AuthContext from "../auth/context";
+import authStorage from "../auth/storage";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -49,6 +50,7 @@ function LoginScreen({ navigation }) {
       .then(async function (response) {
         console.log(response.data);
         authContext.setToken(response.data);
+        authStorage.storeToken(response.data);
         navigation.navigate(routes.CLUBS);
       })
 
