@@ -67,5 +67,28 @@ export default function useApi(token = undefined) {
       axiosInstance
         .post(`bookclubs/${BC_ID}/invite-user/${USER_EMAIL}`)
         .then((response) => response.data),
+
+    getBCInvites: (BC_ID) =>
+      axiosInstance
+        .get(`bookclubs/${BC_ID}/seeInvites`)
+        .then((response) => response.data),
+
+    getBC_ID: (bcName, founderEmail) =>
+      axiosInstance
+        .get(`bookclubs/getIdByName/${bcName}/${founderEmail}`)
+        .then((response) => response.data),
+
+    getReicevedInvites: () =>
+      axiosInstance.get("invites/getInvites").then((response) => response.data),
+
+    acceptInvite: (inviteID) =>
+      axiosInstance
+        .put(`invite/getInvites/accept/${inviteID}`)
+        .then((response) => response.data),
+
+    refuseInvite: (inviteID) =>
+      axiosInstance
+        .get(`invite/getInvites/refuse/${inviteID}`)
+        .then((response) => response.data),
   };
 }

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, Image, Text, Pressable, Alert } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import AuthContext from "../../auth/context";
+import useApi from "../../api/api";
 
 function ReceivedInvite({
   image,
@@ -11,8 +13,39 @@ function ReceivedInvite({
   ImageComponent,
   onPress,
   inviteState,
+  inviteID,
 }) {
-  const [state, setState] = useState(0);
+  const [state, setState] = useState(inviteState);
+
+  const { token, setToken } = useContext(AuthContext);
+  const { acceptInvite } = useApi(token);
+  const { refuseInvite } = useApi(token);
+
+  function acceptFunction() {
+    console.log(inviteID);
+    acceptInvite(inviteID)
+      .then(function (response) {
+        setState("ACCEPTED");
+        console.log("accepted");
+      })
+      .catch(function (error) {
+        console.log("error accepting invite", inviteID);
+        console.error(error);
+      });
+  }
+
+  function refuseFunction() {
+    console.log(inviteID);
+    refuseInvite(inviteID)
+      .then(function (response) {
+        setState("REFUSED");
+        console.log("refused");
+      })
+      .catch(function (error) {
+        console.log("error refusing invite", inviteID);
+        console.error(error);
+      });
+  }
 
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
@@ -26,10 +59,10 @@ function ReceivedInvite({
 
         <View>
           <View>
-            {(state === 0 && (
+            {(state === "PENDING" && (
               <View style={styles.icone}>
                 <>
-                  <Pressable onPress={(state) => setState(1)}>
+                  <Pressable onPress={() => acceptFunction()}>
                     <Ionicons
                       name="checkmark-outline"
                       size={25}
@@ -37,7 +70,7 @@ function ReceivedInvite({
                     />
                   </Pressable>
 
-                  <Pressable onPress={(state) => setState(2)}>
+                  <Pressable onPress={() => refuseFunction()}>
                     <MaterialCommunityIcons
                       style={styles.singleIcon}
                       name="delete-outline"
@@ -48,7 +81,7 @@ function ReceivedInvite({
                 </>
               </View>
             )) ||
-              (state === 1 && (
+              (state === "ACCEPTED" && (
                 <>
                   <Ionicons
                     name="checkmark-circle-sharp"
@@ -57,7 +90,7 @@ function ReceivedInvite({
                   />
                 </>
               )) ||
-              (state === 2 && (
+              (state === "REFUSED" && (
                 <>
                   <Ionicons name="close-circle-sharp" size={25} color="red" />
                 </>

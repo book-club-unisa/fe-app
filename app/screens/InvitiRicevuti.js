@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FlatList, View, StyleSheet, Text, Image, Alert } from "react-native";
 
 import Screen from "../components/Screen";
@@ -6,38 +6,34 @@ import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 
 import colors from "../config/colors";
 import ReceivedInvite from "../components/singleItems/ReceivedInvite";
-
-const Users = [
-  {
-    id: 1,
-    name: "Nome Book Club",
-    image: require("../assets/bwl.jpg"),
-    inviteState: 0,
-  },
-
-  {
-    id: 2,
-    name: "Nome Book Club",
-    image: require("../assets/hpdm.jpg"),
-    inviteState: 2,
-  },
-
-  {
-    id: 3,
-    name: "Nome Book Club",
-    image: require("../assets/lotr1.jpg"),
-    inviteState: 1,
-  },
-
-  {
-    id: 4,
-    name: "Nome Book Club",
-    image: require("../assets/hobbit.jpg"),
-    inviteState: 0,
-  },
-];
+import useApi from "../api/api";
+import AuthContext from "../auth/context";
 
 function InvitiRicevuti(props) {
+  const [invites, setInvites] = useState([]);
+
+  const { token, setToken } = useContext(AuthContext);
+  const { getReicevedInvites } = useApi(token);
+
+  useEffect(() => {
+    getInvites();
+  }, []);
+
+  function getInvites() {
+    getReicevedInvites()
+      .then(function (_invites) {
+        setInvites(_invites);
+        //console.log(_invites);
+        console.log(invites);
+        console.log(1);
+      })
+      .catch(function (error) {
+        console.log(token);
+        console.log("errore");
+        console.error(error);
+      });
+  }
+
   return (
     <Screen>
       <View style={styles.container}>
@@ -45,13 +41,17 @@ function InvitiRicevuti(props) {
 
         <FlatList
           style={{ marginBottom: 55 }}
-          data={Users}
-          keyExtractor={(user) => user.id.toString()}
+          data={invites}
+          keyExtractor={(invite) => invite.inviteId.toString()}
           renderItem={({ item }) => (
             <ReceivedInvite
-              title={item.name}
-              image={item.image}
-              inviteState={item.inviteState}
+              title={item.bookclub.toString()}
+              inviteID={item.inviteId}
+              inviteState={item.State}
+              //email={item.user}
+              //refuseFunction={refuseFunction}
+              //image={item.image}
+              //inviteState={item.inviteState}
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}

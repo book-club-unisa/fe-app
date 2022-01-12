@@ -9,6 +9,11 @@ function UserListItem({ image, title, subTitle, ImageComponent, onPress }) {
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>
         {image && <Image style={styles.profilePic} source={image} />}
+        <MaterialCommunityIcons
+          name="account-circle"
+          size={25}
+          color={colors.mediumgrey}
+        />
         <View style={styles.details}>
           <Text numberOfLines={1} style={styles.title}>
             {title}

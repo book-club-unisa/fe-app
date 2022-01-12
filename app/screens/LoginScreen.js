@@ -40,6 +40,7 @@ function LoginScreen({ navigation }) {
   function LogIn(values) {
     BCapi.post("users/sign-in", values)
       .then(async function (response) {
+        console.log(response.data);
         navigation.navigate(routes.CLUBS);
       })
 
@@ -51,6 +52,23 @@ function LoginScreen({ navigation }) {
   }
   */
 
+  const handleSubmit = async ({ email, password }) => {
+    const result = await authApi
+      .login(email, password)
+      .then(async function (response) {
+        console.log(response.data);
+        authContext.setToken(response.data);
+        authStorage.storeToken(response.data);
+        navigation.navigate(routes.CLUBS);
+      })
+
+      .catch(function (error) {
+        Alert.alert("Errore, controlla i dati inseriti");
+        console.log(error);
+      });
+  };
+
+  /*
   const handleSubmit = async ({ email, password }) => {
     const result = await authApi
       .login(email, password)
@@ -81,6 +99,7 @@ function LoginScreen({ navigation }) {
         console.log(err);
       });
   };
+  */
 
   return (
     <Screen styleChildren={styles.container}>
