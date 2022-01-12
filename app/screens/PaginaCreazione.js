@@ -91,9 +91,7 @@ const styles = StyleSheet.create({
     margin: 10,
     flex: 1,
   },
-  textInput: {
-    flex: 1,
-  },
+  textInput: {},
 
   button: {
     marginTop: 20,

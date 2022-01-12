@@ -7,12 +7,13 @@ import defaultStyle from "../config/styles";
 
 function AppTextInput({
   iconName,
+  style,
   width = "100%",
   onChangeText,
   ...otherProps
 }) {
   return (
-    <View style={[{ width }, styles.container]}>
+    <View style={[styles.container, style]}>
       {
         <MaterialCommunityIcons
           name={iconName}
@@ -26,6 +27,7 @@ function AppTextInput({
         style={[defaultStyle.text, styles.text]}
         {...otherProps}
         onChangeText={onChangeText}
+        autoCapitalize="none"
       />
     </View>
   );

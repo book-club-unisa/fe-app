@@ -23,6 +23,8 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import useApi from "../api/api";
 import AuthContext from "../auth/context";
 
+import { Ionicons } from "@expo/vector-icons";
+
 const Users = [
   {
     id: 1,
@@ -80,7 +82,7 @@ function InfoLibro({ route, navigation }) {
   const [text, setText] = useState("");
 
   const { inviteUserToBookClub } = useApi(token);
-  const BC_ID = 18;
+  const BC_ID = 23;
 
   function Invite() {
     console.log(BC_ID);
@@ -120,26 +122,19 @@ function InfoLibro({ route, navigation }) {
         <View style={styles.searchContainer}>
           <AppTextInput
             onChangeText={(text) => setText(text)}
-            iconName="book-open-page-variant"
-            placeholder="Cerca utenti"
+            placeholder="Invita un utente"
             style={styles.textInput}
-            width="50%"
           />
-          <FontAwesome5
-            name="user-plus"
-            size={20}
-            color="black"
-            style={{ paddingLeft: "30%" }}
-          />
+
+          <Pressable
+            color={colors.red}
+            onPress={(BC_ID, text) => Invite(BC_ID, text)}
+            style={styles.buttonLogout}
+          >
+            <FontAwesome5 name="user-plus" size={20} color="white" />
+          </Pressable>
         </View>
-        <Pressable onPress={(BC_ID, text) => Invite(BC_ID, text)}>
-          <FontAwesome5
-            name="user-plus"
-            size={20}
-            color="black"
-            style={{ paddingLeft: "30%" }}
-          />
-        </Pressable>
+
         <FlatList
           style={{ marginBottom: 55 }}
           data={Users}
@@ -183,7 +178,7 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
     overflow: "hidden",
-    marginHorizontal: 40,
+    marginHorizontal: 20,
     flex: 1,
     justifyContent: "center",
   },
@@ -225,6 +220,28 @@ const styles = StyleSheet.create({
 
   searchContainer: {
     flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+  },
+
+  textInput: {
+    width: "80%",
+    height: 50,
+  },
+
+  buttonIcon: {
+    backgroundColor: colors.blu,
+  },
+
+  buttonLogout: {
+    height: 50,
+    width: 50,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    marginLeft: 10,
+    backgroundColor: colors.blu,
   },
 });
 

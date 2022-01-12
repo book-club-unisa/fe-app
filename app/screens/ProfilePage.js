@@ -80,6 +80,16 @@ function ProfilePage({
       </View>
       <View style={styles.buttonsUtility}>
         <Pressable
+          title="I tuoi inviti"
+          color={colors.blu}
+          onPress={() => navigation.navigate(routes.INVITIRICEVUTI)}
+          style={styles.buttonLogin}
+        >
+          <Ionicons name="people-sharp" size={24} style={styles.icon} />
+          <Text style={styles.settings}> I tuoi inviti </Text>
+        </Pressable>
+
+        <Pressable
           title="ChiSiamo"
           color={colors.blu}
           onPress={() => navigation.navigate(routes.CHISIAMO)}
