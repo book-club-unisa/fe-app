@@ -36,29 +36,13 @@ function PaginaCreazioneBC({ route, navigation }) {
     }
   };
 
-  /*
-  function createBC(isbn) {
-    const name = value.value;
-
-    console.log(isbn, name);
-    BCapi.post("/bookclubs/create/", { isbn: isbn, name: name })
-      .then(async function (response) {
-        console.log(1);
-        console.log(token);
-      })
-      .catch(function (error) {
-        console.log(error);
-        console.log(token);
-      });
-  }
-  */
-
   function createBC(isbn) {
     const name = value.value;
     console.log(isbn, name);
     createBookClub(isbn, name)
       .then((data) => {
         console.log(data);
+        console.log(data.id);
       })
       .catch((err) => {
         console.error(err);

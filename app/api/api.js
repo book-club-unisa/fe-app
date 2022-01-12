@@ -57,10 +57,15 @@ export default function useApi(token = undefined) {
 
     createBookClub: (isbn, name) =>
       axiosInstance
-        .post("bookclubs/create", {
+        .post("bookclubs", {
           isbn,
           name,
         })
+        .then((response) => response.data),
+
+    inviteUserToBookClub: (BC_ID, USER_EMAIL) =>
+      axiosInstance
+        .post(`bookclubs/${BC_ID}/invite-user/${USER_EMAIL}`)
         .then((response) => response.data),
   };
 }

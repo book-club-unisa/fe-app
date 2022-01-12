@@ -11,8 +11,11 @@ import colors from "../config/colors";
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
 import AuthContext from "../auth/context";
+import FirstnameContext from "../auth/firstameContext";
+import LastnameContext from "../auth/lastnameContext";
 import authStorage from "../auth/storage";
 import useApi from "../api/api";
+import EmailContext from "../auth/emailContext";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -30,6 +33,9 @@ const validationSchema = Yup.object().shape({
 
 function LoginScreen({ navigation }) {
   const authContext = useContext(AuthContext);
+  const emailContext = useContext(EmailContext);
+  const firstnameContext = useContext(FirstnameContext);
+  const lastnameContext = useContext(LastnameContext);
   /*
   function LogIn(values) {
     BCapi.post("users/sign-in", values)
@@ -48,19 +54,24 @@ function LoginScreen({ navigation }) {
   const handleSubmit = async ({ email, password }) => {
     const result = await authApi
       .login(email, password)
-      .then((response) => {
+      .then(async function (response) {
         const token = response.data;
         const tokenizedApi = useApi(token);
+        console.log(email);
+        console.log(password);
         return tokenizedApi.getUserDataByToken().then((res) => [token, res]);
       })
-      .then(([token, { email, firstName, lastName }]) => {
+      .then(async function ([token, { email, firstName, lastName }]) {
         console.log(token);
         authContext.setToken(token);
         // TODO
-        // authContent.setEmail(email);
-        // authContent.setFirstName(fistName);
-        // authContent.setLastName(lastName);
-        authStorage.storeToken(token);
+        //emailContext.setToken(email);
+        //firstnameContext.setToken(firstName);
+        //lastnameContext.setToken(lastName);
+        //authStorage.storeToken(token);
+        //authStorage.storeEmail(email);
+        //authStorage.storeFirstName(firstName);
+        //authStorage.storeLastName(lastName);
         navigation.navigate(routes.CLUBS);
         console.log("ok getUserData");
         console.log(email, firstName, lastName);

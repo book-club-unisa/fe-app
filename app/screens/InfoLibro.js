@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   FlatList,
   View,
@@ -20,6 +20,8 @@ import colors from "../config/colors";
 import BCAppFormField from "../components/BCAppFormField";
 import routes from "../navigation/routes";
 import { FontAwesome5 } from "@expo/vector-icons";
+import useApi from "../api/api";
+import AuthContext from "../auth/context";
 
 const Users = [
   {
@@ -73,6 +75,26 @@ const Users = [
 const fondatore = "Michele Bisaccia";
 
 function InfoLibro({ route, navigation }) {
+  const { token, setToken } = useContext(AuthContext);
+
+  const [text, setText] = useState("");
+
+  const { inviteUserToBookClub } = useApi(token);
+  const BC_ID = 18;
+
+  function Invite() {
+    console.log(BC_ID);
+    console.log(text);
+    inviteUserToBookClub(BC_ID, text)
+      .then(function (result) {
+        console.log(1);
+      })
+      .catch(function (error) {
+        console.log(token);
+        console.error(error);
+      });
+  }
+
   return (
     <Screen>
       <View style={styles.container}>
@@ -95,18 +117,29 @@ function InfoLibro({ route, navigation }) {
           </View>
         </View>
 
-        <View style={{ flexDirection: "row" }}>
-          <Text style={styles.txtButton}> Aggiungi partecipanti</Text>
-          <Pressable onPress={() => navigation.navigate(routes.INVITAUTENTI)}>
-            <FontAwesome5
-              name="user-plus"
-              size={20}
-              color="black"
-              style={{ paddingLeft: "30%" }}
-            />
-          </Pressable>
+        <View style={styles.searchContainer}>
+          <AppTextInput
+            onChangeText={(text) => setText(text)}
+            iconName="book-open-page-variant"
+            placeholder="Cerca utenti"
+            style={styles.textInput}
+            width="50%"
+          />
+          <FontAwesome5
+            name="user-plus"
+            size={20}
+            color="black"
+            style={{ paddingLeft: "30%" }}
+          />
         </View>
-
+        <Pressable onPress={(BC_ID, text) => Invite(BC_ID, text)}>
+          <FontAwesome5
+            name="user-plus"
+            size={20}
+            color="black"
+            style={{ paddingLeft: "30%" }}
+          />
+        </Pressable>
         <FlatList
           style={{ marginBottom: 55 }}
           data={Users}
@@ -188,6 +221,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     color: colors.black,
+  },
+
+  searchContainer: {
+    flexDirection: "row",
   },
 });
 

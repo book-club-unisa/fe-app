@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import ProfileItem from "../components/singleItems/ProfileItem";
 import Screen from "../components/Screen";
@@ -15,11 +15,14 @@ import useApi from "../api/api";
 function ProfilePage({
   profileName,
   profilePassword,
-  profileEmail,
+  //profileEmail,
   profileSurname,
   navigation,
 }) {
   const { token, setToken } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
 
   //const user = useContext(AuthContext);
   //console.log(user.token);
@@ -36,24 +39,14 @@ function ProfilePage({
     getUserData();
   }, []);
 
-  /*function getUserDataOLD() {
-    console.log(token);
-    BCapi.get("/users/emailByToken")
-      .then(function (response) {
-        console.log(1);
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(2);
-        console.log(error);
-      });
-  }*/
-
   function getUserData() {
     getUserDataByToken()
       .then(function ({ email, firstName, lastName }) {
         console.log("ok getUserData");
         console.log(email, firstName, lastName);
+        setEmail(email);
+        setName(firstName);
+        setSurname(lastName);
       })
       .catch(function (err) {
         console.log("error getUserData");
@@ -80,10 +73,9 @@ function ProfilePage({
         />
         <Text style={styles.title}> Il tuo profilo </Text>
         <ProfileItem
-          profileName={profileName}
-          profileSurname={profileSurname}
-          profileEmail={profileEmail}
-          profilePassword={profilePassword}
+          profileName={surname}
+          profileSurname={name}
+          profileEmail={email}
         />
       </View>
       <View style={styles.buttonsUtility}>

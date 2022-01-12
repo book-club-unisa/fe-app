@@ -45,7 +45,7 @@ const Catalogo = ({ navigation }) => {
       })
       .catch(function (error) {
         // console.log(2);
-        // console.log(error);
+        //console.log(error);
       });
   }
 
