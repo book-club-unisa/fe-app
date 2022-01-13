@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   FlatList,
   View,
@@ -19,22 +19,51 @@ import NumericInput from "react-native-numeric-input";
 import ProgressBar from "../components/singleItems/ProgressBar";
 import { FontAwesome5 } from "@expo/vector-icons";
 import routes from "../navigation/routes";
+import useApi from "../api/api";
+import AuthContext from "../auth/context";
+import { AntDesign } from "@expo/vector-icons";
 
 function InfoBookClubFounder({ route, navigation }) {
+  const [odl, setOdl] = useState(0);
+  const { token, setToken } = useContext(AuthContext);
+  const { updateLastReadGoal } = useApi(token);
+  const [numPages, setNumPages] = useState();
+
   const item = route.params;
-
   const listUsers = route.params.Members;
-
+  const BC_ID = item.id;
   const readGoalid = item.lastReadGoal.readGoalId;
-  console.log(readGoalid);
+  const bookPages = item.Book.pagesCount;
 
   const pagecountlastreadgoal = route.params.lastReadGoal.pagesCount;
   const pagecountsecondlastreadgoal =
     route.params.secondLastReadGoal.pagesCount;
 
   //console.log(listUsers[0].membershipId);
-  console.log(pagecountlastreadgoal);
-  console.log(pagecountsecondlastreadgoal);
+  //console.log(pagecountlastreadgoal);
+  //console.log(pagecountsecondlastreadgoal);
+
+  useEffect(() => {
+    odlPercentage();
+  }, [odl]);
+
+  function odlPercentage() {
+    const odlPercentageValue = (odl * 100) / bookPages / 100;
+    //console.log("percent", odlPercentageValue);
+    return odlPercentageValue;
+  }
+
+  function _updateReadGoal() {
+    updateLastReadGoal(BC_ID, numPages)
+      .then(function (result) {
+        setOdl(numPages);
+        console.log("ok update lastreadgoal");
+      })
+      .catch(function (err) {
+        console.log("error getUserData");
+        console.error(err);
+      });
+  }
 
   return (
     <Screen>
@@ -97,12 +126,14 @@ function InfoBookClubFounder({ route, navigation }) {
           <View style={styles.allinea}>
             <View style={{ marginRight: 20 }}>
               <Text style={styles.txt}> Obiettivo Di Lettura </Text>
-              <ProgressBar value={0.9} larghezza={200} />
+              <ProgressBar value={odlPercentage()} larghezza={200} />
             </View>
 
             <View style={{ marginTop: 15 }}>
               <NumericInput
-                onChange={(value) => console.log(value)}
+                onChange={(numPages) => {
+                  setNumPages(numPages);
+                }}
                 minValue={0}
                 rounded={true}
                 totalWidth={80}
@@ -111,6 +142,12 @@ function InfoBookClubFounder({ route, navigation }) {
                 borderColor={colors.white}
               />
             </View>
+            <Pressable
+              style={styles.checkmark}
+              onPress={() => _updateReadGoal()}
+            >
+              <AntDesign name="checkcircle" size={24} color={colors.blu} />
+            </Pressable>
           </View>
         </View>
 
@@ -121,7 +158,7 @@ function InfoBookClubFounder({ route, navigation }) {
               <ProgressBar value={0.2} larghezza={200} />
             </View>
 
-            <View style={{ marginTop: 15 }}>
+            <View style={styles.incrementaODL}>
               <NumericInput
                 onChange={(value) => console.log(value)}
                 minValue={0}
@@ -200,12 +237,21 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
 
+  checkmark: {
+    marginTop: 12,
+    marginLeft: 12,
+  },
+
   txt: {
     marginVertical: 5,
     alignSelf: "center",
     fontWeight: "bold",
     textTransform: "uppercase",
     color: colors.black,
+  },
+
+  incrementaODL: {
+    marginTop: 15,
   },
 });
 

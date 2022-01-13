@@ -93,5 +93,12 @@ export default function useApi(token = undefined) {
 
     getBookClubsByToken: () =>
       axiosInstance.get("/bookclubs/mine").then((response) => response.data),
+
+    updateLastReadGoal: (BC_ID, numPages) =>
+      axiosInstance
+        .post(`/bookclubs/${BC_ID}/update-last-read-goal`, {
+          numPages,
+        })
+        .then((response) => response.data),
   };
 }
