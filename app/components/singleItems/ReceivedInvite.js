@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
   },
 
   profilePic: {
-    width: 30,
-    height: 40,
+    width: 40,
+    height: 55,
     borderRadius: 3,
   },
 
