@@ -20,55 +20,41 @@ import ProgressBar from "../components/singleItems/ProgressBar";
 import { FontAwesome5 } from "@expo/vector-icons";
 import routes from "../navigation/routes";
 
-const Users = [
-  {
-    id: 1,
-    name: "giovanna243@hotmail.it",
-    image: require("../assets/users/1.png"),
-    pdl: 0.6,
-  },
-
-  {
-    id: 2,
-    name: "alfonso.m@gmail.com",
-    image: require("../assets/users/2.png"),
-    pdl: 0.2,
-  },
-
-  {
-    id: 3,
-    name: "lucia.rossi12@gmail.it",
-    image: require("../assets/users/3.png"),
-    pdl: 0.8,
-  },
-
-  {
-    id: 4,
-    name: "user536@unisa.it",
-    image: require("../assets/users/4.png"),
-    pdl: 0.5,
-  },
-];
-
 function InfoBookClubFounder({ route, navigation }) {
   const item = route.params;
+
+  const listUsers = route.params.Members;
+
+  const readGoalid = item.lastReadGoal.readGoalId;
+  console.log(readGoalid);
+
+  const pagecountlastreadgoal = route.params.lastReadGoal.pagesCount;
+  const pagecountsecondlastreadgoal =
+    route.params.secondLastReadGoal.pagesCount;
+
+  //console.log(listUsers[0].membershipId);
+  console.log(pagecountlastreadgoal);
+  console.log(pagecountsecondlastreadgoal);
 
   return (
     <Screen>
       <View style={styles.container}>
         <View style={styles.bookContainer}>
-          <Image source={route.params.image} style={styles.copertina} />
+          <Image
+            source={{ uri: item.Book.coverUrl }}
+            style={styles.copertina}
+          />
           <View style={styles.description}>
             <Text style={styles.boldtitle} numberOfLines={1}>
               Nome book club
             </Text>
-            <Text numberOfLines={1}>{route.params.nomebc}</Text>
+            <Text numberOfLines={1}>{item.name}</Text>
             <Text numberOfLines={1}></Text>
 
             <Text style={styles.boldtitle} numberOfLines={1}>
               Fondatore
             </Text>
-            <Text numberOfLines={1}>{route.params.nomeFondatore}</Text>
+            <Text numberOfLines={1}>{item.founderEmail}</Text>
           </View>
         </View>
 
@@ -85,16 +71,17 @@ function InfoBookClubFounder({ route, navigation }) {
             />
           </Pressable>
         </View>
-
         <FlatList
           style={{ marginBottom: 55 }}
-          data={Users}
-          keyExtractor={(user) => user.id.toString()}
+          data={listUsers}
+          keyExtractor={(listUser) => listUser.membershipId.toString()}
           renderItem={({ item }) => (
             <UserState
-              title={item.name}
-              image={item.image}
-              personalprogress={item.pdl}
+              title={item.user.email}
+              readGoalId={readGoalid}
+              personalprogress={item.pageReached}
+              pagecountlastreadgoal={pagecountlastreadgoal}
+              pagecountsecondlastreadgoal={pagecountsecondlastreadgoal}
               onPress={() =>
                 Alert.alert("title", "Messaggio", [
                   { text: "Ok", onPress: () => console.log(item.title) },
@@ -150,6 +137,10 @@ function InfoBookClubFounder({ route, navigation }) {
       </View>
     </Screen>
   );
+
+  /*
+  
+  */
 }
 
 const styles = StyleSheet.create({

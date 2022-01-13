@@ -90,5 +90,8 @@ export default function useApi(token = undefined) {
       axiosInstance
         .get(`invite/getInvites/refuse/${inviteID}`)
         .then((response) => response.data),
+
+    getBookClubsByToken: () =>
+      axiosInstance.get("/bookclubs/mine").then((response) => response.data),
   };
 }

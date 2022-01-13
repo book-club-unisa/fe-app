@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { FontAwesome } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function UserState({
   image,
@@ -11,12 +12,38 @@ function UserState({
   subTitle,
   ImageComponent,
   onPress,
+  pagecountlastreadgoal,
+  pagecountsecondlastreadgoal,
   personalprogress,
+  readGoalId,
 }) {
+  useEffect(() => {
+    calcolaPDL();
+  }, []);
+
+  function calcolaPDL() {
+    if (readGoalId === -1) {
+      return 0;
+    }
+    const numeratore = pagecountlastreadgoal - personalprogress;
+
+    const numeratorePercentuale = numeratore * 100;
+    const denominatore = pagecountlastreadgoal - pagecountsecondlastreadgoal;
+    const valore = numeratorePercentuale / denominatore;
+    const risultato = valore / 100;
+    console.log(risultato);
+    return risultato;
+  }
+
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>
         {image && <Image style={styles.profilePic} source={image} />}
+        <MaterialCommunityIcons
+          name="account-circle"
+          size={25}
+          color={colors.mediumgrey}
+        />
         <View style={styles.details}>
           <Text numberOfLines={1} style={styles.title}>
             {title}
@@ -28,7 +55,7 @@ function UserState({
           )}
         </View>
         <Progress.Pie
-          progress={personalprogress}
+          progress={calcolaPDL()}
           size={25}
           color={colors.green}
           borderWidth={0}

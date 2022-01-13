@@ -1,5 +1,13 @@
 import React from "react";
-import { FlatList, View, StyleSheet, Text, Image } from "react-native";
+import {
+  FlatList,
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  Alert,
+  Pressable,
+} from "react-native";
 
 import Screen from "../components/Screen";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
@@ -9,69 +17,72 @@ import * as Progress from "react-native-progress";
 import UserState from "../components/singleItems/UserState";
 import NumericInput from "react-native-numeric-input";
 import ProgressBar from "../components/singleItems/ProgressBar";
+import { FontAwesome5 } from "@expo/vector-icons";
+import routes from "../navigation/routes";
 import AppButton from "../components/AppButton";
 
-const Users = [
-  {
-    id: 1,
-    name: "giovanna243@hotmail.it",
-    image: require("../assets/users/1.png"),
-    pdl: 0.6,
-  },
+function InfoBookClubFounder({ route, navigation }) {
+  const item = route.params;
 
-  {
-    id: 2,
-    name: "alfonso.m@gmail.com",
-    image: require("../assets/users/2.png"),
-    pdl: 0.2,
-  },
+  const listUsers = route.params.Members;
 
-  {
-    id: 3,
-    name: "lucia.rossi12@gmail.it",
-    image: require("../assets/users/3.png"),
-    pdl: 0.8,
-  },
+  const readGoalid = item.lastReadGoal.readGoalId;
+  console.log(readGoalid);
 
-  {
-    id: 4,
-    name: "user536@unisa.it",
-    image: require("../assets/users/4.png"),
-    pdl: 0.5,
-  },
-];
+  const pagecountlastreadgoal = route.params.lastReadGoal.pagesCount;
+  const pagecountsecondlastreadgoal =
+    route.params.secondLastReadGoal.pagesCount;
 
-function InfoBookClubUser({ route }) {
+  //console.log(listUsers[0].membershipId);
+  console.log(pagecountlastreadgoal);
+  console.log(pagecountsecondlastreadgoal);
+
   return (
     <Screen>
       <View style={styles.container}>
         <View style={styles.bookContainer}>
-          <Image source={route.params.image} style={styles.copertina} />
+          <Image
+            source={{ uri: item.Book.coverUrl }}
+            style={styles.copertina}
+          />
           <View style={styles.description}>
             <Text style={styles.boldtitle} numberOfLines={1}>
               Nome book club
             </Text>
-            <Text numberOfLines={1}>{route.params.nomebc}</Text>
+            <Text numberOfLines={1}>{item.name}</Text>
             <Text numberOfLines={1}></Text>
 
             <Text style={styles.boldtitle} numberOfLines={1}>
               Fondatore
             </Text>
-            <Text numberOfLines={1}>{route.params.nomeFondatore}</Text>
+            <Text numberOfLines={1}>{item.founderEmail}</Text>
           </View>
         </View>
 
-        <Text style={styles.txt}> Partecipanti </Text>
-
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.txt}> Partecipanti </Text>
+          <Pressable
+            onPress={() => navigation.navigate(routes.REVISIONEINVITI, item)}
+          >
+            <FontAwesome5
+              name="user-plus"
+              size={20}
+              color="black"
+              style={{ paddingLeft: "55%" }}
+            />
+          </Pressable>
+        </View>
         <FlatList
           style={{ marginBottom: 55 }}
-          data={Users}
-          keyExtractor={(user) => user.id.toString()}
+          data={listUsers}
+          keyExtractor={(listUser) => listUser.membershipId.toString()}
           renderItem={({ item }) => (
             <UserState
-              title={item.name}
-              image={item.image}
-              personalprogress={item.pdl}
+              title={item.user.email}
+              readGoalId={readGoalid}
+              personalprogress={item.pageReached}
+              pagecountlastreadgoal={pagecountlastreadgoal}
+              pagecountsecondlastreadgoal={pagecountsecondlastreadgoal}
               onPress={() =>
                 Alert.alert("title", "Messaggio", [
                   { text: "Ok", onPress: () => console.log(item.title) },
@@ -82,7 +93,6 @@ function InfoBookClubUser({ route }) {
           ItemSeparatorComponent={ListItemSeparator}
         />
       </View>
-
       <View style={styles.barre}>
         <View style={styles.bar}>
           <View style={styles.allinea}>
@@ -115,12 +125,16 @@ function InfoBookClubUser({ route }) {
         </View>
         <AppButton
           title="Abbandona Book Club"
-          styleButton={{ width: "90%" }}
+          styleButton={styles.button}
           onPress={() => console.log(1)}
         />
       </View>
     </Screen>
   );
+
+  /*
+  
+  */
 }
 
 const styles = StyleSheet.create({
@@ -135,8 +149,10 @@ const styles = StyleSheet.create({
   },
 
   barre: {
+    position: "absolute",
     width: "100%",
-    bottom: 30,
+    bottom: 0,
+    backgroundColor: colors.white,
   },
 
   boldtitle: {
@@ -171,6 +187,12 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
 
+  button: {
+    width: "90%",
+    marginTop: 10,
+    bottom: 10,
+  },
+
   title: {
     marginVertical: 20,
     alignSelf: "center",
@@ -187,4 +209,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InfoBookClubUser;
+export default InfoBookClubFounder;

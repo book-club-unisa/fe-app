@@ -1,99 +1,76 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Alert, FlatList, StyleSheet } from "react-native";
 import BookClubCard from "../components/singleItems/BookClubCard";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
+import useApi from "../api/api";
+import AuthContext from "../auth/context";
 
-const Books = [
-  {
-    nomebc: "APPASSIONATI TOLKENIANI",
-    nomeFondatore: "Luca Morelli",
-    titoloLibro: "Il signore degli anelli - La compagnia dell'anello",
-    autore: "J.R.Tolkien",
-    descrizione:
-      "Nella Seconda Era, Sauron, l'Oscuro Signore di Mordor, donò 19 " +
-      "anelli alle razze della Terra di Mezzo: tre ai re degli elfi," +
-      "sette ai re dei nani e nove ai re degli uomini; tutti loro, però," +
-      "furono ingannati dall'Oscuro Signore, il quale forgiò l'Unico" +
-      "Anello, in grado di controllare tutti gli altri. Nella battaglia" +
-      "contro Sauron, Isildur, figlio del re degli uomini Elendil, tagliò" +
-      "a Sauron il dito al quale era infilato l'Anello, ottenendo così la",
-    image: require("../assets/lotr1.jpg"),
-    odlValue: "50",
-    pdlPersonale: "50",
-  },
-
-  {
-    nomebc: "APPASSIONATI TOLKENIANI1",
-    nomeFondatore: "Luca Morelli",
-    titoloLibro: "Lo hobbit assonnato",
-    autore: "J.R.Tolkien",
-    descrizione:
-      "E’ un romanzo scritto da J.R.R. Tolkien nel 1937, e per molti è ritenuto il prequel del Signore" +
-      "degli Anelli per la presenza di aspetti comuni ad entrambi i libri e per il ripetersi di alcuni " +
-      "personaggi che troviamo nella celeberrima trilogia. E’ un racconto fantasy che si colloca per lo " +
-      "più nella categoria libri per ragazzi. Non mancano: elementi fantastici, maghi, incantesimi, " +
-      " personaggi fatati, inventati, la sete di avventura e il raggiungimento della meta dopo aver " +
-      "dato prova dei propri valori.",
-    image: require("../assets/hobbit.jpg"),
-    odlValue: "50",
-    pdlPersonale: "30",
-  },
-
-  {
-    nomebc: "POTTERHEAD",
-    nomeFondatore: "Paolo Moretti",
-    titoloLibro: "Harry Potter e i doni della morte",
-    autore: "J.K.Rowling",
-    descrizione:
-      "Con l'avvicinarsi del suo diciassettesimo compleanno, Harry Potter rischia" +
-      "di perdere la protezione offerta dalla casa degli zii; i Dursley vengono quindi " +
-      "trasferiti per la loro sicurezza, mentre l'Ordine della Fenice si prepara a scortare " +
-      "Harry verso la Tana, trasformando sei suoi affiliati in copie fisiche del ragazzo in " +
-      "modo da confondere eventuali inseguitori. Durante il tragitto i Mangiamorte li " +
-      " attaccano e Alastor Moody e Edvige vengono uccisi. Lord Voldemort tenta di assassinare " +
-      " Harry, ma una reazione inattesa tra le loro due bacchette glielo impedisce.",
-    image: require("../assets/hpdm.jpg"),
-    odlValue: "30",
-    pdlPersonale: "30",
-  },
-
-  {
-    nomebc: "LETTURA LEGGERA",
-    nomeFondatore: "Luca Morelli",
-    titoloLibro: "Il Batman che ride",
-    autore: "Scott Snyder",
-    descrizione:
-      "Gotham City. La polizia, guidata dal capitano James Gordon, " +
-      " sta investigando in un capannone pieno di cadaveri, tutti caratterizzati da una " +
-      " strana carnagione pallida ed un'anomala contrazione muscolare del viso, che forma " +
-      " quasi un ghigno. Batman sospetta di una strana arma, e le vittime potevano essere una " +
-      "sorta di cavie, e sarà solo l'inizio.",
-    image: require("../assets/bwl.jpg"),
-    odlValue: "60",
-    pdlPersonale: "30",
-  },
-];
 const random = 1;
 
 function Bacheca({ navigation }) {
+  const { token, setToken } = useContext(AuthContext);
+  const { getBookClubsByToken } = useApi(token);
+  const { getUserDataByToken } = useApi(token);
+
+  const [bookClubs, setBookClubs] = useState([]);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+
+  useEffect(() => {
+    getUserData();
+    getBookClubs();
+  }, []);
+
+  function getUserData() {
+    getUserDataByToken()
+      .then(function ({ email, firstName, lastName }) {
+        console.log("ok getUserData");
+        console.log(email, firstName, lastName);
+        setEmail(email);
+        setName(firstName);
+        setSurname(lastName);
+      })
+      .catch(function (err) {
+        console.log("error getUserData");
+        console.error(err);
+      });
+  }
+
+  function getBookClubs() {
+    getBookClubsByToken()
+      .then(function (bookClubs) {
+        console.log("ok getBookClubs");
+        setBookClubs(bookClubs);
+      })
+      .catch(function (err) {
+        console.log("error getBookClubs");
+        console.error(err);
+      });
+  }
+
   return (
     <Screen styleChildren={styles.container}>
       <FlatList
-        data={Books}
-        keyExtractor={(book) => book.nomebc}
+        data={bookClubs}
+        keyExtractor={(bookClub) => bookClub.id}
         renderItem={({ item }) => (
           <BookClubCard
-            bcName={item.nomebc}
-            founderName={item.nomeFondatore}
-            image={item.image}
-            odlValue={item.odlValue}
-            pdlPersonale={item.pdlPersonale}
-            titoloLibro={item.titoloLibro}
-            autore={item.autore}
+            bcName={item.name}
+            founderName={item.founderEmail}
+            image={{ uri: item.Book.coverUrl }}
+            //odlValue={item.odlValue}
+            //pdlPersonale={item.Members.pageReached}
+            titoloLibro={item.Book.title}
+            autore={item.Book.author}
             onPress={() => {
-              navigation.navigate(routes.INFOBOOKCLUBU, item);
+              if (email === item.founderEmail) {
+                navigation.navigate(routes.INFOBOOKCLUBF, item);
+              } else {
+                navigation.navigate(routes.INFOBOOKCLUBU, item);
+              }
             }}
           />
         )}
