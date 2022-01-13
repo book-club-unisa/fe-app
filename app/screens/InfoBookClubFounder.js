@@ -25,9 +25,18 @@ import { AntDesign } from "@expo/vector-icons";
 
 function InfoBookClubFounder({ route, navigation }) {
   const [odl, setOdl] = useState(0);
+  const [pdl, setPdl] = useState(0);
+  const [currentUserPDL, setCurrentUserPDL] = useState(0);
   const { token, setToken } = useContext(AuthContext);
   const { updateLastReadGoal } = useApi(token);
-  const [numPages, setNumPages] = useState();
+  const { addPDL } = useApi(token);
+  const [odlNumPages, setOdlNumPages] = useState();
+  const [pdlNumPages, setPdlNumPages] = useState();
+  const { getUserDataByToken } = useApi(token);
+
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
 
   const item = route.params;
   const listUsers = route.params.Members;
@@ -35,6 +44,7 @@ function InfoBookClubFounder({ route, navigation }) {
   const readGoalid = item.lastReadGoal.readGoalId;
   const bookPages = item.Book.pagesCount;
 
+  const pageReached = item.Members.pageReached;
   const pagecountlastreadgoal = route.params.lastReadGoal.pagesCount;
   const pagecountsecondlastreadgoal =
     route.params.secondLastReadGoal.pagesCount;
@@ -43,9 +53,52 @@ function InfoBookClubFounder({ route, navigation }) {
   //console.log(pagecountlastreadgoal);
   //console.log(pagecountsecondlastreadgoal);
 
+  //const pdl = currentUserPDL;
+
+  function getUserData() {
+    getUserDataByToken()
+      .then(function ({ email, firstName, lastName }) {
+        console.log("ok getUserData");
+        //console.log(email, firstName, lastName);
+        setEmail(email);
+        setName(firstName);
+        setSurname(lastName);
+        listUsers.forEach((element) => {
+          if (element.user.email === email) {
+            console.log(element);
+            //console.log("page reached:", element.pageReached);
+            setCurrentUserPDL(element.pageReached);
+            console.log("currentUserPDL:", currentUserPDL);
+          }
+        });
+      })
+      .catch(function (err) {
+        console.log("error getUserData");
+        console.error(err);
+      });
+  }
+
+  console.log("pdl:", pdl);
+
+  useEffect(() => {
+    setOdl(pagecountlastreadgoal);
+  }, []);
+
+  useEffect(() => {
+    setPdl(pdl);
+  }, []);
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   useEffect(() => {
     odlPercentage();
   }, [odl]);
+
+  useEffect(() => {
+    pdlPercentage();
+  }, [currentUserPDL]);
 
   function odlPercentage() {
     const odlPercentageValue = (odl * 100) / bookPages / 100;
@@ -53,14 +106,32 @@ function InfoBookClubFounder({ route, navigation }) {
     return odlPercentageValue;
   }
 
+  function pdlPercentage() {
+    const pdlPercentageValue = (currentUserPDL * 100) / bookPages / 100;
+    return pdlPercentageValue;
+  }
+
   function _updateReadGoal() {
-    updateLastReadGoal(BC_ID, numPages)
+    updateLastReadGoal(BC_ID, odlNumPages)
       .then(function (result) {
-        setOdl(numPages);
+        setOdl(odlNumPages);
         console.log("ok update lastreadgoal");
       })
       .catch(function (err) {
-        console.log("error getUserData");
+        console.log("error update lastreadgoal");
+        console.error(err);
+      });
+  }
+
+  function _addPDL() {
+    addPDL(BC_ID, currentUserPDL)
+      .then(function (result) {
+        setPdl(currentUserPDL);
+        console.log(currentUserPDL);
+        console.log("ok update pdl");
+      })
+      .catch(function (err) {
+        console.log("error update pdl");
         console.error(err);
       });
   }
@@ -125,14 +196,14 @@ function InfoBookClubFounder({ route, navigation }) {
         <View style={styles.bar}>
           <View style={styles.allinea}>
             <View style={{ marginRight: 20 }}>
-              <Text style={styles.txt}> Obiettivo Di Lettura </Text>
+              <Text style={styles.txt}> Obiettivo Di Lettura: {odl} </Text>
               <ProgressBar value={odlPercentage()} larghezza={200} />
             </View>
 
             <View style={{ marginTop: 15 }}>
               <NumericInput
                 onChange={(numPages) => {
-                  setNumPages(numPages);
+                  setOdlNumPages(numPages);
                 }}
                 minValue={0}
                 rounded={true}
@@ -154,13 +225,17 @@ function InfoBookClubFounder({ route, navigation }) {
         <View style={styles.bar}>
           <View style={styles.allinea}>
             <View style={{ marginRight: 20 }}>
-              <Text style={styles.txt}> Progresso Di Lettura </Text>
-              <ProgressBar value={0.2} larghezza={200} />
+              <Text style={styles.txt}>
+                Progresso di Lettura: {currentUserPDL}
+              </Text>
+              <ProgressBar value={pdlPercentage()} larghezza={200} />
             </View>
 
             <View style={styles.incrementaODL}>
               <NumericInput
-                onChange={(value) => console.log(value)}
+                onChange={(currentUserPDL) => {
+                  setCurrentUserPDL(currentUserPDL);
+                }}
                 minValue={0}
                 rounded={true}
                 totalWidth={80}
@@ -169,6 +244,9 @@ function InfoBookClubFounder({ route, navigation }) {
                 borderColor={colors.white}
               />
             </View>
+            <Pressable style={styles.checkmark} onPress={() => _addPDL()}>
+              <AntDesign name="checkcircle" size={24} color={colors.blu} />
+            </Pressable>
           </View>
         </View>
       </View>

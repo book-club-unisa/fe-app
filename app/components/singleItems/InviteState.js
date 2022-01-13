@@ -10,6 +10,11 @@ function InviteState({ image, title, ImageComponent, onPress, state }) {
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>
         {image && <Image style={styles.profilePic} source={image} />}
+        <MaterialCommunityIcons
+          name="account-circle"
+          size={25}
+          color={colors.mediumgrey}
+        />
         <View style={styles.details}>
           <Text numberOfLines={1} style={styles.title}>
             {title}
@@ -18,7 +23,7 @@ function InviteState({ image, title, ImageComponent, onPress, state }) {
 
         <View>
           <View>
-            {(state === 0 && (
+            {(state === "PENDING" && (
               <View>
                 <>
                   <MaterialCommunityIcons
@@ -29,7 +34,7 @@ function InviteState({ image, title, ImageComponent, onPress, state }) {
                 </>
               </View>
             )) ||
-              (state === 1 && (
+              (state === "ACCEPTED" && (
                 <>
                   <Ionicons
                     name="checkmark-circle-sharp"
@@ -38,7 +43,7 @@ function InviteState({ image, title, ImageComponent, onPress, state }) {
                   />
                 </>
               )) ||
-              (state === 2 && (
+              (state === "REFUSED" && (
                 <>
                   <Ionicons name="close-circle-sharp" size={25} color="red" />
                 </>

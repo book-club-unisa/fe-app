@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FlatList, View, StyleSheet, Text, Image, Alert } from "react-native";
 
 import Screen from "../components/Screen";
@@ -7,62 +7,43 @@ import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import colors from "../config/colors";
 import InviteState from "../components/singleItems/InviteState";
 import AppButton from "../components/AppButton";
-
-const Users = [
-  {
-    id: 1,
-    name: "giovanna243@hotmail.it",
-    image: require("../assets/users/1.png"),
-    inviteState: 0,
-  },
-
-  {
-    id: 2,
-    name: "alfonso.m@gmail.com",
-    image: require("../assets/users/2.png"),
-    inviteState: 2,
-  },
-
-  {
-    id: 3,
-    name: "lucia.rossi12@gmail.it",
-    image: require("../assets/users/3.png"),
-    inviteState: 1,
-  },
-
-  {
-    id: 4,
-    name: "user536@unisa.it",
-    image: require("../assets/users/4.png"),
-    inviteState: 0,
-  },
-];
+import AuthContext from "../auth/context";
+import useApi from "../api/api";
 
 function BookClubInvites({ route }) {
+  const [users, setUsers] = useState([]);
+  const { token, setToken } = useContext(AuthContext);
+  const { getInvitesByFounder } = useApi(token);
+
+  const BC_ID = route.params.id;
+
+  useEffect(() => {
+    seeFounderInvites();
+  }, []);
+
+  function seeFounderInvites() {
+    getInvitesByFounder(BC_ID)
+      .then(function (usersList) {
+        setUsers(usersList);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
+
   return (
     <Screen>
       <View style={styles.container}>
-        <View style={styles.bookContainer}>
-          <Image source={route.params.image} style={styles.copertina} />
-          <View style={styles.description}>
-            <Text style={styles.boldtitle} numberOfLines={1}>
-              {route.params.nomebc}
-            </Text>
-            <Text numberOfLines={1}>Il tuo Book Blub</Text>
-          </View>
-        </View>
-
         <Text style={styles.txt}>Stato dei tuoi inviti </Text>
 
         <FlatList
           style={{ marginBottom: 55 }}
-          data={Users}
-          keyExtractor={(user) => user.id.toString()}
+          data={users}
+          keyExtractor={(user) => user.inviteId.toString()}
           renderItem={({ item }) => (
             <InviteState
-              title={item.name}
-              image={item.image}
-              state={item.inviteState}
+              title={item.user}
+              state={item.State}
               onPress={() =>
                 Alert.alert("title", "Messaggio", [
                   { text: "Ok", onPress: () => console.log("1") },
@@ -71,15 +52,6 @@ function BookClubInvites({ route }) {
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}
-        />
-
-        <AppButton
-          title="INVITA"
-          onPress={() =>
-            Alert.alert("title", "Messaggio", [
-              { text: "Ok", onPress: () => console.log("1") },
-            ])
-          }
         />
       </View>
     </Screen>

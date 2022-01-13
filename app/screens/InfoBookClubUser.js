@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   FlatList,
   View,
@@ -19,23 +19,109 @@ import NumericInput from "react-native-numeric-input";
 import ProgressBar from "../components/singleItems/ProgressBar";
 import { FontAwesome5 } from "@expo/vector-icons";
 import routes from "../navigation/routes";
-import AppButton from "../components/AppButton";
+import useApi from "../api/api";
+import AuthContext from "../auth/context";
+import { AntDesign } from "@expo/vector-icons";
 
-function InfoBookClubFounder({ route, navigation }) {
+function InfoBookClubUser({ route, navigation }) {
+  const [odl, setOdl] = useState(0);
+  const [pdl, setPdl] = useState(0);
+  const [currentUserPDL, setCurrentUserPDL] = useState(0);
+  const { token, setToken } = useContext(AuthContext);
+  const { updateLastReadGoal } = useApi(token);
+  const { addPDL } = useApi(token);
+  const [odlNumPages, setOdlNumPages] = useState();
+  const [pdlNumPages, setPdlNumPages] = useState();
+  const { getUserDataByToken } = useApi(token);
+
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+
   const item = route.params;
-
   const listUsers = route.params.Members;
-
+  const BC_ID = item.id;
   const readGoalid = item.lastReadGoal.readGoalId;
-  console.log(readGoalid);
+  const bookPages = item.Book.pagesCount;
 
+  const pageReached = item.Members.pageReached;
   const pagecountlastreadgoal = route.params.lastReadGoal.pagesCount;
   const pagecountsecondlastreadgoal =
     route.params.secondLastReadGoal.pagesCount;
 
   //console.log(listUsers[0].membershipId);
-  console.log(pagecountlastreadgoal);
-  console.log(pagecountsecondlastreadgoal);
+  //console.log(pagecountlastreadgoal);
+  //console.log(pagecountsecondlastreadgoal);
+
+  //const pdl = currentUserPDL;
+
+  function getUserData() {
+    getUserDataByToken()
+      .then(function ({ email, firstName, lastName }) {
+        console.log("ok getUserData");
+        //console.log(email, firstName, lastName);
+        setEmail(email);
+        setName(firstName);
+        setSurname(lastName);
+        listUsers.forEach((element) => {
+          if (element.user.email === email) {
+            console.log(element);
+            //console.log("page reached:", element.pageReached);
+            setCurrentUserPDL(element.pageReached);
+            console.log("currentUserPDL:", currentUserPDL);
+          }
+        });
+      })
+      .catch(function (err) {
+        console.log("error getUserData");
+        console.error(err);
+      });
+  }
+
+  console.log("pdl:", pdl);
+
+  useEffect(() => {
+    setOdl(pagecountlastreadgoal);
+  }, []);
+
+  useEffect(() => {
+    setPdl(pdl);
+  }, []);
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  useEffect(() => {
+    odlPercentage();
+  }, [odl]);
+
+  useEffect(() => {
+    pdlPercentage();
+  }, [currentUserPDL]);
+
+  function odlPercentage() {
+    const odlPercentageValue = (odl * 100) / bookPages / 100;
+    return odlPercentageValue;
+  }
+
+  function pdlPercentage() {
+    const pdlPercentageValue = (currentUserPDL * 100) / bookPages / 100;
+    return pdlPercentageValue;
+  }
+
+  function _addPDL() {
+    addPDL(BC_ID, currentUserPDL)
+      .then(function (result) {
+        setPdl(currentUserPDL);
+        console.log(currentUserPDL);
+        console.log("ok update pdl");
+      })
+      .catch(function (err) {
+        console.log("error update pdl");
+        console.error(err);
+      });
+  }
 
   return (
     <Screen>
@@ -96,9 +182,9 @@ function InfoBookClubFounder({ route, navigation }) {
       <View style={styles.barre}>
         <View style={styles.bar}>
           <View style={styles.allinea}>
-            <View>
-              <Text style={styles.txt}> Obiettivo Di Lettura </Text>
-              <ProgressBar value={0.5} larghezza={300} />
+            <View style={{ marginRight: 20 }}>
+              <Text style={styles.txt}> Obiettivo Di Lettura: {odl} </Text>
+              <ProgressBar value={odlPercentage()} larghezza={310} />
             </View>
           </View>
         </View>
@@ -106,13 +192,17 @@ function InfoBookClubFounder({ route, navigation }) {
         <View style={styles.bar}>
           <View style={styles.allinea}>
             <View style={{ marginRight: 20 }}>
-              <Text style={styles.txt}> Progresso Di Lettura </Text>
-              <ProgressBar value={0.9} larghezza={200} />
+              <Text style={styles.txt}>
+                Progresso di Lettura: {currentUserPDL}
+              </Text>
+              <ProgressBar value={pdlPercentage()} larghezza={200} />
             </View>
 
-            <View style={{ marginTop: 15 }}>
+            <View style={styles.incrementaODL}>
               <NumericInput
-                onChange={(value) => console.log(value)}
+                onChange={(currentUserPDL) => {
+                  setCurrentUserPDL(currentUserPDL);
+                }}
                 minValue={0}
                 rounded={true}
                 totalWidth={80}
@@ -121,13 +211,11 @@ function InfoBookClubFounder({ route, navigation }) {
                 borderColor={colors.white}
               />
             </View>
+            <Pressable style={styles.checkmark} onPress={() => _addPDL()}>
+              <AntDesign name="checkcircle" size={24} color={colors.blu} />
+            </Pressable>
           </View>
         </View>
-        <AppButton
-          title="Abbandona Book Club"
-          styleButton={styles.button}
-          onPress={() => console.log(1)}
-        />
       </View>
     </Screen>
   );
@@ -187,17 +275,16 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
 
-  button: {
-    width: "90%",
-    marginTop: 10,
-    bottom: 10,
-  },
-
   title: {
     marginVertical: 20,
     alignSelf: "center",
     fontWeight: "bold",
     textTransform: "uppercase",
+  },
+
+  checkmark: {
+    marginTop: 12,
+    marginLeft: 12,
   },
 
   txt: {
@@ -207,6 +294,10 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     color: colors.black,
   },
+
+  incrementaODL: {
+    marginTop: 15,
+  },
 });
 
-export default InfoBookClubFounder;
+export default InfoBookClubUser;

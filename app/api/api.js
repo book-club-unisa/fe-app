@@ -100,5 +100,17 @@ export default function useApi(token = undefined) {
           numPages,
         })
         .then((response) => response.data),
+
+    addPDL: (BC_ID, numPages) =>
+      axiosInstance
+        .post(`/bookclubs/${BC_ID}/addPDL`, {
+          numPages,
+        })
+        .then((response) => response.data),
+
+    getInvitesByFounder: (BC_ID) =>
+      axiosInstance
+        .get(`/bookclubs/${BC_ID}/invited-users`)
+        .then((response) => response.data),
   };
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Alert, Image, StyleSheet } from "react-native";
 import Screen from "../components/Screen";
 import { SubmitButton, AppFormField } from "../components/forms";
@@ -10,6 +10,8 @@ import BCapi from "../api/BCapi";
 import routes from "../navigation/routes";
 import AppButton from "../components/AppButton";
 import LoginScreen from "./LoginScreen";
+import authStorage from "../auth/storage";
+import AuthContext from "../auth/context";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -36,10 +38,11 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen({ navigation }) {
+  const authContext = useContext(AuthContext);
   function register(values) {
     BCapi.post("users", values)
       .then(async function (response) {
-        navigation.navigate(routes.CLUBS);
+        navigation.navigate(routes.ACCEDI);
       })
       .catch(function (error) {
         Alert.alert("Errore, controlla i dati inseriti");
