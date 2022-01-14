@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, FlatList, Text } from "react-native";
+import { StyleSheet, View, FlatList, Text, ScrollView } from "react-native";
 import { SearchBar } from "react-native-elements";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import BCListItem from "../components/singleItems/BCListItem";
@@ -36,7 +36,7 @@ const Books = [
     id: 4,
     title: "Luca Morelli",
     description: "Front-end developer",
-    image: require("../assets/users/1.png"),
+    image: require("../assets/devs/LucoMoro.jpeg"),
   },
 
   {
@@ -71,10 +71,15 @@ const ChiSiamo = (props) => {
   return (
     <Screen>
       <View></View>
-      <View style={styles.tutto}>
-        <Text style={styles.titolo}> Chi siamo </Text>
-        <Text> Il nostro team di sviluppatori: </Text>
-        <View style={styles.container}>
+      <View>
+        <View style={styles.header}>
+          <Text style={styles.textHeader}>Chi Siamo</Text>
+        </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titolo}> Il nostro team di sviluppatori: </Text>
+        </View>
+
+        <ScrollView style={styles.container}>
           <FlatList
             data={Books}
             keyExtractor={(book) => book.id.toString()}
@@ -87,7 +92,7 @@ const ChiSiamo = (props) => {
             )}
             ItemSeparatorComponent={ListItemSeparator}
           />
-        </View>
+        </ScrollView>
       </View>
     </Screen>
   );
@@ -95,7 +100,7 @@ const ChiSiamo = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: colors.yellow,
+    marginBottom: 100,
   },
 
   itemStyle: {
@@ -114,10 +119,28 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 
-  tutto: {
-    margin: 10,
-    top: 20,
-    marginBottom: 150,
+  header: {
+    flexDirection: "row",
+    marginHorizontal: 15,
+    marginVertical: 10,
+    alignItems: "center",
+  },
+
+  textHeader: {
+    fontSize: 35,
+    color: colors.blu,
+    fontWeight: "bold",
+    flex: 5,
+  },
+  titolo: {
+    fontWeight: "bold",
+    color: colors.blu,
+    fontSize: 21,
+    marginBottom: 2,
+  },
+
+  titleContainer: {
+    marginHorizontal: 15,
   },
 });
 

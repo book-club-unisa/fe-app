@@ -136,7 +136,7 @@ function InfoBookClubFounder({ route, navigation }) {
         console.log("ok update pdl");
       })
       .catch(function (err) {
-        console.log("error update pdl");
+        Alert.alert("Errore");
         console.error(err);
       });
   }

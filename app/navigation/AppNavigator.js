@@ -53,6 +53,7 @@ const AppNavigator = () => (
               style={{
                 color: colors.white,
                 fontSize: 12,
+                fontWeight: "bold",
               }}
             >
               CATALOGO
@@ -77,6 +78,7 @@ const AppNavigator = () => (
               style={{
                 color: colors.white,
                 fontSize: 12,
+                fontWeight: "bold",
               }}
             >
               BACHECA
@@ -101,6 +103,7 @@ const AppNavigator = () => (
               style={{
                 color: colors.white,
                 fontSize: 12,
+                fontWeight: "bold",
               }}
             >
               PROFILO

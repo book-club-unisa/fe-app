@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, Text, Pressable } from "react-native";
+import { View, StyleSheet, Text, Pressable, ScrollView } from "react-native";
 import ProfileItem from "../components/singleItems/ProfileItem";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
@@ -11,6 +11,8 @@ import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
 import BCapi from "../api/BCapi";
 import useApi from "../api/api";
+import { AntDesign } from "@expo/vector-icons";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 function ProfilePage({
   profileName,
@@ -56,63 +58,65 @@ function ProfilePage({
 
   return (
     <Screen styleChildren={styles.container}>
-      <View style={styles.subContainer}>
-        <Pressable
-          title="Logout"
-          color={colors.red}
-          onPress={() => handleLogout()}
-          style={styles.buttonLogout}
-        >
-          <Text style={styles.logout}>Esci</Text>
-          <Ionicons name="log-out-sharp" size={24} style={styles.logOutIcon} />
-        </Pressable>
-        <MaterialCommunityIcons
-          name="account-circle"
-          size={150}
-          style={styles.profilePic}
-        />
-        <Text style={styles.title}> Il tuo profilo </Text>
-        <ProfileItem
-          profileName={surname}
-          profileSurname={name}
-          profileEmail={email}
-        />
-      </View>
-      <View style={styles.buttonsUtility}>
-        <Pressable
-          title="I tuoi inviti"
-          color={colors.blu}
-          onPress={() => navigation.navigate(routes.INVITIRICEVUTI)}
-          style={styles.buttonLogin}
-        >
-          <Ionicons name="people-sharp" size={24} style={styles.icon} />
-          <Text style={styles.settings}> I tuoi inviti </Text>
-        </Pressable>
-
-        <Pressable
-          title="ChiSiamo"
-          color={colors.blu}
-          onPress={() => navigation.navigate(routes.CHISIAMO)}
-          style={styles.buttonLogin}
-        >
-          <Ionicons name="people-sharp" size={24} style={styles.icon} />
-          <Text style={styles.settings}> Chi siamo </Text>
-        </Pressable>
-
-        <Pressable
-          title="Sicurezza"
-          color={colors.blu}
-          onPress={() => navigation.navigate(routes.SICUREZZA)}
-          style={styles.buttonLogin}
-        >
-          <Ionicons
-            name="ios-shield-checkmark-sharp"
-            size={24}
-            style={styles.icon}
+      <ScrollView>
+        <View style={styles.subContainer}>
+          <Pressable
+            title="Logout"
+            color={colors.red}
+            onPress={() => handleLogout()}
+            style={styles.buttonLogout}
+          >
+            <Text style={styles.logout}>Esci</Text>
+            <Ionicons name="exit-outline" size={25} style={styles.logOutIcon} />
+          </Pressable>
+          <MaterialCommunityIcons
+            name="account-circle"
+            size={150}
+            style={styles.profilePic}
           />
-          <Text style={styles.settings}>Sicurezza</Text>
-        </Pressable>
-      </View>
+          <Text style={styles.title}> Il tuo profilo </Text>
+          <ProfileItem
+            profileName={surname}
+            profileSurname={name}
+            profileEmail={email}
+          />
+        </View>
+        <View style={styles.buttonsUtility}>
+          <Pressable
+            title="I tuoi inviti"
+            color={colors.blu}
+            onPress={() => navigation.navigate(routes.INVITIRICEVUTI)}
+            style={styles.buttonLogin}
+          >
+            <Ionicons name="mail" size={24} style={styles.icon} />
+            <Text style={styles.settings}> I tuoi inviti </Text>
+          </Pressable>
+
+          <Pressable
+            title="ChiSiamo"
+            color={colors.blu}
+            onPress={() => navigation.navigate(routes.CHISIAMO)}
+            style={styles.buttonLogin}
+          >
+            <Ionicons name="people-sharp" size={24} style={styles.icon} />
+            <Text style={styles.settings}> Chi siamo </Text>
+          </Pressable>
+
+          <Pressable
+            title="Sicurezza"
+            color={colors.blu}
+            onPress={() => navigation.navigate(routes.SICUREZZA)}
+            style={styles.buttonLogin}
+          >
+            <Ionicons
+              name="ios-shield-checkmark-sharp"
+              size={24}
+              style={styles.icon}
+            />
+            <Text style={styles.settings}>Sicurezza</Text>
+          </Pressable>
+        </View>
+      </ScrollView>
     </Screen>
   );
 }
