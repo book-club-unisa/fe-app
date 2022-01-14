@@ -13,12 +13,9 @@ import Screen from "../components/Screen";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 
 import colors from "../config/colors";
-import * as Progress from "react-native-progress";
 import UserState from "../components/singleItems/UserState";
 import NumericInput from "react-native-numeric-input";
 import ProgressBar from "../components/singleItems/ProgressBar";
-import { FontAwesome5 } from "@expo/vector-icons";
-import routes from "../navigation/routes";
 import useApi from "../api/api";
 import AuthContext from "../auth/context";
 import { AntDesign } from "@expo/vector-icons";
@@ -49,24 +46,16 @@ function InfoBookClubUser({ route, navigation }) {
   const pagecountsecondlastreadgoal =
     route.params.secondLastReadGoal.pagesCount;
 
-  //console.log(listUsers[0].membershipId);
-  //console.log(pagecountlastreadgoal);
-  //console.log(pagecountsecondlastreadgoal);
-
-  //const pdl = currentUserPDL;
-
   function getUserData() {
     getUserDataByToken()
       .then(function ({ email, firstName, lastName }) {
         console.log("ok getUserData");
-        //console.log(email, firstName, lastName);
         setEmail(email);
         setName(firstName);
         setSurname(lastName);
         listUsers.forEach((element) => {
           if (element.user.email === email) {
             console.log(element);
-            //console.log("page reached:", element.pageReached);
             setCurrentUserPDL(element.pageReached);
             console.log("currentUserPDL:", currentUserPDL);
           }
@@ -209,10 +198,6 @@ function InfoBookClubUser({ route, navigation }) {
       </View>
     </Screen>
   );
-
-  /*
-  
-  */
 }
 
 const styles = StyleSheet.create({

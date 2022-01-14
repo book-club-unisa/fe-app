@@ -25,11 +25,3 @@ const FeedNavigator = () => (
 );
 
 export default FeedNavigator;
-
-/**
- * const FeedNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Screen name="" /> qua va messo Bacheca -> infoBookClub
-    
-  </Stack.Navigator>
-); */

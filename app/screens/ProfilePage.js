@@ -9,15 +9,11 @@ import { Ionicons } from "@expo/vector-icons";
 import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
-import BCapi from "../api/BCapi";
 import useApi from "../api/api";
-import { AntDesign } from "@expo/vector-icons";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 function ProfilePage({
   profileName,
   profilePassword,
-  //profileEmail,
   profileSurname,
   navigation,
 }) {
@@ -26,9 +22,6 @@ function ProfilePage({
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
 
-  //const user = useContext(AuthContext);
-  //console.log(user.token);
-  //setToken(user.token);
   console.log(token);
   const { getUserDataByToken } = useApi(token);
 
@@ -128,7 +121,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: colors.white,
     alignItems: "center",
-    // justifyContent: "center",
     flexDirection: "row",
     margin: 2,
   },
@@ -139,7 +131,6 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     alignItems: "center",
-    // justifyContent: "center",
     flexDirection: "row",
     margin: 2,
   },

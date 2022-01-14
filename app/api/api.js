@@ -1,7 +1,7 @@
 import BCapi from "./BCapi";
 import axios from "axios";
 
-const apiUrl = "http://127.0.0.1:4000";
+const apiUrl = "http://192.168.1.12:4000";
 
 function makeFormData(obj) {
   const result = new FormData();
@@ -111,6 +111,11 @@ export default function useApi(token = undefined) {
     getInvitesByFounder: (BC_ID) =>
       axiosInstance
         .get(`/bookclubs/${BC_ID}/invited-users`)
+        .then((response) => response.data),
+
+    login: (email, password) =>
+      axiosInstance
+        .post("users/sign-in", { email, password })
         .then((response) => response.data),
   };
 }

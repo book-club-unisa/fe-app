@@ -20,18 +20,12 @@ const Ricerca = ({ navigation }) => {
   }, [name]);
 
   function getBooksByName(name) {
-    //BCapi.get(`books/searchBook?query=${encodeURIComponent(name)}`)
     BCapi.get(`/books/searchBook/${name}`)
       .then(async function (response) {
-        //setLoading(true);
         console.log(response.data);
         setBooks(response.data);
-        //setLoading(false);
-        //setError(false);
       })
-      .catch(function (error) {
-        //setError(true);
-      });
+      .catch(function (error) {});
   }
 
   return (
@@ -62,9 +56,7 @@ const Ricerca = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    //backgroundColor: colors.yellow,
-  },
+  container: {},
 
   itemStyle: {
     padding: 10,

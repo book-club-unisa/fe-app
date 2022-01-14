@@ -5,12 +5,8 @@ import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import colors from "../config/colors";
 import BCapi from "../api/BCapi";
 import routes from "../navigation/routes";
-import AppButton from "../components/AppButton";
-import LoginScreen from "./LoginScreen";
-import authStorage from "../auth/storage";
 import AuthContext from "../auth/context";
 
 const validationSchema = Yup.object().shape({

@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, FlatList, Text, ScrollView } from "react-native";
-import { SearchBar } from "react-native-elements";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
-import BCListItem from "../components/singleItems/BCListItem";
-
 import colors from "../config/colors";
 import Screen from "../components/Screen";
-
-import routes from "../navigation/routes";
 import DevItem from "../components/singleItems/DevItem";
 
 const Books = [
@@ -57,14 +52,14 @@ const Books = [
     id: 7,
     title: "Marco Palmisciano",
     description: "Back-end developer",
-    image: require("../assets/users/3.png"),
+    image: require("../assets/devs/Marco.png"),
   },
 
   {
     id: 8,
     title: "Marianna Vujko",
     description: "Back-end developer",
-    image: require("../assets/users/4.png"),
+    image: require("../assets/devs/Marianna.png"),
   },
 ];
 const ChiSiamo = (props) => {

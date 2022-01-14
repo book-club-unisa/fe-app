@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Text,
   Image,
-  TextInput,
   Alert,
   Pressable,
 } from "react-native";
@@ -15,9 +14,7 @@ import AppButton from "../components/AppButton";
 import UserListItem from "../components/singleItems/UserListItem";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
-import BCAppFormField from "../components/BCAppFormField";
 import routes from "../navigation/routes";
 import { FontAwesome5 } from "@expo/vector-icons";
 import useApi from "../api/api";
@@ -43,21 +40,7 @@ function InfoLibro({ route, navigation }) {
 
   useEffect(() => {
     getUserData();
-    //getBookClubID();
   }, []);
-
-  /*
-  useEffect(() => {
-    seeInvites();
-  }, []);
-  */
-
-  /*
-  function getBookClubID() {
-    console.log("Nome BC:", route.params.value);
-    console.log("email", email);
-  }
-  */
 
   function Invite() {
     console.log(BC_ID);
@@ -105,7 +88,6 @@ function InfoLibro({ route, navigation }) {
         console.log("ok seeInvites");
       })
       .catch(function (error) {
-        //console.log(token);
         console.log("errore seeInvites");
         console.error(error);
       });
@@ -233,8 +215,6 @@ const styles = StyleSheet.create({
 
   refresh: {
     width: "100%",
-    //height: "5%",
-    //alignSelf: "center",
     justifyContent: "center",
     backgroundColor: colors.red,
     alignItems: "center",
@@ -266,7 +246,6 @@ const styles = StyleSheet.create({
   },
 
   buttonRefresh: {
-    //alignSelf: "flex-end",
     alignItems: "center",
   },
 

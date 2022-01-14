@@ -23,9 +23,7 @@ function InvitiRicevuti(props) {
     getReicevedInvites()
       .then(function (_invites) {
         setInvites(_invites);
-        //console.log(_invites);
         console.log(_invites[0].invitoUtente);
-        //console.log(invites);
         console.log(1);
       })
       .catch(function (error) {
@@ -48,10 +46,7 @@ function InvitiRicevuti(props) {
               title={item.nomeBookclub}
               inviteID={item.invitoUtente.inviteId}
               inviteState={item.invitoUtente.State}
-              //email={item.user}
-              //refuseFunction={refuseFunction}
               image={{ uri: item.coverLibro }}
-              //inviteState={item.inviteState}
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}

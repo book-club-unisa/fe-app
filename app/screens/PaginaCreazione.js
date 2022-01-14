@@ -28,6 +28,8 @@ function PaginaCreazioneBC({ route, navigation }) {
   const CButton = () => {
     if (validate === true) {
       createBC(isbn, value);
+      navigation.navigate(routes.INFOLIBRO, item),
+        navigation.navigate(routes.INFOLIBRO, value);
     } else {
       Alert.alert("Errore", "Il nome del bookclub non è valido");
     }
@@ -37,11 +39,14 @@ function PaginaCreazioneBC({ route, navigation }) {
     const name = value.value;
     createBookClub(isbn, name)
       .then((data) => {
-        navigation.navigate(routes.INFOLIBRO, item),
-          navigation.navigate(routes.INFOLIBRO, value);
+        const bcName = name;
+        console.log("name:", name);
+        console.log("value:", value);
       })
       .catch(function (err) {
-        Alert.alert("Errore", "Hai già creato un bookclub con questo nome");
+        Alert.alert("Errore", "Hai già creato un bookclub con questo nome", [
+          { title: "Ok", onPress: () => navigation.navigate(routes.BACHECA) },
+        ]);
         console.error(err);
       });
   };

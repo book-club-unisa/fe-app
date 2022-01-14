@@ -57,7 +57,6 @@ const InvitaUtenti = ({ navigation }) => {
             />
 
             <FlatList
-              //style={{ marginBottom: 55 }}
               data={users}
               keyExtractor={(user) => user.email}
               renderItem={({ item }) => (

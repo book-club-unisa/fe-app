@@ -7,14 +7,11 @@ import authApi from "../api/auth";
 import * as Yup from "yup";
 
 import AppButton from "../components/AppButton";
-import colors from "../config/colors";
 import routes from "../navigation/routes";
-import BCapi from "../api/BCapi";
 import AuthContext from "../auth/context";
 import FirstnameContext from "../auth/firstameContext";
 import LastnameContext from "../auth/lastnameContext";
 import authStorage from "../auth/storage";
-import useApi from "../api/api";
 import EmailContext from "../auth/emailContext";
 
 const validationSchema = Yup.object().shape({
@@ -36,21 +33,6 @@ function LoginScreen({ navigation }) {
   const emailContext = useContext(EmailContext);
   const firstnameContext = useContext(FirstnameContext);
   const lastnameContext = useContext(LastnameContext);
-  /*
-  function LogIn(values) {
-    BCapi.post("users/sign-in", values)
-      .then(async function (response) {
-        console.log(response.data);
-        navigation.navigate(routes.CLUBS);
-      })
-
-      .catch(function (error) {
-        Alert.alert("Errore, controlla i dati inseriti");
-
-        console.log(error);
-      });
-  }
-  */
 
   const handleSubmit = async ({ email, password }) => {
     const result = await authApi
@@ -67,39 +49,6 @@ function LoginScreen({ navigation }) {
         console.log(error);
       });
   };
-
-  /*
-  const handleSubmit = async ({ email, password }) => {
-    const result = await authApi
-      .login(email, password)
-      .then(async function (response) {
-        const token = response.data;
-        const tokenizedApi = useApi(token);
-        console.log(email);
-        console.log(password);
-        return tokenizedApi.getUserDataByToken().then((res) => [token, res]);
-      })
-      .then(async function ([token, { email, firstName, lastName }]) {
-        console.log(token);
-        authContext.setToken(token);
-        // TODO
-        //emailContext.setToken(email);
-        //firstnameContext.setToken(firstName);
-        //lastnameContext.setToken(lastName);
-        //authStorage.storeToken(token);
-        //authStorage.storeEmail(email);
-        //authStorage.storeFirstName(firstName);
-        //authStorage.storeLastName(lastName);
-        navigation.navigate(routes.CLUBS);
-        console.log("ok getUserData");
-        console.log(email, firstName, lastName);
-      })
-      .catch((err) => {
-        Alert.alert("Errore, controlla i dati inseriti");
-        console.log(err);
-      });
-  };
-  */
 
   return (
     <Screen styleChildren={styles.container}>

@@ -22,9 +22,6 @@ const AppNavigator = () => (
     tabBarOptions={{
       showLabel: false,
       style: {
-        //position: "relative",
-        //bottom: 15,
-        //left: 20,
         right: 20,
         elevation: 0,
         backgroundColor: colors.blu,
@@ -32,8 +29,6 @@ const AppNavigator = () => (
         borderTopLeftRadius: 15,
         borderWidth: 1,
         borderColor: colors.blu,
-        //height: 55,
-        //marginTop: 20,
         ...styles.shadow,
       },
     }}
@@ -133,9 +128,3 @@ const styles = StyleSheet.create({
 });
 
 export default AppNavigator;
-
-/**
- * tabBarButton: () => (
-          <NewBacheca onPress={() => navigation.navigate("Bacheca")} />
-        ),
- */
