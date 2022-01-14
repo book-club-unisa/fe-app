@@ -22,6 +22,7 @@ import routes from "../navigation/routes";
 import useApi from "../api/api";
 import AuthContext from "../auth/context";
 import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 function InfoBookClubFounder({ route, navigation }) {
   const [odl, setOdl] = useState(0);
@@ -163,8 +164,8 @@ function InfoBookClubFounder({ route, navigation }) {
           <Pressable
             onPress={() => navigation.navigate(routes.REVISIONEINVITI, item)}
           >
-            <FontAwesome5
-              name="user-plus"
+            <Ionicons
+              name="people"
               size={20}
               color="black"
               style={{ paddingLeft: "55%" }}

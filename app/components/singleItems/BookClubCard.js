@@ -41,39 +41,6 @@ export default function BookClubCard({
               <Text style={styles.author}>{autore}</Text>
             </View>
           </View>
-          <View style={styles.iconContainer}>
-            <View style={styles.subContainerODL}>
-              {pdlPersonale === odlValue ? (
-                <>
-                  <BCIconItem
-                    iconName="check-bold"
-                    backgroundIconColor={colors.green}
-                    containerSize={17}
-                    styleContainer={{
-                      padding: 0,
-                    }}
-                  />
-                  <Text style={[styles.textODL, { color: "green" }]}>
-                    obiettivo raggiunto
-                  </Text>
-                </>
-              ) : (
-                <>
-                  <BCIconItem
-                    iconName="close"
-                    backgroundIconColor={colors.giallo}
-                    containerSize={17}
-                    styleContainer={{
-                      padding: 0,
-                    }}
-                  />
-                  <Text style={[styles.textODL, { color: colors.giallo }]}>
-                    {diff} pagine rimanenti
-                  </Text>
-                </>
-              )}
-            </View>
-          </View>
         </View>
       </Screen>
     </TouchableOpacity>

@@ -70,7 +70,7 @@ export default function useApi(token = undefined) {
 
     getBCInvites: (BC_ID) =>
       axiosInstance
-        .get(`bookclubs/${BC_ID}/seeInvites`)
+        .get(`bookclubs/${BC_ID}/invited-users`)
         .then((response) => response.data),
 
     getBC_ID: (bcName, founderEmail) =>

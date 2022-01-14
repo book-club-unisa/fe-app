@@ -25,8 +25,6 @@ import AuthContext from "../auth/context";
 
 import { Ionicons } from "@expo/vector-icons";
 
-const fondatore = "Michele Bisaccia";
-
 function InfoLibro({ route, navigation }) {
   const { token, setToken } = useContext(AuthContext);
 
@@ -45,7 +43,7 @@ function InfoLibro({ route, navigation }) {
 
   useEffect(() => {
     getUserData();
-    getBookClubID();
+    //getBookClubID();
   }, []);
 
   /*
@@ -54,29 +52,22 @@ function InfoLibro({ route, navigation }) {
   }, []);
   */
 
+  /*
   function getBookClubID() {
-    console.log(route.params.value);
-    console.log(email);
-    getBC_ID(route.params.value, email)
-      .then(function (id) {
-        setBC_ID(id);
-        console.log(1);
-      })
-      .catch(function (error) {
-        console.log(token);
-        console.error(error);
-      });
+    console.log("Nome BC:", route.params.value);
+    console.log("email", email);
   }
+  */
 
   function Invite() {
     console.log(BC_ID);
     console.log(text);
     inviteUserToBookClub(BC_ID, text)
       .then(function (result) {
-        console.log(1);
+        console.log("ok Invite");
       })
       .catch(function (error) {
-        console.log(token);
+        console.log("errore Invite");
         console.error(error);
       });
   }
@@ -89,9 +80,18 @@ function InfoLibro({ route, navigation }) {
         setEmail(email);
         setName(firstName);
         setSurname(lastName);
+        getBC_ID(route.params.value, email)
+          .then(function (id) {
+            setBC_ID(id);
+            console.log("ok getBookClubID");
+          })
+          .catch(function (error) {
+            console.log("errore getBookClubID");
+            console.error(error);
+          });
       })
       .catch(function (err) {
-        console.log("error getUserData");
+        console.log("errore getUserData");
         console.error(err);
       });
   }
@@ -101,11 +101,11 @@ function InfoLibro({ route, navigation }) {
       .then(function (invites) {
         setUsers(invites);
         console.log(invites);
-        console.log(1);
+        console.log("ok seeInvites");
       })
       .catch(function (error) {
-        console.log(token);
-        console.log("errore");
+        //console.log(token);
+        console.log("errore seeInvites");
         console.error(error);
       });
   }
@@ -177,7 +177,10 @@ function InfoLibro({ route, navigation }) {
         />
       </View>
       <View style={styles.button}>
-        <AppButton title="Fine" onPress={() => console.log(1)} />
+        <AppButton
+          title="Fine"
+          onPress={() => navigation.navigate(routes.BACHECA)}
+        />
       </View>
     </Screen>
   );

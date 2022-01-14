@@ -19,6 +19,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const Catalogo = ({ navigation }) => {
   const [books, setBooks] = useState([]);
@@ -52,10 +53,15 @@ const Catalogo = ({ navigation }) => {
   return (
     <Screen>
       <View style={styles.container}>
-        <AppButton
-          title="Cerca un libro"
-          onPress={() => navigation.navigate(routes.RICERCA)}
-        />
+        <View style={styles.header}>
+          <Ionicons
+            style={styles.searchIcon}
+            name="ios-search-circle-sharp"
+            size={60}
+            color={colors.blu}
+            onPress={() => navigation.navigate(routes.RICERCA)}
+          />
+        </View>
 
         <FlatList
           data={books}
@@ -105,10 +111,17 @@ const styles = StyleSheet.create({
     color: colors.blu,
   },
 
+  header: {
+    //flex: 1,
+  },
+
   searchIcon: {
-    marginHorizontal: 10,
+    alignSelf: "flex-end",
+    marginRight: 10,
     color: colors.blu,
   },
+
+  styleButton: {},
 
   buttonSearch: {
     position: "absolute",

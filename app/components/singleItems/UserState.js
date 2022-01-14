@@ -5,6 +5,7 @@ import colors from "../../config/colors";
 import { FontAwesome } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 function UserState({
   image,
@@ -54,13 +55,26 @@ function UserState({
             </Text>
           )}
         </View>
-        <Progress.Pie
-          progress={calcolaPDL()}
-          size={25}
-          color={colors.green}
-          borderWidth={0}
-          unfilledColor="#a5d6a7"
-        />
+
+        <View>
+          {(calcolaPDL() > 0 && (
+            <View>
+              <>
+                <Progress.Pie
+                  progress={calcolaPDL()}
+                  size={25}
+                  color={colors.green}
+                  borderWidth={0}
+                  unfilledColor="#a5d6a7"
+                />
+              </>
+            </View>
+          )) || (
+            <>
+              <Ionicons name="checkmark-circle" size={25} color="green" />
+            </>
+          )}
+        </View>
       </View>
     </TouchableHighlight>
   );

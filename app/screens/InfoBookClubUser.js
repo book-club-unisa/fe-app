@@ -145,18 +145,8 @@ function InfoBookClubUser({ route, navigation }) {
           </View>
         </View>
 
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ justifyContent: "center" }}>
           <Text style={styles.txt}> Partecipanti </Text>
-          <Pressable
-            onPress={() => navigation.navigate(routes.REVISIONEINVITI, item)}
-          >
-            <FontAwesome5
-              name="user-plus"
-              size={20}
-              color="black"
-              style={{ paddingLeft: "55%" }}
-            />
-          </Pressable>
         </View>
         <FlatList
           style={{ marginBottom: 55 }}
@@ -293,6 +283,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     color: colors.black,
+    width: "100%",
   },
 
   incrementaODL: {
