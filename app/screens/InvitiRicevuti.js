@@ -41,7 +41,6 @@ function InvitiRicevuti(props) {
         <Text style={styles.txt}> Inviti ricevuti </Text>
 
         <FlatList
-          style={{ marginBottom: 55 }}
           data={invites}
           keyExtractor={(invite) => invite.invitoUtente.inviteId.toString()}
           renderItem={({ item }) => (

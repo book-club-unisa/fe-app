@@ -64,10 +64,11 @@ function InfoLibro({ route, navigation }) {
     console.log(text);
     inviteUserToBookClub(BC_ID, text)
       .then(function (result) {
-        console.log("ok Invite");
+        Alert.alert("Invito andato a buon fine");
+        seeInvites();
       })
       .catch(function (error) {
-        console.log("errore Invite");
+        Alert.alert("Errore", "L' utente non esiste o è stato già invitato");
         console.error(error);
       });
   }
@@ -129,19 +130,6 @@ function InfoLibro({ route, navigation }) {
               Fondatore Book Club
             </Text>
             <Text numberOfLines={1}>{[name, " ", surname]}</Text>
-
-            <Pressable
-              title="Refresh"
-              color={colors.red}
-              onPress={() => seeInvites()}
-              style={styles.buttonRefresh}
-            >
-              <Ionicons
-                name="ios-refresh-circle"
-                size={30}
-                style={styles.refreshIcon}
-              />
-            </Pressable>
           </View>
         </View>
 
@@ -163,6 +151,16 @@ function InfoLibro({ route, navigation }) {
           </Pressable>
         </View>
 
+        <Pressable
+          title="Controlla lo stato degli inviti"
+          color={colors.blu}
+          onPress={() => seeInvites()}
+          style={styles.buttonLogin}
+        >
+          <Ionicons name="ios-refresh-circle" size={30} style={styles.icon} />
+          <Text style={styles.settings}>Aggiorna la lista degli inviti</Text>
+        </Pressable>
+
         <FlatList
           style={{ marginBottom: 55 }}
           data={users}
@@ -179,7 +177,21 @@ function InfoLibro({ route, navigation }) {
       <View style={styles.button}>
         <AppButton
           title="Fine"
-          onPress={() => navigation.navigate(routes.BACHECA)}
+          onPress={() => {
+            Alert.alert(
+              "Attenzione",
+              "Sei sicuro di voler invitare solo questi utenti?",
+              [
+                {
+                  text: "Si",
+                  onPress: () => navigation.navigate(routes.BACHECA),
+                },
+                {
+                  text: "No",
+                },
+              ]
+            );
+          }}
         />
       </View>
     </Screen>
@@ -219,6 +231,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 
+  refresh: {
+    width: "100%",
+    //height: "5%",
+    //alignSelf: "center",
+    justifyContent: "center",
+    backgroundColor: colors.red,
+    alignItems: "center",
+  },
+
   description: {
     marginTop: 10,
     marginHorizontal: 20,
@@ -241,20 +262,12 @@ const styles = StyleSheet.create({
   },
 
   refreshIcon: {
-    marginHorizontal: 10,
     color: colors.blu,
   },
 
   buttonRefresh: {
-    position: "absolute",
-    alignSelf: "flex-end",
-    height: 60,
-    borderRadius: 30,
-    //alignItems: "center",
-    // justifyContent: "center",
-    //flexDirection: "row",
-    //margin: 2,
-    zIndex: 100,
+    //alignSelf: "flex-end",
+    alignItems: "center",
   },
 
   txtButton: {
@@ -263,6 +276,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     color: colors.black,
+  },
+
+  icon: {
+    marginHorizontal: 10,
+    color: colors.blu,
   },
 
   searchContainer: {
@@ -289,6 +307,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginLeft: 10,
     backgroundColor: colors.blu,
+  },
+
+  buttonLogin: {
+    width: "90%",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+
+  settings: {
+    flex: 1,
+    fontWeight: "bold",
+    fontSize: 16,
+    color: colors.blu,
   },
 });
 

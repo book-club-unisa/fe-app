@@ -41,7 +41,7 @@ const Ricerca = ({ navigation }) => {
           onChangeText={(name) => setName(name)}
           iconName="book-search"
           placeholder="Cerca un libro"
-          style={styles.textInput}
+          style={styles.searchInput}
         />
         <FlatList
           data={books}
@@ -70,10 +70,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   searchInput: {
-    width: "100%",
-    height: "100%",
-    paddingLeft: 8,
-    fontSize: 16,
+    width: "90%",
+    alignSelf: "center",
   },
 });
 

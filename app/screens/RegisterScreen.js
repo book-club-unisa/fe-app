@@ -45,7 +45,7 @@ function RegisterScreen({ navigation }) {
         navigation.navigate(routes.ACCEDI);
       })
       .catch(function (error) {
-        Alert.alert("Errore, controlla i dati inseriti");
+        Alert.alert("Errore, indirizzo email non disponibile");
       });
   }
 

@@ -6,6 +6,7 @@ import colors from "../config/colors";
 import routes from "../navigation/routes";
 import useApi from "../api/api";
 import AuthContext from "../auth/context";
+import BachecaVuota from "./BachecaVuota";
 
 const random = 1;
 
@@ -53,28 +54,34 @@ function Bacheca({ navigation }) {
 
   return (
     <Screen styleChildren={styles.container}>
-      <FlatList
-        data={bookClubs}
-        keyExtractor={(bookClub) => bookClub.id}
-        renderItem={({ item }) => (
-          <BookClubCard
-            bcName={item.name}
-            founderName={item.founderEmail}
-            image={{ uri: item.Book.coverUrl }}
-            //odlValue={item.odlValue}
-            //pdlPersonale={item.Members.pageReached}
-            titoloLibro={item.Book.title}
-            autore={item.Book.author}
-            onPress={() => {
-              if (email === item.founderEmail) {
-                navigation.navigate(routes.INFOBOOKCLUBF, item);
-              } else {
-                navigation.navigate(routes.INFOBOOKCLUBU, item);
-              }
-            }}
+      {(bookClubs.length === 0 && (
+        <>
+          <BachecaVuota />
+        </>
+      )) || (
+        <>
+          <FlatList
+            data={bookClubs}
+            keyExtractor={(bookClub) => bookClub.id}
+            renderItem={({ item }) => (
+              <BookClubCard
+                bcName={item.name}
+                founderName={item.founderEmail}
+                image={{ uri: item.Book.coverUrl }}
+                titoloLibro={item.Book.title}
+                autore={item.Book.author}
+                onPress={() => {
+                  if (email === item.founderEmail) {
+                    navigation.navigate(routes.INFOBOOKCLUBF, item);
+                  } else {
+                    navigation.navigate(routes.INFOBOOKCLUBU, item);
+                  }
+                }}
+              />
+            )}
           />
-        )}
-      />
+        </>
+      )}
     </Screen>
   );
 }

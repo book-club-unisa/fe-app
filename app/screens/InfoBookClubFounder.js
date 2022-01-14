@@ -119,6 +119,10 @@ function InfoBookClubFounder({ route, navigation }) {
         console.log("ok update lastreadgoal");
       })
       .catch(function (err) {
+        Alert.alert(
+          "Errore",
+          `Non puoi inserire un valore minore del precedente (${odl}) o maggiore del numero di pagine del libro (${bookPages})`
+        );
         console.log("error update lastreadgoal");
         console.error(err);
       });

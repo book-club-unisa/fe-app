@@ -54,13 +54,15 @@ const Catalogo = ({ navigation }) => {
     <Screen>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Ionicons
-            style={styles.searchIcon}
-            name="ios-search-circle-sharp"
-            size={60}
-            color={colors.blu}
-            onPress={() => navigation.navigate(routes.RICERCA)}
-          />
+          <Text style={styles.textHeader}>Catalogo</Text>
+          <View style={styles.searchIcon}>
+            <Ionicons
+              name="ios-search-circle-sharp"
+              size={60}
+              color={colors.blu}
+              onPress={() => navigation.navigate(routes.RICERCA)}
+            />
+          </View>
         </View>
 
         <FlatList
@@ -112,16 +114,22 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    //flex: 1,
+    flexDirection: "row",
+    marginHorizontal: 15,
+    alignItems: "center",
   },
 
   searchIcon: {
-    alignSelf: "flex-end",
-    marginRight: 10,
     color: colors.blu,
+    flex: 1,
   },
 
-  styleButton: {},
+  textHeader: {
+    fontSize: 35,
+    color: colors.blu,
+    fontWeight: "bold",
+    flex: 5,
+  },
 
   buttonSearch: {
     position: "absolute",

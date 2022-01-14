@@ -27,27 +27,24 @@ function PaginaCreazioneBC({ route, navigation }) {
 
   const CButton = () => {
     if (validate === true) {
-      //console.log(1);
       createBC(isbn, value);
-      navigation.navigate(routes.INFOLIBRO, item),
-        navigation.navigate(routes.INFOLIBRO, value);
     } else {
-      Alert.alert("Alert", "Il nome del bookclub non è valido");
+      Alert.alert("Errore", "Il nome del bookclub non è valido");
     }
   };
 
-  function createBC(isbn) {
+  const createBC = (isbn) => {
     const name = value.value;
-    console.log(isbn, name);
     createBookClub(isbn, name)
       .then((data) => {
-        console.log(data);
-        console.log(data.id);
+        navigation.navigate(routes.INFOLIBRO, item),
+          navigation.navigate(routes.INFOLIBRO, value);
       })
-      .catch((err) => {
+      .catch(function (err) {
+        Alert.alert("Errore", "Hai già creato un bookclub con questo nome");
         console.error(err);
       });
-  }
+  };
 
   const item = route.params;
 
@@ -60,17 +57,21 @@ function PaginaCreazioneBC({ route, navigation }) {
           style={styles.textInput}
           onChangeText={Controllo}
         />
-        <Text style={styles.title}> Libro scelto </Text>
-        <Text style={styles.bookTitle}>{route.params.title}</Text>
-        <Text style={styles.autore}>{route.params.autore}</Text>
+        <Text style={styles.title}> Libro scelto: "{route.params.title}" </Text>
+        <Text style={styles.autore}> Autore: {route.params.author}</Text>
         <View style={styles.BookContainer}>
           <Image
             source={{ uri: route.params.coverUrl }}
             style={styles.copertina}
           />
-          <Text style={styles.description} numberOfLines={12}>
-            {route.params.description}
-          </Text>
+          <View>
+            <Text style={styles.numPages}>
+              Numero di pagine: {route.params.pagesCount}
+            </Text>
+            <Text style={styles.description} numberOfLines={12}>
+              {route.params.description}
+            </Text>
+          </View>
         </View>
         <AppButton
           onPress={(isbn, value) => {
@@ -91,17 +92,21 @@ const styles = StyleSheet.create({
     margin: 10,
     flex: 1,
   },
-  textInput: {},
+  textInput: {
+    width: "90%",
+    alignSelf: "center",
+  },
 
   button: {
     marginTop: 20,
   },
 
   title: {
-    margin: 20,
+    marginVertical: 10,
     alignSelf: "center",
     fontWeight: "bold",
     textTransform: "uppercase",
+    textAlign: "center",
   },
 
   autore: {
@@ -109,6 +114,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontWeight: "bold",
     textTransform: "uppercase",
+  },
+
+  numPages: {
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    marginBottom: 5,
   },
 
   bookTitle: {
@@ -131,7 +142,6 @@ const styles = StyleSheet.create({
   },
 
   description: {
-    flex: 1,
     textAlign: "justify",
     marginRight: 5,
   },
