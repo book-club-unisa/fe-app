@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Alert, Image, StyleSheet } from "react-native";
+import { Alert, Image, StyleSheet, KeyboardAvoidingView } from "react-native";
 import Screen from "../components/Screen";
 import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
@@ -49,7 +49,12 @@ function RegisterScreen({ navigation }) {
     <Screen styleChildren={styles.container}>
       <Image style={styles.logo} source={require("../assets/BCLogo.png")} />
       <Formik
-        initialValues={{ firstName: "", lastName: "", email: "", password: "" }}
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+        }}
         onSubmit={(values) => register(values)}
         validationSchema={validationSchema}
       >

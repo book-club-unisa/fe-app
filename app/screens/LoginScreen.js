@@ -85,11 +85,6 @@ function LoginScreen({ navigation }) {
           </>
         )}
       </Formik>
-      <AppButton
-        title="Registrati qui"
-        onPress={() => navigation.navigate(routes.REGISTRATI)}
-        styleButton={styles.button}
-      />
     </Screen>
   );
 }

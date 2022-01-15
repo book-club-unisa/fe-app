@@ -1,7 +1,7 @@
 import BCapi from "./BCapi";
 import axios from "axios";
 
-const apiUrl = "http://192.168.1.12:4000";
+const apiUrl = "http://192.168.1.46:4000";
 
 function makeFormData(obj) {
   const result = new FormData();

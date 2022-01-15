@@ -19,10 +19,8 @@ function InitialPage({ navigation }) {
         <View style={styles.subContainer}>
           <View style={styles.buttons}>
             <AppButton
-              title="Registrati qui"
-              onPress={() => {
-                console.log(1);
-              }}
+              title="Accedi"
+              onPress={() => navigation.navigate(routes.ACCEDI)}
             />
           </View>
 
