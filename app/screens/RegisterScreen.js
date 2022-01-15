@@ -4,6 +4,7 @@ import Screen from "../components/Screen";
 import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import BCapi from "../api/BCapi";
 import routes from "../navigation/routes";
@@ -47,53 +48,55 @@ function RegisterScreen({ navigation }) {
 
   return (
     <Screen styleChildren={styles.container}>
-      <Image style={styles.logo} source={require("../assets/BCLogo.png")} />
-      <Formik
-        initialValues={{
-          firstName: "",
-          lastName: "",
-          email: "",
-          password: "",
-        }}
-        onSubmit={(values) => register(values)}
-        validationSchema={validationSchema}
-      >
-        {() => (
-          <>
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              placeholder="Nome"
-              iconName="account"
-              name="firstName"
-            />
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              placeholder="Cognome"
-              iconName="account"
-              name="lastName"
-            />
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              keyboardType="email-address"
-              placeholder="Email"
-              iconName="email"
-              name="email"
-            />
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              placeholder="Password"
-              iconName="lock"
-              name="password"
-              secureTextEntry={true}
-            />
-            <SubmitButton title="Registrati" />
-          </>
-        )}
-      </Formik>
+      <KeyboardAwareScrollView>
+        <Image style={styles.logo} source={require("../assets/BCLogo.png")} />
+        <Formik
+          initialValues={{
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+          }}
+          onSubmit={(values) => register(values)}
+          validationSchema={validationSchema}
+        >
+          {() => (
+            <>
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                placeholder="Nome"
+                iconName="account"
+                name="firstName"
+              />
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                placeholder="Cognome"
+                iconName="account"
+                name="lastName"
+              />
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="email-address"
+                placeholder="Email"
+                iconName="email"
+                name="email"
+              />
+              <AppFormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                placeholder="Password"
+                iconName="lock"
+                name="password"
+                secureTextEntry={true}
+              />
+              <SubmitButton title="Registrati" />
+            </>
+          )}
+        </Formik>
+      </KeyboardAwareScrollView>
     </Screen>
   );
 }
