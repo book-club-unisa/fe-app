@@ -1,6 +1,10 @@
 import BCapi from "./BCapi";
 import axios from "axios";
 
+/*UNCOMMENT FOR TESTING ON BROWSER
+const apiUrl = "http://127.0.0.1:4000";*/
+
+// COMMENT FOR TESTING ON BROWSER
 const apiUrl = "http://192.168.1.46:4000";
 
 function makeFormData(obj) {

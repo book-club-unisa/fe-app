@@ -65,7 +65,11 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     alignSelf: "center",
     marginBottom: 10,
+    // COMMENT BEFORE TESTING on browser
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+
+    /*UNCOMMENT BEFORE TESTING ON BROSER
+    fontFamily: "Arial",*/
   },
 });
 
