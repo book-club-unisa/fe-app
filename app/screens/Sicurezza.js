@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Screen from "../components/Screen";
@@ -15,7 +14,7 @@ function Sicurezza() {
         <ScrollView style={styles.textContainer}>
           <Text style={styles.titolo}>Trattamento dei dati personali</Text>
           <Text style={styles.text}>
-            L'associazione Book Club tratta i tuoi dati nel rispetto del
+            L&apos;associazione Book Club tratta i tuoi dati nel rispetto del
             REGOLAMENTO (UE) 2016/679 DEL PARLAMENTO EUROPEO E DEL CONSIGLIO del
             27 aprile 2016 relativo alla protezione delle persone fisiche con
             riguardo al trattamento dei dati personali, nonché alla libera

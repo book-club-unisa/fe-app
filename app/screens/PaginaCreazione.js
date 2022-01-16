@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable react/no-unescaped-entities */
 import React, { useState, useContext } from "react";
 import { View, StyleSheet, Text, Image, Alert } from "react-native";
 import Screen from "../components/Screen";
@@ -35,8 +33,8 @@ function PaginaCreazioneBC({ route, navigation }) {
   const CButton = () => {
     if (validate === true) {
       createBC(isbn, value);
-      navigation.navigate(routes.INFOLIBRO, item),
-        navigation.navigate(routes.INFOLIBRO, value);
+      navigation.navigate(routes.INFOLIBRO, item);
+      navigation.navigate(routes.INFOLIBRO, value);
     } else {
       Alert.alert("Errore", "Il nome del bookclub non è valido");
     }
@@ -69,7 +67,9 @@ function PaginaCreazioneBC({ route, navigation }) {
           style={styles.textInput}
           onChangeText={Controllo}
         />
-        <Text style={styles.title}> Libro scelto: "{route.params.title}" </Text>
+        <Text style={styles.title}>
+          Libro scelto: &quot;{route.params.title}&quot;
+        </Text>
         <Text style={styles.autore}> Autore: {route.params.author}</Text>
         <View style={styles.BookContainer}>
           <Image
