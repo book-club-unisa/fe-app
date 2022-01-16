@@ -1,11 +1,12 @@
 import React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
-function AddUserItem({ image, title, ImageComponent, onPress, state }) {
+// eslint-disable-next-line react/prop-types
+function AddUserItem({ title, onPress, state }) {
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>
@@ -66,15 +67,12 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     //borderRadius: 35,
+    color: colors.blu,
   },
 
   details: {
     marginLeft: 10,
     flex: 1,
-  },
-
-  profilePic: {
-    color: colors.blu,
   },
 
   title: {

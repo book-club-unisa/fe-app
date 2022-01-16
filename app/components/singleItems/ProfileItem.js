@@ -4,6 +4,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../../config/colors";
 
+// eslint-disable-next-line react/prop-types
 function ProfileItem({ profileName, profileEmail, profileSurname }) {
   return (
     <View style={styles.container}>

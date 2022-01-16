@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, Text, Pressable, ScrollView } from "react-native";
 import ProfileItem from "../components/singleItems/ProfileItem";
@@ -11,12 +12,7 @@ import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
 import useApi from "../api/api";
 
-function ProfilePage({
-  profileName,
-  profilePassword,
-  profileSurname,
-  navigation,
-}) {
+function ProfilePage({ navigation }) {
   const { token, setToken } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");

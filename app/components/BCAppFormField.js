@@ -1,10 +1,10 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { useFormikContext } from "formik";
 
 import BCAppTextInput from "../components/singleItems/BCAppTextInput";
 import { ErrorMessage } from "./forms";
 
+// eslint-disable-next-line react/prop-types
 export default function BCAppFormField({ name, width, ...otherProps }) {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
 
@@ -20,5 +20,3 @@ export default function BCAppFormField({ name, width, ...otherProps }) {
     </>
   );
 }
-
-const styles = StyleSheet.create({});

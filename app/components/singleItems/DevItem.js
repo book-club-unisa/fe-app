@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import Screen from "../../components/Screen";
 import colors from "../../config/colors";
 
+// eslint-disable-next-line react/prop-types
 function DevItem({ image, title, subTitle }) {
   return (
     <View style={styles.container}>

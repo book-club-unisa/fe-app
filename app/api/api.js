@@ -1,13 +1,12 @@
-import BCapi from "./BCapi";
 import axios from "axios";
 
 /*UNCOMMENT FOR TESTING ON BROWSER
 const apiUrl = "http://127.0.0.1:4000";*/
 
 // COMMENT FOR TESTING ON BROWSER
-const apiUrl = "http://192.168.1.46:4000";
+const apiUrl = "http://192.168.0.109:4000";
 
-function makeFormData(obj) {
+/*unction makeFormData(obj) {
   const result = new FormData();
   Object.entries(obj).forEach(([key, value]) => {
     if (value !== undefined) {
@@ -15,7 +14,7 @@ function makeFormData(obj) {
     }
   });
   return result;
-}
+}*/
 
 export default function useApi(token = undefined) {
   const axiosInstance = axios.create({
@@ -26,9 +25,9 @@ export default function useApi(token = undefined) {
     },
   });
 
-  const fd = new FormData();
+  /*const fd = new FormData();
   fd.append("isbn", "ciao");
-  fd.append("name", "ciao");
+  fd.append("name", "ciao");*/
 
   return {
     /*
@@ -39,8 +38,7 @@ export default function useApi(token = undefined) {
         )
         .then((response) => response.data),
         */
-
-    createBookClub: (name, bookId) =>
+    /*createBookClub: (name, bookId) =>
       axiosInstance
         .post(
           "books",
@@ -49,7 +47,7 @@ export default function useApi(token = undefined) {
             bookId,
           })
         )
-        .then((response) => response.data),
+        .then((response) => response.data),*/
 
     searchBooksByName: (name) =>
       axiosInstance

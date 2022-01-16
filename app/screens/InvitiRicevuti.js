@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { FlatList, View, StyleSheet, Text, Image, Alert } from "react-native";
+import { FlatList, View, StyleSheet, Text } from "react-native";
 
 import Screen from "../components/Screen";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
@@ -9,10 +9,10 @@ import ReceivedInvite from "../components/singleItems/ReceivedInvite";
 import useApi from "../api/api";
 import AuthContext from "../auth/context";
 
-function InvitiRicevuti(props) {
+function InvitiRicevuti() {
   const [invites, setInvites] = useState([]);
 
-  const { token, setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { getReicevedInvites } = useApi(token);
 
   useEffect(() => {

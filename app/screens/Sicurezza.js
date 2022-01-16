@@ -1,9 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
 
-function Sicurezza(props) {
+function Sicurezza() {
   return (
     <Screen>
       <View>

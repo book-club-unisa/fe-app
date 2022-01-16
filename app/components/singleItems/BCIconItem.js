@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from "react";
-import { View, StyleSheet, Image, Text, Alert } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";

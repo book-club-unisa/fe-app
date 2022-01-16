@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from "react";
 import {
   FlatList,
@@ -23,7 +26,7 @@ import AuthContext from "../auth/context";
 import { Ionicons } from "@expo/vector-icons";
 
 function InfoLibro({ route, navigation }) {
-  const { token, setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   const [text, setText] = useState("");
   const [users, setUsers] = useState([]);
@@ -31,7 +34,6 @@ function InfoLibro({ route, navigation }) {
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [BC_ID, setBC_ID] = useState();
-  const [ready, setReady] = useState(0);
 
   const { inviteUserToBookClub } = useApi(token);
   const { getBCInvites } = useApi(token);
@@ -46,7 +48,7 @@ function InfoLibro({ route, navigation }) {
     console.log(BC_ID);
     console.log(text);
     inviteUserToBookClub(BC_ID, text)
-      .then(function (result) {
+      .then(function () {
         Alert.alert("Invito andato a buon fine");
         seeInvites();
       })

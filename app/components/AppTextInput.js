@@ -5,13 +5,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import defaultStyle from "../config/styles";
 
-function AppTextInput({
-  iconName,
-  style,
-  width = "100%",
-  onChangeText,
-  ...otherProps
-}) {
+// eslint-disable-next-line react/prop-types
+function AppTextInput({ iconName, style, onChangeText, ...otherProps }) {
   return (
     <View style={[styles.container, style]}>
       {

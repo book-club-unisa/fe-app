@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import React, { useEffect } from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
-import { FontAwesome } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -11,7 +11,6 @@ function UserState({
   image,
   title,
   subTitle,
-  ImageComponent,
   onPress,
   pagecountlastreadgoal,
   pagecountsecondlastreadgoal,

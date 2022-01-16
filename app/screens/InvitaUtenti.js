@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, View, StyleSheet, Alert, Text, Button } from "react-native";
+import { FlatList, View, StyleSheet, Alert, Text } from "react-native";
 import Screen from "../components/Screen";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import colors from "../config/colors";
@@ -9,7 +9,7 @@ import AddUserItem from "../components/singleItems/AddUserItem";
 import AppButton from "../components/AppButton";
 import AppActivityIndicator from "../components/AppActivityIndicator";
 
-const InvitaUtenti = ({ navigation }) => {
+const InvitaUtenti = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const InvitaUtenti = ({ navigation }) => {
         setLoading(false);
         setError(false);
       })
-      .catch(function (error) {
+      .catch(function () {
         setError(true);
       });
   }
@@ -127,6 +127,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontWeight: "bold",
     textTransform: "uppercase",
+    flexDirection: "row",
+    flex: 1,
   },
 
   txt: {
@@ -135,11 +137,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     color: colors.black,
-  },
-
-  title: {
-    flexDirection: "row",
-    flex: 1,
   },
 
   textInput: {

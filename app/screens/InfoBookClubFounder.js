@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from "react";
 import {
   FlatList,
@@ -26,11 +28,10 @@ function InfoBookClubFounder({ route, navigation }) {
   const [odl, setOdl] = useState(0);
   const [pdl, setPdl] = useState(0);
   const [currentUserPDL, setCurrentUserPDL] = useState(0);
-  const { token, setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { updateLastReadGoal } = useApi(token);
   const { addPDL } = useApi(token);
   const [odlNumPages, setOdlNumPages] = useState();
-  const [pdlNumPages, setPdlNumPages] = useState();
   const { getUserDataByToken } = useApi(token);
 
   const [email, setEmail] = useState("");
@@ -43,7 +44,6 @@ function InfoBookClubFounder({ route, navigation }) {
   const readGoalid = item.lastReadGoal.readGoalId;
   const bookPages = item.Book.pagesCount;
 
-  const pageReached = item.Members.pageReached;
   const pagecountlastreadgoal = route.params.lastReadGoal.pagesCount;
   const pagecountsecondlastreadgoal =
     route.params.secondLastReadGoal.pagesCount;
@@ -103,7 +103,7 @@ function InfoBookClubFounder({ route, navigation }) {
 
   function _updateReadGoal() {
     updateLastReadGoal(BC_ID, odlNumPages)
-      .then(function (result) {
+      .then(function () {
         setOdl(odlNumPages);
         console.log("ok update lastreadgoal");
       })
@@ -119,7 +119,7 @@ function InfoBookClubFounder({ route, navigation }) {
 
   function _addPDL() {
     addPDL(BC_ID, currentUserPDL)
-      .then(function (result) {
+      .then(function () {
         setPdl(currentUserPDL);
         console.log(currentUserPDL);
         console.log("ok update pdl");

@@ -4,7 +4,8 @@ import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function UserListItem({ image, title, subTitle, ImageComponent, onPress }) {
+// eslint-disable-next-line react/prop-types
+function UserListItem({ image, title, subTitle, onPress }) {
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>

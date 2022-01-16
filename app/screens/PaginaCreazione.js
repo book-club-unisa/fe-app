@@ -1,17 +1,20 @@
+/* eslint-disable indent */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/prop-types */
 import React, { useState, useContext } from "react";
-import { View, StyleSheet, Text, Image, Alert, Pressable } from "react-native";
+import { View, StyleSheet, Text, Image, Alert } from "react-native";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
 import routes from "../navigation/routes";
-import BCapi from "../api/BCapi";
 import AuthContext from "../auth/context";
 import useApi from "../api/api";
 
 function PaginaCreazioneBC({ route, navigation }) {
   const [value, setValue] = useState("");
   const [validate, setValidate] = useState(false);
-  const { token, setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { createBookClub } = useApi(token);
 
   const [isbn, setIsbn] = useState(route.params.isbn);
@@ -38,8 +41,8 @@ function PaginaCreazioneBC({ route, navigation }) {
   const createBC = (isbn) => {
     const name = value.value;
     createBookClub(isbn, name)
-      .then((data) => {
-        const bcName = name;
+      .then(() => {
+        //const bcName = name;
         console.log("name:", name);
         console.log("value:", value);
       })
@@ -69,7 +72,7 @@ function PaginaCreazioneBC({ route, navigation }) {
             source={{ uri: route.params.coverUrl }}
             style={styles.copertina}
           />
-          <View>
+          <View style={{ flex: 1 }}>
             <Text style={styles.numPages}>
               Numero di pagine: {route.params.pagesCount}
             </Text>
@@ -149,6 +152,7 @@ const styles = StyleSheet.create({
   description: {
     textAlign: "justify",
     marginRight: 5,
+    width: "100%",
   },
 });
 

@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList, Text } from "react-native";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
@@ -11,7 +13,6 @@ import BCapi from "../api/BCapi";
 const Catalogo = ({ navigation }) => {
   const [books, setBooks] = useState([]);
   const [index, setIndex] = useState(1);
-  const [next, setNext] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,7 +29,9 @@ const Catalogo = ({ navigation }) => {
         );
         setLoading(false);
       })
-      .catch(function (error) {});
+      .catch(function (error) {
+        console.error(error);
+      });
   }
 
   return (

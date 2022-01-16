@@ -1,28 +1,24 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import {
   StyleSheet,
   Text,
   View,
   Image,
-  TouchableHighlight,
   TouchableOpacity,
   Platform,
 } from "react-native";
 import colors from "../../config/colors";
 import Screen from "../Screen";
-import BCIconItem from "./BCIconItem";
 
 export default function BookClubCard({
   bcName,
   founderName,
   image,
-  odlValue,
-  pdlPersonale,
   titoloLibro,
   autore,
   onPress,
 }) {
-  const diff = odlValue - pdlPersonale;
   return (
     <TouchableOpacity onPress={onPress}>
       <Screen styleChildren={{ alignItems: "center" }}>

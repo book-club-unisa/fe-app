@@ -1,11 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { StyleSheet } from "react-native";
 import AppActivityIndicator from "../components/AppActivityIndicator";
 import Screen from "../components/Screen";
 
-function ChargingScreen1(props) {
+function ChargingScreen1() {
   return (
-    <Screen>
+    <Screen styleChildren={styles.container}>
       <AppActivityIndicator
         visible={true}
         source={require("../assets/animations/verifiedSign4.json")}

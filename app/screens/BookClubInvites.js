@@ -1,18 +1,18 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from "react";
-import { FlatList, View, StyleSheet, Text, Image, Alert } from "react-native";
+import { FlatList, View, StyleSheet, Text, Alert } from "react-native";
 
 import Screen from "../components/Screen";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 
 import colors from "../config/colors";
 import InviteState from "../components/singleItems/InviteState";
-import AppButton from "../components/AppButton";
 import AuthContext from "../auth/context";
 import useApi from "../api/api";
 
 function BookClubInvites({ route }) {
   const [users, setUsers] = useState([]);
-  const { token, setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { getInvitesByFounder } = useApi(token);
 
   const BC_ID = route.params.id;

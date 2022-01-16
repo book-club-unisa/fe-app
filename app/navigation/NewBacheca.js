@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+// eslint-disable-next-line react/prop-types
 function NewBacheca({ onPress }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>

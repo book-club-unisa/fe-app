@@ -3,6 +3,7 @@ import { Pressable, View, StyleSheet, Text } from "react-native";
 
 import colors from "../config/colors";
 
+// eslint-disable-next-line react/prop-types
 function AppButton({ title, onPress, styleButton }) {
   return (
     <View style={styles.container}>

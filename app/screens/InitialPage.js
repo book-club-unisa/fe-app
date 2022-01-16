@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import React from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
 import Screen from "../components/Screen";

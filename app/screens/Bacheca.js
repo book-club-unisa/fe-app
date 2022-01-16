@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from "react";
-import { Alert, FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import BookClubCard from "../components/singleItems/BookClubCard";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
@@ -8,10 +10,8 @@ import useApi from "../api/api";
 import AuthContext from "../auth/context";
 import BachecaVuota from "./BachecaVuota";
 
-const random = 1;
-
 function Bacheca({ navigation }) {
-  const { token, setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { getBookClubsByToken } = useApi(token);
   const { getUserDataByToken } = useApi(token);
 

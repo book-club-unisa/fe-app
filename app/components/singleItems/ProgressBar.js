@@ -3,6 +3,7 @@ import { View } from "react-native";
 import colors from "../../config/colors";
 import * as Progress from "react-native-progress";
 
+// eslint-disable-next-line react/prop-types
 export default function ProgressBar({ value, larghezza }) {
   return (
     <View>

@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-no-duplicate-props */
+/* eslint-disable react/prop-types */
 import React, { useContext } from "react";
 import { Image, StyleSheet, Alert } from "react-native";
 import Screen from "../components/Screen";
@@ -6,7 +9,6 @@ import { Formik } from "formik";
 import authApi from "../api/auth";
 import * as Yup from "yup";
 
-import AppButton from "../components/AppButton";
 import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
 import FirstnameContext from "../auth/firstameContext";
@@ -30,9 +32,6 @@ const validationSchema = Yup.object().shape({
 
 function LoginScreen({ navigation }) {
   const authContext = useContext(AuthContext);
-  const emailContext = useContext(EmailContext);
-  const firstnameContext = useContext(FirstnameContext);
-  const lastnameContext = useContext(LastnameContext);
 
   const handleSubmit = async ({ email, password }) => {
     const result = await authApi
@@ -78,7 +77,6 @@ function LoginScreen({ navigation }) {
             />
             <SubmitButton
               title="Accedi"
-              onPress={() => navigation.navigate(routes.BACHECA)}
               onPress={() => navigation.navigate(routes.BACHECA)}
               styleButton={styles.button}
             />
