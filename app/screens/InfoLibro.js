@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-/* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from "react";
 import {
   FlatList,
@@ -24,6 +21,12 @@ import useApi from "../api/api";
 import AuthContext from "../auth/context";
 
 import { Ionicons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
+
+InfoLibro.propTypes = {
+  route: PropTypes.any,
+  navigation: PropTypes.any,
+};
 
 function InfoLibro({ route, navigation }) {
   const { token } = useContext(AuthContext);
@@ -47,6 +50,7 @@ function InfoLibro({ route, navigation }) {
   function Invite() {
     console.log(BC_ID);
     console.log(text);
+    console.log(email);
     inviteUserToBookClub(BC_ID, text)
       .then(function () {
         Alert.alert("Invito andato a buon fine");
@@ -152,7 +156,7 @@ function InfoLibro({ route, navigation }) {
           renderItem={({ item }) => (
             <UserListItem
               title={item.user}
-              onPress={() => alert("email: " + item.user)}
+              onPress={() => Alert.alert("email: " + item.user)}
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}

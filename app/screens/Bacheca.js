@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import BookClubCard from "../components/singleItems/BookClubCard";
@@ -9,6 +7,12 @@ import routes from "../navigation/routes";
 import useApi from "../api/api";
 import AuthContext from "../auth/context";
 import BachecaVuota from "./BachecaVuota";
+import PropTypes from "prop-types";
+
+Bacheca.propTypes = {
+  navigation: PropTypes.any,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};
 
 function Bacheca({ navigation }) {
   const { token } = useContext(AuthContext);
@@ -29,10 +33,10 @@ function Bacheca({ navigation }) {
     getUserDataByToken()
       .then(function ({ email, firstName, lastName }) {
         console.log("ok getUserData");
-        console.log(email, firstName, lastName);
         setEmail(email);
         setName(firstName);
         setSurname(lastName);
+        console.log(email, name, surname);
       })
       .catch(function (err) {
         console.log("error getUserData");

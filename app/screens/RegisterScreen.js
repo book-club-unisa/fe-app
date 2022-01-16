@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import { Alert, Image, StyleSheet } from "react-native";
 import Screen from "../components/Screen";
@@ -9,6 +8,11 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import BCapi from "../api/BCapi";
 import routes from "../navigation/routes";
+import PropTypes from "prop-types";
+
+RegisterScreen.propTypes = {
+  navigation: PropTypes.any,
+};
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import {
   StyleSheet,
@@ -10,6 +9,17 @@ import {
 } from "react-native";
 import colors from "../../config/colors";
 import Screen from "../Screen";
+
+import PropTypes from "prop-types";
+
+BookClubCard.propTypes = {
+  bcName: PropTypes.string,
+  founderName: PropTypes.string,
+  image: PropTypes.object,
+  titoloLibro: PropTypes.string,
+  onPress: PropTypes.func,
+  autore: PropTypes.string,
+};
 
 export default function BookClubCard({
   bcName,

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, Text, Pressable, ScrollView } from "react-native";
 import ProfileItem from "../components/singleItems/ProfileItem";
@@ -11,6 +10,11 @@ import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
 import useApi from "../api/api";
+import PropTypes from "prop-types";
+
+ProfilePage.propTypes = {
+  navigation: PropTypes.any,
+};
 
 function ProfilePage({ navigation }) {
   const { token, setToken } = useContext(AuthContext);

@@ -1,11 +1,14 @@
-/* eslint-disable no-undef */
-/* eslint-disable react/prop-types */
 import React from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, Text, Platform } from "react-native";
 import Screen from "../components/Screen";
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
+import PropTypes from "prop-types";
+
+InitialPage.propTypes = {
+  navigation: PropTypes.any,
+};
 
 function InitialPage({ navigation }) {
   return (

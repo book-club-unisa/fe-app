@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useState, useContext, useEffect } from "react";
 import {
   FlatList,
@@ -23,6 +21,12 @@ import useApi from "../api/api";
 import AuthContext from "../auth/context";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
+
+InfoBookClubFounder.propTypes = {
+  route: PropTypes.any,
+  navigation: PropTypes.any,
+};
 
 function InfoBookClubFounder({ route, navigation }) {
   const [odl, setOdl] = useState(0);
@@ -49,12 +53,14 @@ function InfoBookClubFounder({ route, navigation }) {
     route.params.secondLastReadGoal.pagesCount;
 
   function getUserData() {
+    console.log(email);
     getUserDataByToken()
       .then(function ({ email, firstName, lastName }) {
         console.log("ok getUserData");
         setEmail(email);
         setName(firstName);
         setSurname(lastName);
+        console.log(name, surname);
         listUsers.forEach((element) => {
           if (element.user.email === email) {
             console.log(element);

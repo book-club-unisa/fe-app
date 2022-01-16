@@ -4,8 +4,15 @@ import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
+InviteState.propTypes = {
+  title: PropTypes.string,
+  onPress: PropTypes.func,
+  image: PropTypes.object,
+  state: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};
+
 function InviteState({ image, title, onPress, state }) {
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>

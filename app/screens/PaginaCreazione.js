@@ -1,7 +1,5 @@
 /* eslint-disable indent */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/prop-types */
 import React, { useState, useContext } from "react";
 import { View, StyleSheet, Text, Image, Alert } from "react-native";
 import Screen from "../components/Screen";
@@ -10,6 +8,12 @@ import AppButton from "../components/AppButton";
 import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
 import useApi from "../api/api";
+import PropTypes from "prop-types";
+
+PaginaCreazioneBC.propTypes = {
+  route: PropTypes.any,
+  navigation: PropTypes.any,
+};
 
 function PaginaCreazioneBC({ route, navigation }) {
   const [value, setValue] = useState("");
@@ -17,7 +21,7 @@ function PaginaCreazioneBC({ route, navigation }) {
   const { token } = useContext(AuthContext);
   const { createBookClub } = useApi(token);
 
-  const [isbn, setIsbn] = useState(route.params.isbn);
+  const [isbn] = useState(route.params.isbn);
 
   const Controllo = (value) => {
     if (value.length < 2 || value.length > 20) {

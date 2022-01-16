@@ -4,8 +4,8 @@ import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
 function AddUserItem({ title, onPress, state }) {
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
@@ -54,6 +54,12 @@ function AddUserItem({ title, onPress, state }) {
     </TouchableHighlight>
   );
 }
+
+AddUserItem.propTypes = {
+  title: PropTypes.string,
+  onPress: PropTypes.func,
+  state: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};
 
 const styles = StyleSheet.create({
   container: {

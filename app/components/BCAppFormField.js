@@ -3,8 +3,13 @@ import { useFormikContext } from "formik";
 
 import BCAppTextInput from "../components/singleItems/BCAppTextInput";
 import { ErrorMessage } from "./forms";
+import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
+BCAppFormField.propTypes = {
+  name: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};
+
 export default function BCAppFormField({ name, width, ...otherProps }) {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
 

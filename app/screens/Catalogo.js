@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList, Text } from "react-native";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
@@ -9,6 +7,7 @@ import Screen from "../components/Screen";
 import { Ionicons } from "@expo/vector-icons";
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
+import PropTypes from "prop-types";
 
 const Catalogo = ({ navigation }) => {
   const [books, setBooks] = useState([]);
@@ -21,6 +20,7 @@ const Catalogo = ({ navigation }) => {
 
   function changeNextPage() {
     setLoading(true);
+    console.log(loading);
     BCapi.get(`/books?page=${index}&limit=10`)
       .then(async function (response) {
         setIndex(response.data.meta.currentPage + 1);
@@ -29,9 +29,7 @@ const Catalogo = ({ navigation }) => {
         );
         setLoading(false);
       })
-      .catch(function (error) {
-        console.error(error);
-      });
+      .catch(function () {});
   }
 
   return (
@@ -69,6 +67,10 @@ const Catalogo = ({ navigation }) => {
       </View>
     </Screen>
   );
+};
+
+Catalogo.propTypes = {
+  navigation: PropTypes.any,
 };
 
 const styles = StyleSheet.create({

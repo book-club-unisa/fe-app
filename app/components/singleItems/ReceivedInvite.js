@@ -6,8 +6,16 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import AuthContext from "../../auth/context";
 import useApi from "../../api/api";
+import PropTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
+ReceivedInvite.propTypes = {
+  image: PropTypes.object,
+  title: PropTypes.string,
+  onPress: PropTypes.func,
+  inviteState: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  inviteID: PropTypes.number,
+};
+
 function ReceivedInvite({ image, title, onPress, inviteState, inviteID }) {
   const [state, setState] = useState(inviteState);
 

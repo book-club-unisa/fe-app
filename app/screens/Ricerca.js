@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
@@ -7,6 +6,7 @@ import Screen from "../components/Screen";
 import routes from "../navigation/routes";
 import AppTextInput from "../components/AppTextInput";
 import BCapi from "../api/BCapi";
+import PropTypes from "prop-types";
 
 const Ricerca = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -50,6 +50,10 @@ const Ricerca = ({ navigation }) => {
       </View>
     </Screen>
   );
+};
+
+Ricerca.propTypes = {
+  navigation: PropTypes.any,
 };
 
 const styles = StyleSheet.create({

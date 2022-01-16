@@ -4,7 +4,15 @@ import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-// eslint-disable-next-line react/prop-types
+import PropTypes from "prop-types";
+
+BCListItem.propTypes = {
+  image: PropTypes.object,
+  subTitle: PropTypes.string,
+  title: PropTypes.string,
+  onPress: PropTypes.func,
+};
+
 function BCListItem({ image, title, subTitle, onPress }) {
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>

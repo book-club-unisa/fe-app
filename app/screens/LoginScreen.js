@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-no-duplicate-props */
-/* eslint-disable react/prop-types */
 import React, { useContext } from "react";
 import { Image, StyleSheet, Alert } from "react-native";
 import Screen from "../components/Screen";
@@ -11,10 +8,12 @@ import * as Yup from "yup";
 
 import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
-import FirstnameContext from "../auth/firstameContext";
-import LastnameContext from "../auth/lastnameContext";
 import authStorage from "../auth/storage";
-import EmailContext from "../auth/emailContext";
+import PropTypes from "prop-types";
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.any,
+};
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -34,7 +33,7 @@ function LoginScreen({ navigation }) {
   const authContext = useContext(AuthContext);
 
   const handleSubmit = async ({ email, password }) => {
-    const result = await authApi
+    await authApi
       .login(email, password)
       .then(async function (response) {
         console.log(response.data);
