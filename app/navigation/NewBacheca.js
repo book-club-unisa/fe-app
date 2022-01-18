@@ -2,6 +2,11 @@ import React from "react";
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
+
+NewBacheca.propTypes = {
+  onPress: PropTypes.func,
+};
 
 function NewBacheca({ onPress }) {
   return (

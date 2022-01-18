@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Alert, FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import BookClubCard from "../components/singleItems/BookClubCard";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
@@ -7,11 +7,15 @@ import routes from "../navigation/routes";
 import useApi from "../api/api";
 import AuthContext from "../auth/context";
 import BachecaVuota from "./BachecaVuota";
+import PropTypes from "prop-types";
 
-const random = 1;
+Bacheca.propTypes = {
+  navigation: PropTypes.any,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};
 
 function Bacheca({ navigation }) {
-  const { token, setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { getBookClubsByToken } = useApi(token);
   const { getUserDataByToken } = useApi(token);
 
@@ -29,10 +33,10 @@ function Bacheca({ navigation }) {
     getUserDataByToken()
       .then(function ({ email, firstName, lastName }) {
         console.log("ok getUserData");
-        console.log(email, firstName, lastName);
         setEmail(email);
         setName(firstName);
         setSurname(lastName);
+        console.log(email, name, surname);
       })
       .catch(function (err) {
         console.log("error getUserData");

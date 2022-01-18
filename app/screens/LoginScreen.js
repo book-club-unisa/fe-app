@@ -6,13 +6,14 @@ import { Formik } from "formik";
 import authApi from "../api/auth";
 import * as Yup from "yup";
 
-import AppButton from "../components/AppButton";
 import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
-import FirstnameContext from "../auth/firstameContext";
-import LastnameContext from "../auth/lastnameContext";
 import authStorage from "../auth/storage";
-import EmailContext from "../auth/emailContext";
+import PropTypes from "prop-types";
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.any,
+};
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -30,12 +31,9 @@ const validationSchema = Yup.object().shape({
 
 function LoginScreen({ navigation }) {
   const authContext = useContext(AuthContext);
-  const emailContext = useContext(EmailContext);
-  const firstnameContext = useContext(FirstnameContext);
-  const lastnameContext = useContext(LastnameContext);
 
   const handleSubmit = async ({ email, password }) => {
-    const result = await authApi
+    await authApi
       .login(email, password)
       .then(async function (response) {
         console.log(response.data);
@@ -78,7 +76,6 @@ function LoginScreen({ navigation }) {
             />
             <SubmitButton
               title="Accedi"
-              onPress={() => navigation.navigate(routes.BACHECA)}
               onPress={() => navigation.navigate(routes.BACHECA)}
               styleButton={styles.button}
             />

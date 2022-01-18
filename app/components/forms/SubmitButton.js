@@ -1,8 +1,8 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { useFormikContext } from "formik";
 
 import AppButton from "../AppButton";
+import PropTypes from "prop-types";
 
 export default function SubmitButton({ title, styleButton }) {
   const { handleSubmit } = useFormikContext();
@@ -11,4 +11,7 @@ export default function SubmitButton({ title, styleButton }) {
   );
 }
 
-const styles = StyleSheet.create({});
+SubmitButton.propTypes = {
+  title: PropTypes.string,
+  styleButton: PropTypes.object,
+};

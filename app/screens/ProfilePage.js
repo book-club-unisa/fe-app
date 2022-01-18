@@ -10,13 +10,13 @@ import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
 import useApi from "../api/api";
+import PropTypes from "prop-types";
 
-function ProfilePage({
-  profileName,
-  profilePassword,
-  profileSurname,
-  navigation,
-}) {
+ProfilePage.propTypes = {
+  navigation: PropTypes.any,
+};
+
+function ProfilePage({ navigation }) {
   const { token, setToken } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");

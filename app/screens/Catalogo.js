@@ -7,11 +7,11 @@ import Screen from "../components/Screen";
 import { Ionicons } from "@expo/vector-icons";
 import routes from "../navigation/routes";
 import BCapi from "../api/BCapi";
+import PropTypes from "prop-types";
 
 const Catalogo = ({ navigation }) => {
   const [books, setBooks] = useState([]);
   const [index, setIndex] = useState(1);
-  const [next, setNext] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const Catalogo = ({ navigation }) => {
 
   function changeNextPage() {
     setLoading(true);
+    console.log(loading);
     BCapi.get(`/books?page=${index}&limit=10`)
       .then(async function (response) {
         setIndex(response.data.meta.currentPage + 1);
@@ -28,7 +29,7 @@ const Catalogo = ({ navigation }) => {
         );
         setLoading(false);
       })
-      .catch(function (error) {});
+      .catch(function () {});
   }
 
   return (
@@ -66,6 +67,10 @@ const Catalogo = ({ navigation }) => {
       </View>
     </Screen>
   );
+};
+
+Catalogo.propTypes = {
+  navigation: PropTypes.any,
 };
 
 const styles = StyleSheet.create({

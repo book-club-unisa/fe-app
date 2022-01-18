@@ -1,9 +1,14 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { useFormikContext } from "formik";
 
 import BCAppTextInput from "../components/singleItems/BCAppTextInput";
 import { ErrorMessage } from "./forms";
+import PropTypes from "prop-types";
+
+BCAppFormField.propTypes = {
+  name: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};
 
 export default function BCAppFormField({ name, width, ...otherProps }) {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
@@ -20,5 +25,3 @@ export default function BCAppFormField({ name, width, ...otherProps }) {
     </>
   );
 }
-
-const styles = StyleSheet.create({});

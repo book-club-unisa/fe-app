@@ -1,20 +1,25 @@
 import React, { useState, useContext } from "react";
-import { View, StyleSheet, Text, Image, Alert, Pressable } from "react-native";
+import { View, StyleSheet, Text, Image, Alert } from "react-native";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
 import routes from "../navigation/routes";
-import BCapi from "../api/BCapi";
 import AuthContext from "../auth/context";
 import useApi from "../api/api";
+import PropTypes from "prop-types";
+
+PaginaCreazioneBC.propTypes = {
+  route: PropTypes.any,
+  navigation: PropTypes.any,
+};
 
 function PaginaCreazioneBC({ route, navigation }) {
   const [value, setValue] = useState("");
   const [validate, setValidate] = useState(false);
-  const { token, setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { createBookClub } = useApi(token);
 
-  const [isbn, setIsbn] = useState(route.params.isbn);
+  const [isbn] = useState(route.params.isbn);
 
   const Controllo = (value) => {
     if (value.length < 2 || value.length > 20) {
@@ -28,8 +33,8 @@ function PaginaCreazioneBC({ route, navigation }) {
   const CButton = () => {
     if (validate === true) {
       createBC(isbn, value);
-      navigation.navigate(routes.INFOLIBRO, item),
-        navigation.navigate(routes.INFOLIBRO, value);
+      navigation.navigate(routes.INFOLIBRO, item);
+      navigation.navigate(routes.INFOLIBRO, value);
     } else {
       Alert.alert("Errore", "Il nome del bookclub non è valido");
     }
@@ -38,8 +43,8 @@ function PaginaCreazioneBC({ route, navigation }) {
   const createBC = (isbn) => {
     const name = value.value;
     createBookClub(isbn, name)
-      .then((data) => {
-        const bcName = name;
+      .then(() => {
+        //const bcName = name;
         console.log("name:", name);
         console.log("value:", value);
       })
@@ -62,14 +67,16 @@ function PaginaCreazioneBC({ route, navigation }) {
           style={styles.textInput}
           onChangeText={Controllo}
         />
-        <Text style={styles.title}> Libro scelto: "{route.params.title}" </Text>
+        <Text style={styles.title}>
+          Libro scelto: &quot;{route.params.title}&quot;
+        </Text>
         <Text style={styles.autore}> Autore: {route.params.author}</Text>
         <View style={styles.BookContainer}>
           <Image
             source={{ uri: route.params.coverUrl }}
             style={styles.copertina}
           />
-          <View>
+          <View style={{ flex: 1 }}>
             <Text style={styles.numPages}>
               Numero di pagine: {route.params.pagesCount}
             </Text>
@@ -149,6 +156,7 @@ const styles = StyleSheet.create({
   description: {
     textAlign: "justify",
     marginRight: 5,
+    width: "100%",
   },
 });
 

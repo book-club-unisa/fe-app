@@ -2,6 +2,13 @@ import React from "react";
 import { Pressable, View, StyleSheet, Text } from "react-native";
 
 import colors from "../config/colors";
+import PropTypes from "prop-types";
+
+AppButton.propTypes = {
+  title: PropTypes.string,
+  onPress: PropTypes.func,
+  styleButton: PropTypes.any,
+};
 
 function AppButton({ title, onPress, styleButton }) {
   return (

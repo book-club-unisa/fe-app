@@ -19,16 +19,19 @@ import ProgressBar from "../components/singleItems/ProgressBar";
 import useApi from "../api/api";
 import AuthContext from "../auth/context";
 import { AntDesign } from "@expo/vector-icons";
+import PropTypes from "prop-types";
 
-function InfoBookClubUser({ route, navigation }) {
+InfoBookClubUser.propTypes = {
+  route: PropTypes.any,
+};
+
+function InfoBookClubUser({ route }) {
   const [odl, setOdl] = useState(0);
   const [pdl, setPdl] = useState(0);
   const [currentUserPDL, setCurrentUserPDL] = useState(0);
-  const { token, setToken } = useContext(AuthContext);
-  const { updateLastReadGoal } = useApi(token);
+  const { token } = useContext(AuthContext);
+
   const { addPDL } = useApi(token);
-  const [odlNumPages, setOdlNumPages] = useState();
-  const [pdlNumPages, setPdlNumPages] = useState();
   const { getUserDataByToken } = useApi(token);
 
   const [email, setEmail] = useState("");
@@ -41,18 +44,20 @@ function InfoBookClubUser({ route, navigation }) {
   const readGoalid = item.lastReadGoal.readGoalId;
   const bookPages = item.Book.pagesCount;
 
-  const pageReached = item.Members.pageReached;
+  //const pageReached = item.Members.pageReached;
   const pagecountlastreadgoal = route.params.lastReadGoal.pagesCount;
   const pagecountsecondlastreadgoal =
     route.params.secondLastReadGoal.pagesCount;
 
   function getUserData() {
+    console.log(email);
     getUserDataByToken()
       .then(function ({ email, firstName, lastName }) {
         console.log("ok getUserData");
         setEmail(email);
         setName(firstName);
         setSurname(lastName);
+        console.log(name, surname);
         listUsers.forEach((element) => {
           if (element.user.email === email) {
             console.log(element);
@@ -101,7 +106,7 @@ function InfoBookClubUser({ route, navigation }) {
 
   function _addPDL() {
     addPDL(BC_ID, currentUserPDL)
-      .then(function (result) {
+      .then(function () {
         setPdl(currentUserPDL);
         console.log(currentUserPDL);
         console.log("ok update pdl");

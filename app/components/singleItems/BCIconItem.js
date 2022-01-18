@@ -1,8 +1,22 @@
 import React from "react";
-import { View, StyleSheet, Image, Text, Alert } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
+
+BCIconItem.propTypes = {
+  backgroundIconColor: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]),
+  iconName: PropTypes.string,
+  title: PropTypes.string,
+  onPress: PropTypes.func,
+  containerSize: PropTypes.number,
+  iconColor: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  styleContainer: PropTypes.object,
+};
 
 function BCIconItem({
   backgroundIconColor = colors.green,

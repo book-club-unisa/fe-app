@@ -1,16 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 import colors from "../config/colors";
-import Bacheca from "../screens/Bacheca";
-import Catalogo from "../screens/Catalogo";
-import ProfilePage from "../screens/ProfilePage";
 import FeedNavigator from "./FeedNavigator";
-import NewBacheca from "./NewBacheca";
 import ClubNavigator from "./ClubNavigator";
 import UsNavigator from "./UsNavigator";
 
@@ -36,8 +30,8 @@ const AppNavigator = () => (
     <Tab.Screen
       name="Catalogo"
       component={FeedNavigator}
-      options={({ navigation }) => ({
-        tabBarIcon: ({ color, size, focused }) => (
+      options={() => ({
+        tabBarIcon: ({ size, focused }) => (
           <View style={styles.container}>
             <Ionicons
               name={focused ? "ios-library" : "ios-library-outline"}
@@ -61,8 +55,8 @@ const AppNavigator = () => (
     <Tab.Screen
       name="Bacheca"
       component={ClubNavigator}
-      options={({ navigation }) => ({
-        tabBarIcon: ({ color, size, focused }) => (
+      options={() => ({
+        tabBarIcon: ({ size, focused }) => (
           <View style={styles.container}>
             <Ionicons
               name={focused ? "home" : "home-outline"}
@@ -86,8 +80,8 @@ const AppNavigator = () => (
     <Tab.Screen
       name="Profilo"
       component={UsNavigator}
-      options={({ navigation }) => ({
-        tabBarIcon: ({ color, size, focused }) => (
+      options={() => ({
+        tabBarIcon: ({ size, focused }) => (
           <View style={styles.container}>
             <Ionicons
               name={focused ? "person" : "person-outline"}

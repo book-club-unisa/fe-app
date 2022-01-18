@@ -1,30 +1,32 @@
-import React, { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, Image, Text, Pressable, Alert } from "react-native";
+import React, { useState, useContext } from "react";
+import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import AuthContext from "../../auth/context";
 import useApi from "../../api/api";
+import PropTypes from "prop-types";
 
-function ReceivedInvite({
-  image,
-  title,
-  ImageComponent,
-  onPress,
-  inviteState,
-  inviteID,
-}) {
+ReceivedInvite.propTypes = {
+  image: PropTypes.object,
+  title: PropTypes.string,
+  onPress: PropTypes.func,
+  inviteState: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  inviteID: PropTypes.number,
+};
+
+function ReceivedInvite({ image, title, onPress, inviteState, inviteID }) {
   const [state, setState] = useState(inviteState);
 
-  const { token, setToken } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { acceptInvite } = useApi(token);
   const { refuseInvite } = useApi(token);
 
   function acceptFunction() {
     console.log(inviteID);
     acceptInvite(inviteID)
-      .then(function (response) {
+      .then(function () {
         setState("ACCEPTED");
         console.log("accepted");
       })
@@ -37,7 +39,7 @@ function ReceivedInvite({
   function refuseFunction() {
     console.log(inviteID);
     refuseInvite(inviteID)
-      .then(function (response) {
+      .then(function () {
         setState("REFUSED");
         console.log("refused");
       })

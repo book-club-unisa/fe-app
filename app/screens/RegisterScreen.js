@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Alert, Image, StyleSheet, KeyboardAvoidingView } from "react-native";
+import React from "react";
+import { Alert, Image, StyleSheet } from "react-native";
 import Screen from "../components/Screen";
 import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
@@ -8,7 +8,11 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import BCapi from "../api/BCapi";
 import routes from "../navigation/routes";
-import AuthContext from "../auth/context";
+import PropTypes from "prop-types";
+
+RegisterScreen.propTypes = {
+  navigation: PropTypes.any,
+};
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -35,13 +39,13 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen({ navigation }) {
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
   function register(values) {
     BCapi.post("users", values)
-      .then(async function (response) {
+      .then(async function () {
         navigation.navigate(routes.ACCEDI);
       })
-      .catch(function (error) {
+      .catch(function () {
         Alert.alert("Errore, indirizzo email non disponibile");
       });
   }

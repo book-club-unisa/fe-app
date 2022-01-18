@@ -1,17 +1,11 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  Platform,
-  Pressable,
-} from "react-native";
+import { View, StyleSheet, TextInput, Pressable } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import colors from "../../config/colors";
 import defaultStyle from "../../config/styles";
+import PropTypes from "prop-types";
 
 function BCAppTextInput({ iconName, width = "100%", ...otherProps }) {
   return (
@@ -43,6 +37,11 @@ function BCAppTextInput({ iconName, width = "100%", ...otherProps }) {
     </View>
   );
 }
+
+BCAppTextInput.propTypes = {
+  iconName: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};
 
 const styles = StyleSheet.create({
   container: {

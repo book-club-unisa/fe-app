@@ -3,7 +3,7 @@ import { View, StyleSheet, Image } from "react-native";
 import AppActivityIndicator from "../components/AppActivityIndicator";
 import Screen from "../components/Screen";
 
-function ChargingScreen1(props) {
+function ChargingScreen1() {
   return (
     <Screen>
       <View style={styles.container}>

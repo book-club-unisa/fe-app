@@ -1,17 +1,27 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
-import { FontAwesome } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
+
+UserState.propTypes = {
+  image: PropTypes.object,
+  title: PropTypes.string,
+  subTitle: PropTypes.string,
+  onPress: PropTypes.func,
+  pagecountlastreadgoal: PropTypes.number,
+  pagecountsecondlastreadgoal: PropTypes.number,
+  personalprogress: PropTypes.number,
+  readGoalId: PropTypes.number,
+};
 
 function UserState({
   image,
   title,
   subTitle,
-  ImageComponent,
   onPress,
   pagecountlastreadgoal,
   pagecountsecondlastreadgoal,

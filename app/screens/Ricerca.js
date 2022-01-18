@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList, Pressable } from "react-native";
-import { SearchBar } from "react-native-elements";
+import { StyleSheet, View, FlatList } from "react-native";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import BCListItem from "../components/singleItems/BCListItem";
-import colors from "../config/colors";
 import Screen from "../components/Screen";
 import routes from "../navigation/routes";
-import { TextInput } from "react-native-gesture-handler";
 import AppTextInput from "../components/AppTextInput";
-import { FontAwesome5 } from "@expo/vector-icons";
 import BCapi from "../api/BCapi";
+import PropTypes from "prop-types";
 
 const Ricerca = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -25,7 +22,7 @@ const Ricerca = ({ navigation }) => {
         console.log(response.data);
         setBooks(response.data);
       })
-      .catch(function (error) {});
+      .catch(function () {});
   }
 
   return (
@@ -53,6 +50,10 @@ const Ricerca = ({ navigation }) => {
       </View>
     </Screen>
   );
+};
+
+Ricerca.propTypes = {
+  navigation: PropTypes.any,
 };
 
 const styles = StyleSheet.create({

@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { useFormikContext } from "formik";
 
 import AppTextInput from "../AppTextInput";
 import ErrorMessage from "./ErrorMessage";
+import PropTypes from "prop-types";
 
 export default function AppFormField({ name, width, ...otherProps }) {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
@@ -21,4 +21,7 @@ export default function AppFormField({ name, width, ...otherProps }) {
   );
 }
 
-const styles = StyleSheet.create({});
+AppFormField.propTypes = {
+  name: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+};

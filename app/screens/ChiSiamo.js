@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, FlatList, Text, ScrollView } from "react-native";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import colors from "../config/colors";
@@ -62,7 +62,7 @@ const Books = [
     image: require("../assets/devs/Marianna.png"),
   },
 ];
-const ChiSiamo = (props) => {
+const ChiSiamo = () => {
   return (
     <Screen>
       <View></View>
@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
-  titolo: {
+  /*titolo: {
     fontWeight: "bold",
     color: colors.blu,
     fontSize: 20,
-  },
+  },*/
 
   header: {
     flexDirection: "row",

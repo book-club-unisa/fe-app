@@ -3,8 +3,16 @@ import { View, StyleSheet, Image, Text } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import PropTypes from "prop-types";
 
-function UserListItem({ image, title, subTitle, ImageComponent, onPress }) {
+UserListItem.propTypes = {
+  image: PropTypes.object,
+  title: PropTypes.string,
+  subTitle: PropTypes.string,
+  onPress: PropTypes.func,
+};
+
+function UserListItem({ image, title, subTitle, onPress }) {
   return (
     <TouchableHighlight underlayColor={colors.lightgrey} onPress={onPress}>
       <View style={styles.container}>

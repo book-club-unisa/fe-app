@@ -1,7 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import Screen from "../../components/Screen";
 import colors from "../../config/colors";
+import PropTypes from "prop-types";
+
+DevItem.propTypes = {
+  image: PropTypes.object,
+  title: PropTypes.string,
+  subTitle: PropTypes.string,
+};
 
 function DevItem({ image, title, subTitle }) {
   return (
