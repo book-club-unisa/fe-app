@@ -6,7 +6,7 @@ import Ricerca from "../screens/Ricerca";
 import PaginaCreazioneBC from "../screens/PaginaCreazione";
 import InfoLibro from "../screens/InfoLibro";
 import InvitaUtenti from "../screens/InvitaUtenti";
-import CheckScreen from "../screens/CheckScreen";
+import BachecaSelection from "../screens/BachecaSelection";
 
 const Stack = createStackNavigator();
 
@@ -22,7 +22,7 @@ const FeedNavigator = () => (
     <Stack.Screen name="CreazioneBC" component={PaginaCreazioneBC} />
     <Stack.Screen name="InfoLibro" component={InfoLibro} />
     <Stack.Screen name="InvitaUtenti" component={InvitaUtenti} />
-    <Stack.Screen name="CheckScreen" component={CheckScreen} />
+    <Stack.Screen name="BachecaSelection" component={BachecaSelection} />
   </Stack.Navigator>
 );
 

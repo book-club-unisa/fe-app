@@ -8,7 +8,6 @@ import AuthContext from "../auth/context";
 import BachecaVuota from "./BachecaVuota";
 import PropTypes from "prop-types";
 import Bacheca from "./Bacheca";
-import LoadingScreen from "./LoadingScreen";
 
 BachecaSelection.propTypes = {
   navigation: PropTypes.any,
@@ -20,20 +19,19 @@ function BachecaSelection({ navigation }) {
   const { getBookClubsByToken } = useApi(token);
 
   const [bookClubs, setBookClubs] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getBookClubs();
   }, []);
 
   function getBookClubs() {
-    setLoading(true);
+    // setLoading(true);
     getBookClubsByToken()
       .then(function (bookClubs) {
-        setLoading(true);
+        //setLoading(true);
         console.log("ok getBookClubs");
         setBookClubs(bookClubs);
-        setLoading(false);
+        //setLoading(false);
       })
       .catch(function (err) {
         console.log("error getBookClubs");
@@ -51,20 +49,15 @@ function BachecaSelection({ navigation }) {
 
   return (
     <Screen styleChildren={styles.container}>
-      {(loading == true && (
+      {(arrayValue() === 0 && (
         <>
-          <LoadingScreen />
+          <BachecaVuota />
         </>
-      )) ||
-        (arrayValue() === 0 && (
-          <>
-            <BachecaVuota />
-          </>
-        )) || (
-          <>
-            <Bacheca navigation={navigation} bookClubs={bookClubs} />
-          </>
-        )}
+      )) || (
+        <>
+          <Bacheca navigation={navigation} bookClubs={bookClubs} />
+        </>
+      )}
     </Screen>
   );
 }

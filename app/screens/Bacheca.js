@@ -6,7 +6,6 @@ import colors from "../config/colors";
 import routes from "../navigation/routes";
 import useApi from "../api/api";
 import AuthContext from "../auth/context";
-import BachecaVuota from "./BachecaVuota";
 import PropTypes from "prop-types";
 
 Bacheca.propTypes = {
@@ -57,34 +56,28 @@ function Bacheca({ navigation, bookClubs }) {
 
   return (
     <Screen styleChildren={styles.container}>
-      {(bookClubs.length === 0 && (
-        <>
-          <BachecaVuota />
-        </>
-      )) || (
-        <>
-          <FlatList
-            data={bookClubs}
-            keyExtractor={(bookClub) => bookClub.id}
-            renderItem={({ item }) => (
-              <BookClubCard
-                bcName={item.name}
-                founderName={item.founderEmail}
-                image={{ uri: item.Book.coverUrl }}
-                titoloLibro={item.Book.title}
-                autore={item.Book.author}
-                onPress={() => {
-                  if (email === item.founderEmail) {
-                    navigation.navigate(routes.INFOBOOKCLUBF, item);
-                  } else {
-                    navigation.navigate(routes.INFOBOOKCLUBU, item);
-                  }
-                }}
-              />
-            )}
-          />
-        </>
-      )}
+      <>
+        <FlatList
+          data={bookClubs}
+          keyExtractor={(bookClub) => bookClub.id}
+          renderItem={({ item }) => (
+            <BookClubCard
+              bcName={item.name}
+              founderName={item.founderEmail}
+              image={{ uri: item.Book.coverUrl }}
+              titoloLibro={item.Book.title}
+              autore={item.Book.author}
+              onPress={() => {
+                if (email === item.founderEmail) {
+                  navigation.navigate(routes.INFOBOOKCLUBF, item);
+                } else {
+                  navigation.navigate(routes.INFOBOOKCLUBU, item);
+                }
+              }}
+            />
+          )}
+        />
+      </>
     </Screen>
   );
 }
