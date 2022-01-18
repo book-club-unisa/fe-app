@@ -11,22 +11,21 @@ import PropTypes from "prop-types";
 
 Bacheca.propTypes = {
   navigation: PropTypes.any,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  bookClubs: PropTypes.any,
 };
 
-function Bacheca({ navigation }) {
+function Bacheca({ navigation, bookClubs }) {
   const { token } = useContext(AuthContext);
-  const { getBookClubsByToken } = useApi(token);
   const { getUserDataByToken } = useApi(token);
 
-  const [bookClubs, setBookClubs] = useState([]);
+  //const [bookClubs, setBookClubs] = useState([]);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
 
   useEffect(() => {
     getUserData();
-    getBookClubs();
+    //  getBookClubs();
   }, []);
 
   function getUserData() {
@@ -44,7 +43,7 @@ function Bacheca({ navigation }) {
       });
   }
 
-  function getBookClubs() {
+  /* function getBookClubs() {
     getBookClubsByToken()
       .then(function (bookClubs) {
         console.log("ok getBookClubs");
@@ -54,7 +53,7 @@ function Bacheca({ navigation }) {
         console.log("error getBookClubs");
         console.error(err);
       });
-  }
+  }*/
 
   return (
     <Screen styleChildren={styles.container}>

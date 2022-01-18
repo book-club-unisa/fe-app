@@ -15,4 +15,5 @@ export default Object.freeze({
   CLUBS: "Clubs",
   RICERCA: "Ricerca",
   INVITIRICEVUTI: "InvitiRicevuti",
+  CHECKSCREEN: "CheckScreen",
 });

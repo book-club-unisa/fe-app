@@ -172,7 +172,7 @@ function InfoLibro({ route, navigation }) {
               [
                 {
                   text: "Si",
-                  onPress: () => navigation.navigate(routes.BACHECA),
+                  onPress: () => navigation.navigate(routes.CHECKSCREEN),
                 },
                 {
                   text: "No",

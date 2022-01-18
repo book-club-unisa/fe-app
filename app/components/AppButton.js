@@ -8,11 +8,12 @@ AppButton.propTypes = {
   title: PropTypes.string,
   onPress: PropTypes.func,
   styleButton: PropTypes.any,
+  styleButtonContainer: PropTypes.any,
 };
 
-function AppButton({ title, onPress, styleButton }) {
+function AppButton({ title, onPress, styleButton, styleButtonContainer }) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styleButtonContainer]}>
       <Pressable
         title={title}
         onPress={onPress}

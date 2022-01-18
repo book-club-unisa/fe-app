@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, View, StyleSheet, Text } from "react-native";
 
-import colors from "../config/colors";
+import colors from "../../config/colors";
 import PropTypes from "prop-types";
 
 function AppButton({ title, onPress }) {
@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    alignItems: "center",
-    justifyContent: "center",
+    //alignItems: "center",
+    //justifyContent: "center",
   },
 
   buttonLogin: {
