@@ -6,11 +6,14 @@ import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 
 import colors from "../config/colors";
 import ReceivedInvite from "../components/singleItems/ReceivedInvite";
+
+import InviteLoader from "../components/singleItems/InviteLoader";
 import useApi from "../api/api";
 import AuthContext from "../auth/context";
 
 function InvitiRicevuti() {
   const [invites, setInvites] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { token } = useContext(AuthContext);
   const { getReicevedInvites } = useApi(token);
@@ -20,9 +23,12 @@ function InvitiRicevuti() {
   }, []);
 
   function getInvites() {
+    setLoading(true);
     getReicevedInvites()
       .then(function (_invites) {
+        setLoading(true);
         setInvites(_invites);
+        setLoading(false);
         console.log(_invites[0].invitoUtente);
         console.log(1);
       })
@@ -38,19 +44,32 @@ function InvitiRicevuti() {
       <View style={styles.container}>
         <Text style={styles.txt}> Inviti ricevuti </Text>
 
-        <FlatList
-          data={invites}
-          keyExtractor={(invite) => invite.invitoUtente.inviteId.toString()}
-          renderItem={({ item }) => (
-            <ReceivedInvite
-              title={item.nomeBookclub}
-              inviteID={item.invitoUtente.inviteId}
-              inviteState={item.invitoUtente.State}
-              image={{ uri: item.coverLibro }}
+        {(loading === true && (
+          <>
+            <FlatList
+              data={invites}
+              keyExtractor={(invite) => invite.invitoUtente.inviteId.toString()}
+              renderItem={({ item }) => <InviteLoader />}
+              ItemSeparatorComponent={ListItemSeparator}
             />
-          )}
-          ItemSeparatorComponent={ListItemSeparator}
-        />
+          </>
+        )) || (
+          <>
+            <FlatList
+              data={invites}
+              keyExtractor={(invite) => invite.invitoUtente.inviteId.toString()}
+              renderItem={({ item }) => (
+                <ReceivedInvite
+                  title={item.nomeBookclub}
+                  inviteID={item.invitoUtente.inviteId}
+                  inviteState={item.invitoUtente.State}
+                  image={{ uri: item.coverLibro }}
+                />
+              )}
+              ItemSeparatorComponent={ListItemSeparator}
+            />
+          </>
+        )}
       </View>
     </Screen>
   );

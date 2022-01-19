@@ -5,7 +5,7 @@ import colors from "../config/colors";
 import Screen from "../components/Screen";
 import DevItem from "../components/singleItems/DevItem";
 
-const Books = [
+const Devs = [
   {
     id: 1,
     title: "Alessia Amato",
@@ -63,6 +63,8 @@ const Books = [
   },
 ];
 const ChiSiamo = () => {
+  const [loading, setLoading] = useState(false);
+
   return (
     <Screen>
       <View></View>
@@ -73,11 +75,10 @@ const ChiSiamo = () => {
         <View style={styles.titleContainer}>
           <Text style={styles.titolo}> Il nostro team di sviluppatori: </Text>
         </View>
-
         <ScrollView style={styles.container}>
           <FlatList
-            data={Books}
-            keyExtractor={(book) => book.id.toString()}
+            data={Devs}
+            keyExtractor={(dev) => dev.id.toString()}
             renderItem={({ item }) => (
               <DevItem
                 title={item.title}
