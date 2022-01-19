@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import { View, StyleSheet, Text, Image, Alert } from "react-native";
+import { View, StyleSheet, Text, Image, Alert, Platform } from "react-native";
+import AwesomeAlert from "react-native-awesome-alerts";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
@@ -16,6 +17,9 @@ PaginaCreazioneBC.propTypes = {
 function PaginaCreazioneBC({ route, navigation }) {
   const [value, setValue] = useState("");
   const [validate, setValidate] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [visibleName, setVisibleName] = useState(false);
+
   const { token } = useContext(AuthContext);
   const { createBookClub } = useApi(token);
 
@@ -36,7 +40,9 @@ function PaginaCreazioneBC({ route, navigation }) {
       navigation.navigate(routes.INFOLIBRO, item);
       navigation.navigate(routes.INFOLIBRO, value);
     } else {
-      Alert.alert("Errore", "Il nome del bookclub non è valido");
+      Platform.OS === "web"
+        ? setVisibleName(true)
+        : Alert.alert("Errore", "Il nome del bookclub non è valido");
     }
   };
 
@@ -49,9 +55,18 @@ function PaginaCreazioneBC({ route, navigation }) {
         console.log("value:", value);
       })
       .catch(function (err) {
-        Alert.alert("Errore", "Hai già creato un bookclub con questo nome", [
-          { title: "Ok", onPress: () => navigation.navigate(routes.BACHECA) },
-        ]);
+        Platform.OS === "web"
+          ? navigation.navigate(routes.BACHECA)
+          : Alert.alert(
+              "Errore",
+              "Hai già creato un bookclub con questo nome",
+              [
+                {
+                  title: "Ok",
+                  onPress: () => navigation.navigate(routes.BACHECA),
+                },
+              ]
+            );
         console.error(err);
       });
   };
@@ -60,6 +75,14 @@ function PaginaCreazioneBC({ route, navigation }) {
 
   return (
     <Screen>
+      <AwesomeAlert
+        show={visibleName}
+        title="Errore"
+        message="Il nome del bookclub non è valido"
+        closeOnTouchOutside={true}
+        showCancelButton={false}
+        showConfirmButton={false}
+      />
       <View style={styles.container}>
         <AppTextInput
           iconName="book-open-page-variant"

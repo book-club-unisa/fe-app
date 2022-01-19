@@ -1,5 +1,6 @@
-import React from "react";
-import { Alert, Image, StyleSheet } from "react-native";
+import React, { useContext, useState } from "react";
+import { Alert, Image, StyleSheet, Platform } from "react-native";
+import AwesomeAlert from "react-native-awesome-alerts";
 import Screen from "../components/Screen";
 import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
@@ -39,6 +40,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen({ navigation }) {
+  const [visible, setVisible] = useState(false);
   // const authContext = useContext(AuthContext);
   function register(values) {
     BCapi.post("users", values)
@@ -46,12 +48,22 @@ function RegisterScreen({ navigation }) {
         navigation.navigate(routes.ACCEDI);
       })
       .catch(function () {
-        Alert.alert("Errore, indirizzo email non disponibile");
+        Platform.OS === "web"
+          ? setVisible(true)
+          : Alert.alert("Errore, indirizzo email non disponibile");
       });
   }
 
   return (
     <Screen styleChildren={styles.container}>
+      <AwesomeAlert
+        show={visible}
+        title="Errore"
+        message="Indirizzo email non disponibile"
+        closeOnTouchOutside={true}
+        showCancelButton={false}
+        showConfirmButton={false}
+      />
       <KeyboardAwareScrollView>
         <Image style={styles.logo} source={require("../assets/BCLogo.png")} />
         <Formik

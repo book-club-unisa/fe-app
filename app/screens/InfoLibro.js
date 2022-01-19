@@ -39,6 +39,7 @@ function InfoLibro({ route, navigation }) {
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [BC_ID, setBC_ID] = useState();
+
   const [visibleInvite, setVisibleInvite] = useState(false);
   const [visibleInviteError, setVisibleInviteError] = useState(false);
   const [visibleCreate, setVisibleCreate] = useState(false);
@@ -126,27 +127,7 @@ function InfoLibro({ route, navigation }) {
         showCancelButton={false}
         showConfirmButton={false}
       />
-      <AwesomeAlert
-        show={visibleCreate}
-        title="Attenzione"
-        message="Sei sicuro di voler invitare solo questi utenti?"
-        closeOnTouchOutside={true}
-        showCancelButton={false}
-        showConfirmButton={false}
-        closeOnHardwareBackPress={false}
-        showCancelButton={true}
-        showConfirmButton={true}
-        cancelText="No"
-        confirmText="Si"
-        confirmButtonColor="#007aff"
-        onCancelPressed={() => {
-          setVisibleCreate(false);
-        }}
-        onConfirmPressed={() => {
-          navigation.navigate(routes.BACHECASELECTION);
-          setVisibleCreate(false);
-        }}
-      />
+
       <View style={styles.containerVisibleCreate}></View>
       <View style={styles.container}>
         <View style={styles.bookContainer}>
@@ -208,7 +189,9 @@ function InfoLibro({ route, navigation }) {
         <AppButton
           title="Fine"
           onPress={() => {
-            setVisibleCreate(true);
+            //Platform.OS === "web"?
+            navigation.navigate(routes.BACHECA);
+            //: setVisibleCreate(true);
           }}
         />
       </View>
@@ -342,3 +325,25 @@ const styles = StyleSheet.create({
 });
 
 export default InfoLibro;
+
+/*<AwesomeAlert
+        show={visibleCreate}
+        title="Attenzione"
+        message="Sei sicuro di voler invitare solo questi utenti?"
+        closeOnTouchOutside={true}
+        showCancelButton={false}
+        showConfirmButton={false}
+        closeOnHardwareBackPress={false}
+        showCancelButton={true}
+        showConfirmButton={true}
+        cancelText="No"
+        confirmText="Si"
+        confirmButtonColor="#007aff"
+        onCancelPressed={() => {
+          setVisibleCreate(false);
+        }}
+        onConfirmPressed={() => {
+          navigation.navigate(routes.BACHECASELECTION);
+          setVisibleCreate(false);
+        }}
+      />*/
