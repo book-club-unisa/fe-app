@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import AwesomeAlert from "react-native-awesome-alerts";
 import {
   FlatList,
   View,
@@ -7,6 +8,7 @@ import {
   Image,
   Alert,
   Pressable,
+  Platform,
 } from "react-native";
 
 import Screen from "../components/Screen";
@@ -29,6 +31,7 @@ function InfoBookClubUser({ route }) {
   const [odl, setOdl] = useState(0);
   const [pdl, setPdl] = useState(0);
   const [currentUserPDL, setCurrentUserPDL] = useState(0);
+  const [visiblePDL, setVisiblePDL] = useState(false);
   const { token } = useContext(AuthContext);
 
   const { addPDL } = useApi(token);
@@ -112,13 +115,26 @@ function InfoBookClubUser({ route }) {
         console.log("ok update pdl");
       })
       .catch(function (err) {
-        Alert.alert("Errore");
+        Platform.OS === "web"
+          ? setVisiblePDL(true)
+          : Alert.alert(
+              "Errore",
+              `Non puoi inserire un valore pari o minore di zero`
+            );
         console.error(err);
       });
   }
 
   return (
     <Screen>
+      <AwesomeAlert
+        show={visiblePDL}
+        title="Errore"
+        message={`Non puoi inserire un valore pari o minore di zero`}
+        closeOnTouchOutside={true}
+        showCancelButton={false}
+        showConfirmButton={false}
+      />
       <View style={styles.container}>
         <View style={styles.bookContainer}>
           <Image
@@ -153,11 +169,6 @@ function InfoBookClubUser({ route }) {
               personalprogress={item.pageReached}
               pagecountlastreadgoal={pagecountlastreadgoal}
               pagecountsecondlastreadgoal={pagecountsecondlastreadgoal}
-              onPress={() =>
-                Alert.alert("title", "Messaggio", [
-                  { text: "Ok", onPress: () => console.log(item.title) },
-                ])
-              }
             />
           )}
           ItemSeparatorComponent={ListItemSeparator}

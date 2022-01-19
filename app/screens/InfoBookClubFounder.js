@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import AwesomeAlert from "react-native-awesome-alerts";
 import {
   FlatList,
   View,
@@ -7,6 +8,7 @@ import {
   Image,
   Alert,
   Pressable,
+  Platform,
 } from "react-native";
 
 import Screen from "../components/Screen";
@@ -41,6 +43,8 @@ function InfoBookClubFounder({ route, navigation }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
+  const [visibleODL, setVisibleODL] = useState(false);
+  const [visiblePDL, setVisiblePDL] = useState(false);
 
   const item = route.params;
   const listUsers = route.params.Members;
@@ -114,12 +118,15 @@ function InfoBookClubFounder({ route, navigation }) {
         console.log("ok update lastreadgoal");
       })
       .catch(function (err) {
-        Alert.alert(
-          "Errore",
-          `Non puoi inserire un valore minore del precedente (${odl}) o maggiore del numero di pagine del libro (${bookPages})`
-        );
+        Platform.OS === "web"
+          ? setVisibleODL(true)
+          : Alert.alert(
+              "Errore",
+              `Non puoi inserire un valore minore del precedente (${odl}) o maggiore del numero di pagine del libro (${bookPages})`
+            );
+
         console.log("error update lastreadgoal");
-        console.error(err);
+        //console.error(err);
       });
   }
 
@@ -131,13 +138,35 @@ function InfoBookClubFounder({ route, navigation }) {
         console.log("ok update pdl");
       })
       .catch(function (err) {
-        Alert.alert("Errore");
-        console.error(err);
+        Platform.OS === "web"
+          ? setVisiblePDL(true)
+          : Alert.alert(
+              "Errore",
+              `Non puoi inserire un valore pari o minore di zero`
+            );
+        //Alert.alert("Errore");
+        //console.error(err);
       });
   }
 
   return (
     <Screen>
+      <AwesomeAlert
+        show={visibleODL}
+        title="Errore"
+        message={`Non puoi inserire un valore minore del precedente (${odl}) o maggiore del numero di pagine del libro (${bookPages})`}
+        closeOnTouchOutside={true}
+        showCancelButton={false}
+        showConfirmButton={false}
+      />
+      <AwesomeAlert
+        show={visiblePDL}
+        title="Errore"
+        message={`Non puoi inserire un valore pari o minore di zero`}
+        closeOnTouchOutside={true}
+        showCancelButton={false}
+        showConfirmButton={false}
+      />
       <View style={styles.container}>
         <View style={styles.bookContainer}>
           <Image
