@@ -16,4 +16,5 @@ export default Object.freeze({
   RICERCA: "Ricerca",
   INVITIRICEVUTI: "InvitiRicevuti",
   CHECKSCREEN: "CheckScreen",
+  BACHECASELECTION: "BachecaSelection",
 });

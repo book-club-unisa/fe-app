@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import AwesomeAlert from "react-native-awesome-alerts";
 import {
   FlatList,
   View,
@@ -7,6 +8,7 @@ import {
   Image,
   Alert,
   Pressable,
+  Platform,
 } from "react-native";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
@@ -37,6 +39,9 @@ function InfoLibro({ route, navigation }) {
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [BC_ID, setBC_ID] = useState();
+  const [visibleInvite, setVisibleInvite] = useState(false);
+  const [visibleInviteError, setVisibleInviteError] = useState(false);
+  const [visibleCreate, setVisibleCreate] = useState(false);
 
   const { inviteUserToBookClub } = useApi(token);
   const { getBCInvites } = useApi(token);
@@ -53,12 +58,16 @@ function InfoLibro({ route, navigation }) {
     console.log(email);
     inviteUserToBookClub(BC_ID, text)
       .then(function () {
-        Alert.alert("Invito andato a buon fine");
+        Platform.OS === "web"
+          ? setVisibleInvite(true)
+          : Alert.alert("Invito andato a buon fine");
         seeInvites();
       })
       .catch(function (error) {
-        Alert.alert("Errore", "L' utente non esiste o è stato già invitato");
-        console.error(error);
+        Platform.OS === "web"
+          ? setVisibleInviteError(true)
+          : Alert.alert("Errore", "L'utente non esiste o è stato già invitato");
+        //console.error(error);
       });
   }
 
@@ -101,6 +110,44 @@ function InfoLibro({ route, navigation }) {
 
   return (
     <Screen>
+      <AwesomeAlert
+        show={visibleInvite}
+        title="Successo"
+        message="Utente invitato correttamente"
+        closeOnTouchOutside={true}
+        showCancelButton={false}
+        showConfirmButton={false}
+      />
+      <AwesomeAlert
+        show={visibleInviteError}
+        title="Errore"
+        message="L'utente non esiste o è stato già invitato"
+        closeOnTouchOutside={true}
+        showCancelButton={false}
+        showConfirmButton={false}
+      />
+      <AwesomeAlert
+        show={visibleCreate}
+        title="Attenzione"
+        message="Sei sicuro di voler invitare solo questi utenti?"
+        closeOnTouchOutside={true}
+        showCancelButton={false}
+        showConfirmButton={false}
+        closeOnHardwareBackPress={false}
+        showCancelButton={true}
+        showConfirmButton={true}
+        cancelText="No"
+        confirmText="Si"
+        confirmButtonColor="#007aff"
+        onCancelPressed={() => {
+          setVisibleCreate(false);
+        }}
+        onConfirmPressed={() => {
+          navigation.navigate(routes.BACHECASELECTION);
+          setVisibleCreate(false);
+        }}
+      />
+      <View style={styles.containerVisibleCreate}></View>
       <View style={styles.container}>
         <View style={styles.bookContainer}>
           <Image
@@ -153,12 +200,7 @@ function InfoLibro({ route, navigation }) {
           style={{ marginBottom: 55 }}
           data={users}
           keyExtractor={(user) => user.inviteId.toString()}
-          renderItem={({ item }) => (
-            <UserListItem
-              title={item.user}
-              onPress={() => Alert.alert("email: " + item.user)}
-            />
-          )}
+          renderItem={({ item }) => <UserListItem title={item.user} />}
           ItemSeparatorComponent={ListItemSeparator}
         />
       </View>
@@ -166,19 +208,7 @@ function InfoLibro({ route, navigation }) {
         <AppButton
           title="Fine"
           onPress={() => {
-            Alert.alert(
-              "Attenzione",
-              "Sei sicuro di voler invitare solo questi utenti?",
-              [
-                {
-                  text: "Si",
-                  onPress: () => navigation.navigate(routes.BACHECA),
-                },
-                {
-                  text: "No",
-                },
-              ]
-            );
+            setVisibleCreate(true);
           }}
         />
       </View>
@@ -305,6 +335,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
     color: colors.blu,
+  },
+  containerVisibleCreate: {
+    top: 100,
   },
 });
 

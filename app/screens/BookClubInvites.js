@@ -45,15 +45,7 @@ function BookClubInvites({ route }) {
           data={users}
           keyExtractor={(user) => user.inviteId.toString()}
           renderItem={({ item }) => (
-            <InviteState
-              title={item.user}
-              state={item.State}
-              onPress={() =>
-                Alert.alert("title", "Messaggio", [
-                  { text: "Ok", onPress: () => console.log("1") },
-                ])
-              }
-            />
+            <InviteState title={item.user} state={item.State} />
           )}
           ItemSeparatorComponent={ListItemSeparator}
         />
