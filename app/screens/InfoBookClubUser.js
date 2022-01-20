@@ -152,6 +152,8 @@ function InfoBookClubUser({ route }) {
               Fondatore
             </Text>
             <Text numberOfLines={1}>{item.founderEmail}</Text>
+
+            <Text numberOfLines={1}></Text>
             <Text style={styles.boldtitle} numberOfLines={1}>
               Numero pagine
             </Text>
