@@ -31,6 +31,7 @@ InfoBookClubFounder.propTypes = {
 };
 
 function InfoBookClubFounder({ route, navigation }) {
+  console.log(route.params);
   const [odl, setOdl] = useState(0);
   const [pdl, setPdl] = useState(0);
   const [currentUserPDL, setCurrentUserPDL] = useState(0);
@@ -184,6 +185,10 @@ function InfoBookClubFounder({ route, navigation }) {
               Fondatore
             </Text>
             <Text numberOfLines={1}>{item.founderEmail}</Text>
+            <Text style={styles.boldtitle} numberOfLines={1}>
+              Numero pagine
+            </Text>
+            <Text numberOfLines={1}>{bookPages}</Text>
           </View>
         </View>
 
