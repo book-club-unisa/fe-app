@@ -8,7 +8,6 @@ import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
 import useApi from "../api/api";
 import PropTypes from "prop-types";
-import AlertWButtons from "../components/singleItems/AlertWButtons";
 
 PaginaCreazioneBC.propTypes = {
   route: PropTypes.any,
@@ -84,10 +83,6 @@ function PaginaCreazioneBC({ route, navigation }) {
         showCancelButton={false}
         showConfirmButton={false}
       />
-      <AlertWButtons
-        onPressButtonRight={() => navigation.navigate(routes.INFOLIBRO)}
-        onPressButtonLeft={() => navigation.navigate(routes.BACHECA)}
-      ></AlertWButtons>
       <View style={styles.container}>
         <AppTextInput
           iconName="book-open-page-variant"
