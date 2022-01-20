@@ -190,7 +190,7 @@ function InfoLibro({ route, navigation }) {
           title="Fine"
           onPress={() => {
             //Platform.OS === "web"?
-            navigation.navigate(routes.BACHECA);
+            navigation.navigate(routes.CATALOGO);
             //: setVisibleCreate(true);
           }}
         />

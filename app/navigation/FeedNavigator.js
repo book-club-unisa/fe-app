@@ -12,6 +12,7 @@ const Stack = createStackNavigator();
 
 const FeedNavigator = () => (
   <Stack.Navigator
+    initialRouteName="Catalogo"
     mode="modal"
     screenOptions={{
       headerShown: false,

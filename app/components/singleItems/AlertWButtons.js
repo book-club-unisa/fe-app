@@ -25,10 +25,10 @@ function AlertWButtons({
       <Text style={styles.alertTitle}>Errore</Text>
       <Text style={styles.alertText}>Testo di errore</Text>
       <View style={styles.alertButtons}>
-        <Pressable style={styles.alertButtonLeft}>
+        <Pressable style={styles.alertButtonLeft} onPress={onPressButtonLeft}>
           <Text style={styles.buttonText}>Tasto sinistro</Text>
         </Pressable>
-        <Pressable style={styles.alertButtonRight}>
+        <Pressable style={styles.alertButtonRight} onPress={onPressButtonRight}>
           <Text style={styles.buttonText}>Tasto destro</Text>
         </Pressable>
       </View>
