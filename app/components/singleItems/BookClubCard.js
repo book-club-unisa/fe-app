@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightgrey,
     width: "90%",
     borderRadius: 5,
-    marginVertical: Platform.OS === "android" ? 0 : 5,
+    //marginVertical: Platform.OS === "android" ? 0 : 5,
+    fontFamily: "Arial",
   },
   subContainer: {
     flexDirection: "row",

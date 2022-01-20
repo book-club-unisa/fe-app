@@ -71,10 +71,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginBottom: 10,
     // COMMENT BEFORE TESTING on browser
-    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-
-    /*UNCOMMENT BEFORE TESTING ON BROSER
-    fontFamily: "Arial",*/
+    //fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+    fontFamily: "Arial",
   },
 });
 

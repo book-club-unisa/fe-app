@@ -60,15 +60,7 @@ const InvitaUtenti = () => {
               data={users}
               keyExtractor={(user) => user.email}
               renderItem={({ item }) => (
-                <AddUserItem
-                  title={item.email}
-                  image={item.image}
-                  onPress={() =>
-                    Alert.alert("title", "Messaggio", [
-                      { text: "Ok", onPress: () => console.log("1") },
-                    ])
-                  }
-                />
+                <AddUserItem title={item.email} image={item.image} />
               )}
               ItemSeparatorComponent={ListItemSeparator}
             />

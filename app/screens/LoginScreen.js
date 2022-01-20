@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { Image, StyleSheet, Alert } from "react-native";
+import React, { useContext, useState } from "react";
+import { Image, StyleSheet, Alert, Platform } from "react-native";
+import AwesomeAlert from "react-native-awesome-alerts";
 import Screen from "../components/Screen";
 import { SubmitButton, AppFormField } from "../components/forms";
 import { Formik } from "formik";
 import authApi from "../api/auth";
 import * as Yup from "yup";
-
 import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/storage";
@@ -31,6 +31,7 @@ const validationSchema = Yup.object().shape({
 
 function LoginScreen({ navigation }) {
   const authContext = useContext(AuthContext);
+  const [visible, setVisible] = useState(false);
 
   const handleSubmit = async ({ email, password }) => {
     await authApi
@@ -43,13 +44,23 @@ function LoginScreen({ navigation }) {
       })
 
       .catch(function (error) {
-        Alert.alert("Errore, controlla i dati inseriti");
-        console.log(error);
+        Platform.OS === "web"
+          ? setVisible(true)
+          : Alert.alert("Errore, controlla i dati inseriti");
+        //console.log(error);
       });
   };
 
   return (
     <Screen styleChildren={styles.container}>
+      <AwesomeAlert
+        show={visible}
+        title="Errore"
+        message="Controlla i dati inseriti"
+        closeOnTouchOutside={true}
+        showCancelButton={false}
+        showConfirmButton={false}
+      />
       <Image style={styles.logo} source={require("../assets/BCLogo.png")} />
       <Formik
         initialValues={{ email: "", password: "" }}
@@ -76,7 +87,9 @@ function LoginScreen({ navigation }) {
             />
             <SubmitButton
               title="Accedi"
-              onPress={() => navigation.navigate(routes.BACHECA)}
+              onPress={() => {
+                navigation.navigate(routes.BACHECASELECTION), consol.log(1);
+              }}
               styleButton={styles.button}
             />
           </>

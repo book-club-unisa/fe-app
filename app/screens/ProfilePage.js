@@ -69,8 +69,8 @@ function ProfilePage({ navigation }) {
           />
           <Text style={styles.title}> Il tuo profilo </Text>
           <ProfileItem
-            profileName={surname}
-            profileSurname={name}
+            profileName={name}
+            profileSurname={surname}
             profileEmail={email}
           />
         </View>
