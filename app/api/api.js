@@ -70,6 +70,11 @@ export default function useApi(token = undefined) {
         .post(`bookclubs/${BC_ID}/invite-user/${USER_EMAIL}`)
         .then((response) => response.data),
 
+    deleteInviteToBookClub: (BC_ID, USER_EMAIL) =>
+      axiosInstance
+        .delete(`bookclubs/${BC_ID}/delete-invite/${USER_EMAIL}`)
+        .then((response) => response.data),
+
     getBCInvites: (BC_ID) =>
       axiosInstance
         .get(`bookclubs/${BC_ID}/invited-users`)

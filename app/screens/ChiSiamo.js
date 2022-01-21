@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, FlatList, Text, ScrollView } from "react-native";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import colors from "../config/colors";
