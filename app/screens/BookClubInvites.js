@@ -45,7 +45,11 @@ function BookClubInvites({ route }) {
           data={users}
           keyExtractor={(user) => user.inviteId.toString()}
           renderItem={({ item }) => (
-            <InviteState title={item.user} state={item.State} />
+            <InviteState
+              title={item.user}
+              inviteState={item.State}
+              bookClubID={item.bookclub}
+            />
           )}
           ItemSeparatorComponent={ListItemSeparator}
         />
