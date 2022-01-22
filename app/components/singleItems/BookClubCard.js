@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     width: "90%",
     borderRadius: 5,
     marginVertical: Platform.OS === "ios" ? 5 : 0,
-    fontFamily: "Arial",
+    //fontFamily: "Arial",
   },
   subContainer: {
     flexDirection: "row",

@@ -12,14 +12,7 @@ AlertWButtons.propTypes = {
   onPressButtonRight: PropTypes.func,
 };
 
-function AlertWButtons({
-  title,
-  text,
-  buttonLeft,
-  buttonRight,
-  onPressButtonLeft,
-  onPressButtonRight,
-}) {
+function AlertWButtons({ onPressButtonLeft, onPressButtonRight }) {
   return (
     <View style={styles.alert}>
       <Text style={styles.alertTitle}>Errore</Text>

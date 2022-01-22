@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import ContentLoader, { Rect, Circle, Path } from "react-content-loader/native";
+import ContentLoader, { Rect, Circle } from "react-content-loader/native";
 
 const InviteLoader = (props) => {
   return (

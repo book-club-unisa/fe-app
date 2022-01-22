@@ -1,12 +1,5 @@
 import React, { useState, useContext } from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  Pressable,
-  BackHandler,
-} from "react-native";
+import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import { TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -20,18 +13,11 @@ InviteState.propTypes = {
   bookClubID: PropTypes.number,
   onPress: PropTypes.func,
   image: PropTypes.object,
-  state: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  inviteState: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onPressDelete: PropTypes.func,
 };
 
-function InviteState({
-  image,
-  title,
-  onPress,
-  inviteState,
-  onPressDelete,
-  bookClubID,
-}) {
+function InviteState({ image, title, onPress, inviteState, bookClubID }) {
   const [state, setState] = useState(inviteState);
 
   const { token } = useContext(AuthContext);

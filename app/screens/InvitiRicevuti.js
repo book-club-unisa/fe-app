@@ -49,7 +49,7 @@ function InvitiRicevuti() {
             <FlatList
               data={invites}
               keyExtractor={(invite) => invite.invitoUtente.inviteId.toString()}
-              renderItem={({ item }) => <InviteLoader />}
+              renderItem={() => <InviteLoader />}
               ItemSeparatorComponent={ListItemSeparator}
             />
           </>

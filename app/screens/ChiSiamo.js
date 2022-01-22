@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, FlatList, Text, ScrollView } from "react-native";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import colors from "../config/colors";
@@ -63,8 +63,6 @@ const Devs = [
   },
 ];
 const ChiSiamo = () => {
-  const [loading, setLoading] = useState(false);
-
   return (
     <Screen>
       <View></View>

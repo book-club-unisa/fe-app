@@ -118,9 +118,9 @@ function InfoBookClubUser({ route }) {
         Platform.OS === "web"
           ? setVisiblePDL(true)
           : Alert.alert(
-              "Errore",
-              `Non puoi inserire un valore pari o minore di zero`
-            );
+            "Errore",
+            "Non puoi inserire un valore pari o minore di zero"
+          );
         console.error(err);
       });
   }
@@ -130,7 +130,7 @@ function InfoBookClubUser({ route }) {
       <AwesomeAlert
         show={visiblePDL}
         title="Errore"
-        message={`Non puoi inserire un valore pari o minore di zero`}
+        message={"Non puoi inserire un valore pari o minore di zero"}
         closeOnTouchOutside={true}
         showCancelButton={false}
         showConfirmButton={false}

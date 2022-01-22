@@ -43,7 +43,7 @@ function LoginScreen({ navigation }) {
         navigation.navigate(routes.CLUBS);
       })
 
-      .catch(function (error) {
+      .catch(function () {
         Platform.OS === "web"
           ? setVisible(true)
           : Alert.alert("Errore, controlla i dati inseriti");
@@ -88,7 +88,7 @@ function LoginScreen({ navigation }) {
             <SubmitButton
               title="Accedi"
               onPress={() => {
-                navigation.navigate(routes.BACHECASELECTION), consol.log(1);
+                navigation.navigate(routes.BACHECASELECTION), console.log(1);
               }}
               styleButton={styles.button}
             />

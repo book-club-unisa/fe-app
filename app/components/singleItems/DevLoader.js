@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import Screen from "../Screen";
-import ContentLoader, { Rect, Circle, Path } from "react-content-loader/native";
+import ContentLoader, { Rect, Circle } from "react-content-loader/native";
 
 const DevLoader = (props) => {
   return (
