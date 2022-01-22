@@ -42,7 +42,6 @@ function InfoLibro({ route, navigation }) {
 
   const [visibleInvite, setVisibleInvite] = useState(false);
   const [visibleInviteError, setVisibleInviteError] = useState(false);
-  const [visibleCreate, setVisibleCreate] = useState(false);
 
   const { inviteUserToBookClub } = useApi(token);
   const { getBCInvites } = useApi(token);
@@ -64,7 +63,7 @@ function InfoLibro({ route, navigation }) {
           : Alert.alert("Invito andato a buon fine");
         seeInvites();
       })
-      .catch(function (error) {
+      .catch(function () {
         Platform.OS === "web"
           ? setVisibleInviteError(true)
           : Alert.alert("Errore", "L'utente non esiste o è stato già invitato");

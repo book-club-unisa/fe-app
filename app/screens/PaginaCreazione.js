@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useState, useContext } from "react";
 import { View, StyleSheet, Text, Image, Alert, Platform } from "react-native";
 import AwesomeAlert from "react-native-awesome-alerts";
@@ -17,7 +18,6 @@ PaginaCreazioneBC.propTypes = {
 function PaginaCreazioneBC({ route, navigation }) {
   const [value, setValue] = useState("");
   const [validate, setValidate] = useState(false);
-  const [visible, setVisible] = useState(false);
   const [visibleName, setVisibleName] = useState(false);
 
   const { token } = useContext(AuthContext);

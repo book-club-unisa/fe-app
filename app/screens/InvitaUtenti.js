@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, View, StyleSheet, Alert, Text } from "react-native";
+import { FlatList, View, StyleSheet, Text } from "react-native";
 import Screen from "../components/Screen";
 import ListItemSeparator from "../components/singleItems/ListItemSeparator";
 import colors from "../config/colors";

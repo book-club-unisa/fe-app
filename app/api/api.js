@@ -4,7 +4,7 @@ import axios from "axios";
 const apiUrl = "http://127.0.0.1:4000";*/
 
 // COMMENT FOR TESTING ON BROWSER
-const apiUrl = "http://localhost:4000";
+const apiUrl = "http://192.168.56.1:4000";
 
 /*unction makeFormData(obj) {
   const result = new FormData();

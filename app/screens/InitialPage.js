@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Image, Text, Platform } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import Screen from "../components/Screen";
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     // COMMENT BEFORE TESTING on browser
     //fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
-    fontFamily: "Arial",
+    //fontFamily: "Arial",
   },
 });
 

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useState, useContext, useEffect } from "react";
 import AwesomeAlert from "react-native-awesome-alerts";
 import {
@@ -118,7 +119,7 @@ function InfoBookClubFounder({ route, navigation }) {
         setOdl(odlNumPages);
         console.log("ok update lastreadgoal");
       })
-      .catch(function (err) {
+      .catch(function () {
         Platform.OS === "web"
           ? setVisibleODL(true)
           : Alert.alert(
@@ -138,12 +139,12 @@ function InfoBookClubFounder({ route, navigation }) {
         console.log(currentUserPDL);
         console.log("ok update pdl");
       })
-      .catch(function (err) {
+      .catch(function () {
         Platform.OS === "web"
           ? setVisiblePDL(true)
           : Alert.alert(
               "Errore",
-              `Non puoi inserire un valore pari o minore di zero`
+              "Non puoi inserire un valore pari o minore di zero"
             );
         //Alert.alert("Errore");
         //console.error(err);
@@ -163,7 +164,7 @@ function InfoBookClubFounder({ route, navigation }) {
       <AwesomeAlert
         show={visiblePDL}
         title="Errore"
-        message={`Non puoi inserire un valore pari o minore di zero`}
+        message={"Non puoi inserire un valore pari o minore di zero"}
         closeOnTouchOutside={true}
         showCancelButton={false}
         showConfirmButton={false}

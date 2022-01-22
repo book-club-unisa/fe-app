@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Alert, Image, StyleSheet, Platform } from "react-native";
 import AwesomeAlert from "react-native-awesome-alerts";
 import Screen from "../components/Screen";
